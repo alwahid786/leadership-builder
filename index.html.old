@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./images/fav.svg">
+    <title>Microlearning Academy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrap_landing_page" style="background: url(./images/main_banner.jpg) no-repeat center/cover;">
+        <section class="academy_row">
+            <img src="images/logo.svg" alt="logo">
+            <h3>Welcome to The Microlearning Academy!</h3>
+            <p>Our mission is to empower entrepreneurs, corporations, and their employees to achieve maximum results in a minimum of time.</p>
+            <p>Your time is extremely valuable, your brain is an amazing machine. We focus on the little things that make a BIG difference. our platform is designed to deliver bite-sized information that packs a powerful punch.</p>
+            <div class="academy_box">
+                <h4>Our micro learning workshops, help you become a:</h4>
+                <ul class="workshop">
+                    <li>3X Author in just 2 one-half day sessions.</li>
+                    <li>Transformational Leader. (the kind of leader who is changing their life and helping other people change their lives).</li>
+                    <li>Master Sales Organization (control your  top line with business you drive).</li>
+                </ul>
+                <h3>Our daily trainings:</h3>
+                <ul>
+                    <li>Build Self-Image</li>
+                    <li>Improve Customer Experience</li>
+                    <li>Build Company Culture.</li>
+                </ul>
+            </div>
+            <div class="btn_wrap">
+                <a href="https://themicrolearningacademy.com/bookbuilder" class="book_btn" target="_blank">                    
+                    <p class="small">Login For</p>
+                    <h4>Book Builder</h4>
+                </a>
+                <a href="https://themicrolearningacademy.com/leadership" class="leder_btn" target="_blank">
+                    <p class="small">Login For</p>
+                    <h4>Leadership Builder</h4>
+                </a>
+            </div>
+            <p class="info">At The Microlearning Academy, we believe that small steps can lead to big results. Our unique approach focuses on delivering valuable insights and<br/> practical techniques that can be easily incorporated into your busy schedule. With just a few minutes a day, you can transform your mindset, <br/>hone your skills, and make meaningful progress towards your personal and professional goals. Our user-friendly platform provides<br/> a seamless and convenient learning experience.</p>
+            <h3 class="community">Join our community of like-minded individuals who are committed to <br/>their continuous growth and development.</h3>
+            <div class="botton_text">
+                <p>It's time to unlock your full potential and take your success to the next level.</p>
+                <p>Start your high power learning journey today with The Microlearning Academy! </p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
