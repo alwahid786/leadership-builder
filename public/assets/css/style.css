@@ -456,7 +456,7 @@ hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
   border: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--blue);
 }
 
 small,
@@ -4819,7 +4819,7 @@ input[type="button"].btn-block {
   display: block;
 }
 
-/* 
+/*
 .navbar {
   position: relative;
   display: -webkit-box;
@@ -6541,7 +6541,7 @@ a.close.disabled {
   font-size: 0.875rem;
   background-color: rgba(255, 255, 255, 0.85);
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--blue);
   -webkit-box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
   -webkit-backdrop-filter: blur(10px);
@@ -11836,7 +11836,7 @@ h5,
   border-radius: 5px;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--blue);
 }
 
 .form-control::-webkit-input-placeholder {
@@ -12046,30 +12046,36 @@ h5,
   margin-left: 250px;
   padding: 20px;
 }
-.ftco-section .logo_book img{
+
+.ftco-section .logo_book img {
   display: block;
   text-align: center;
   margin: 0 auto;
 }
-.sign_in_page{
+
+.sign_in_page {
   display: flex;
   height: 100vh;
   align-items: center;
 }
-@media(min-width:481px) and (max-width:991px){
-  .sign_in_page{
+
+@media(min-width:481px) and (max-width:991px) {
+  .sign_in_page {
     height: auto;
   }
 }
-@media(max-width:767px){
-  .sign_in_page .main_title{
+
+@media(max-width:767px) {
+  .sign_in_page .main_title {
     margin-top: 20px;
     font-size: 25px;
   }
-  .sign_in_page .logo_book img{
+
+  .sign_in_page .logo_book img {
     width: 200px;
   }
 }
+
 @media screen and (max-width: 992px) {
   .contentSection {
     margin-top: 70px;

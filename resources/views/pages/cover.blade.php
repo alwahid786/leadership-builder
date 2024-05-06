@@ -1,9 +1,6 @@
 @extends('layouts.default-layout')
 @section('content')
 <style>
-	.navbar-header {
-		background: white;
-	}
 
 	@media screen and (max-width: 991px) {
 		.responsive-mobile-navbar {
@@ -121,11 +118,11 @@
 @endsection
 @section('insertjavascript')
 <script>
-	$('.sidenav  li:nth-of-type(1)').addClass('active');
+	// $('.sidenav  li:nth-of-type(1)').addClass('active');
 </script>
 <script>
 	$(document).ready(function() {
-		// Click Signin Button 
+		// Click Signin Button
 		let errors = 0;
 		$("#submitCoverButton").click(function() {
 			$(".validation").each(function() {
@@ -133,7 +130,7 @@
 					errors++;
 					$(this).css('border', '1px solid red');
 				} else {
-					$(this).css('border', '1px solid rgba(0, 0, 0, 0.1)');
+					$(this).css('border', '1px solid var(--blue)');
 				}
 			})
 			if (errors > 0) {
@@ -197,7 +194,7 @@
 					pageErrors++;
 					$(this).css('border', '1px solid red');
 				} else {
-					$(this).css('border', '1px solid rgba(0, 0, 0, 0.1)');
+					$(this).css('border', '1px solid var(--blue)');
 				}
 			})
 			if (pageErrors > 0) {

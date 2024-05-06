@@ -273,7 +273,7 @@
 		}
 
 
-		
+
 
 
 		let pageErrors = 0;
@@ -283,7 +283,7 @@
 					pageErrors++;
 					$(this).css('border', '1px solid red');
 				} else {
-					$(this).css('border', '1px solid rgba(0, 0, 0, 0.1)');
+					$(this).css('border', '1px solid var(--blue)');
 				}
 			})
 			if (pageErrors > 0) {
