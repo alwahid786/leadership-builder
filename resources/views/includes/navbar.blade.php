@@ -214,11 +214,12 @@
             background: -moz-linear-gradient(left, rgba(255, 255, 255, 1) 60%, rgba(255, 255, 255, 0));
             background: -o-linear-gradient(left, rgba(255, 255, 255, 1) 60%, rgba(255, 255, 255, 0));
             color: var(--blue) !important;
+            font-weight: 500 !important;
         }
 
         .sidenav .nav-item.active .nav-link {
-            font-weight: 500;
-            color: var(--blue);
+            font-weight: 500 !important;
+            color: var(--blue) !important;
         }
 
         .sidenav .nav-item.active .sidenav-item {
@@ -513,7 +514,7 @@ $page = auth()->user()->page_number;
                 DAYS <i class="fas fa-caret-down ml-2"></i>
             </div>
             <div class="collapse show" id="days">
-                <li class="nav-item my-1">
+                <li class="nav-item my-1 active">
                     <a class="nav-link d-flex align-items-center" href="{{url('/cover')}}">
                         <span class="">Day 1 (Today)</span>
                     </a>
