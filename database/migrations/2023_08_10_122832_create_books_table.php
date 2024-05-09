@@ -24,10 +24,6 @@ class CreateBooksTable extends Migration
             $table->longText('vision')->nullable();
             $table->longText('inspiration')->nullable();
             $table->longText('execution')->nullable();
-            $table->string('response_type')->nullable();
-            $table->longText('q_answer')->nullable();
-            $table->string('video_url')->nullable();
-            $table->string('day')->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDataInUsers extends Migration
+class AddNewDataInBooks extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class AddDataInUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('last_name')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('profile_img')->nullable();
-            $table->string('type')->nullable();
+        Schema::table('books', function (Blueprint $table) {
+            $table->string('response_type')->nullable();
+            $table->longText('q_answer')->nullable();
+            $table->string('video_url')->nullable();
+            $table->string('day')->nullable();
         });
     }
 
@@ -28,7 +28,7 @@ class AddDataInUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('books', function (Blueprint $table) {
             //
         });
     }
