@@ -519,12 +519,22 @@ $page = auth()->user()->page_number;
                         <span class="">Day 1 (Today)</span>
                     </a>
                 </li>
-                <div style="font-size: 16px;padding-left:28px;" class="nav-menu my-1 mb-3" data-toggle="collapse" data-target="#pastDays" aria-expanded="false" aria-controls="submenu">
+                <div style="font-size: 16px;padding-left:28px;" class="nav-menu" data-toggle="collapse" data-target="#pastDays" aria-expanded="false" aria-controls="submenu">
                     Past Days <i class="fas fa-caret-down ml-2"></i>
                 </div>
-                <div style="font-size: 16px;padding-left:28px;" class="nav-menu my-1" data-toggle="collapse" data-target="#upcomingDays" aria-expanded="false" aria-controls="submenu">
-                    Upcoming Days <i class="fas fa-caret-down ml-2"></i>
+                <div class="collapse" id="pastDays">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" style="margin-left: 15px;" href="{{url('/cover')}}">
+                            <span class="">Day {{ auth()->user()->total_days }} (Today)</span>
+                        </a>
+                    </li>
+                    {{-- <div style="font-size: 16px;padding-left:28px;" class="nav-menu my-1" data-toggle="collapse" data-target="#upcomingDays" aria-expanded="false" aria-controls="submenu">
+                        Upcoming Days <i class="fas fa-caret-down ml-2"></i>
+                    </div> --}}
                 </div>
+                {{-- <div style="font-size: 16px;padding-left:28px;" class="nav-menu my-1" data-toggle="collapse" data-target="#upcomingDays" aria-expanded="false" aria-controls="submenu">
+                    Upcoming Days <i class="fas fa-caret-down ml-2"></i>
+                </div> --}}
             </div>
             {{--<li class="nav-item my-1 <?php if ($page < 7) echo "disabled-item"; ?>">
                 <a class="nav-link sidenav-item d-flex align-items-center" <?php if ($page < 7) echo "style='pointer-events: none'"; ?> href="{{url('wow ')}}">

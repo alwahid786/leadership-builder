@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Carbon\Carbon;
 
 class ContentController extends Controller
 {
@@ -175,8 +176,15 @@ class ContentController extends Controller
     public function coverPage(Request $request)
     {
         $loginUserId = Auth::user()->id;
-        $book = Book::where('user_id', $loginUserId)->first();
-        return view('pages.cover', compact('book'));
+        $current_date = Carbon::now()->toDateString();
+        
+        $response_exists = Book::where('user_id', $loginUserId)
+            ->whereDate('created_at', $current_date)
+            ->first();
+
+        // dd($response_exists);
+
+        return view('pages.cover', compact('response_exists'));
     }
 
     // Show gratitude Page
@@ -249,6 +257,29 @@ class ContentController extends Controller
         $book->last_name = $request->last_name;
         $book->save();
         return $this->sendResponse($book, 'Data inserted successfully!');
+    }
+
+    // Submit Day to Day Response
+    public function submitresponse(Request $request)
+    {
+        $data = $request->except('_token');
+        $book = new Book();
+        $book->user_id = Auth::user()->id;
+        $book->day = Auth::user()->total_days+1;
+        if ($request->responsetype == 'audio') {
+            $book->q_answer = $request->desire;
+        }
+        else{
+        }
+        $book->response_type = $request->responsetype;
+        $book->save();
+        return redirect()->back()->with('responseSuccess', 'Respose Saved Successfully!');
+
+        // $loginUserId = Auth::user()->id;
+        // $book = Book::where('user_id', $loginUserId)->first();
+        // $book->day_response = $request->day_response;
+        // $book->save();
+        // return redirect()->back()->with('responseSuccess', 'Data inserted Successfully!');
     }
 
     // submit Gratitude Function 

@@ -18,6 +18,7 @@ class AddDataInUsers extends Migration
             $table->string('phone')->nullable();
             $table->string('profile_img')->nullable();
             $table->string('type')->nullable();
+            $table->integer('total_days')->nullable()->default(0);
         });
     }
 

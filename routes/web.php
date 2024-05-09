@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\MediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,8 @@ use App\Http\Controllers\ContentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::resource('videos', MediaController::class);
 
 Route::get('/', function () {
     return view('auth.login');
@@ -74,6 +77,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/inspiration/submit', [ContentController::class, 'submitInspiration'])->name('submitInspiration');
     Route::post('/execution/submit', [ContentController::class, 'submitExecution'])->name('submitExecution');
     Route::get('/welcome/submit', [ContentController::class, 'submitWelcome'])->name('submitWelcome');
+
+    // Submit Day Response
+    Route::post('/DayResponse/submit', [ContentController::class, 'submitresponse'])->name('submitresponse');
 
     Route::get('/welcome', function () {
         return view('pages.welcome');
