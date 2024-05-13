@@ -259,9 +259,8 @@ input::placeholder {
     flex-direction: column;
     justify-content: center;
 }
-.answer-card {
 
-}
+.answer-card {}
 
 .day-card {
     border: 1px solid var(--blue);
@@ -276,7 +275,7 @@ input::placeholder {
     color: var(--blue);
 }
 
-.day-card q{
+.day-card q {
     font-weight: 500;
     font-size: 18px;
 }
@@ -291,6 +290,7 @@ input::placeholder {
     font-weight: 500;
     font-size: 18px;
 }
+
 /* .audioRecording{
     width: 250px;
     padding: 10px;
@@ -350,6 +350,7 @@ input::placeholder {
     box-shadow: inset 0 0 400px 0 #11AA29;
     color: white;
 }
+
 .audioRecording:hover {
     box-shadow: inset 0 0 400px 0 #11AA29;
     color: white;
@@ -358,4 +359,85 @@ input::placeholder {
 .videoRecording:hover {
     box-shadow: inset 0 0 400px 0 #11AA29;
     color: whitesmoke;
+}
+
+.video-container {
+    width: 100% !important;
+    height: 80vh;
+    border-radius: 15px;
+    position: relative;
+    background-color: gray;
+    /* background-image: url('../images/recording-bg.jpg'); */
+    overflow: hidden;
+    /* Ensure video is contained within the container */
+}
+
+#videoElement {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Maintain aspect ratio and fill container */
+}
+
+.controls-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.719);
+}
+
+.controls-container h5 {
+    color: white;
+}
+
+.recordingBtns img {
+    width: 50px !important;
+    height: 100%;
+    cursor: pointer;
+}
+
+.liveRecording {
+    position: absolute;
+    color: white;
+    top: 15px;
+    left: 15px;
+    background-color: rgba(0, 0, 0, 0.719);
+    padding: 5px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px;
+}
+
+.liveRecording h4 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.blink {
+    animation: blink 2s infinite;
+}
+.full-hd{
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+}
+.full-hd img{
+    width: 40px;
 }
