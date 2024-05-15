@@ -525,7 +525,6 @@
 
 			$("#retakevideo").click(function() {
 				$('.startRecordingBtn').removeClass('d-none');
-				$(".liveRecording").removeClass('d-none');
 				$('.full-hd').removeClass('d-none');
 				$('.controls-container').removeClass('d-none');
 				$('#videoElement1').addClass('d-none');
