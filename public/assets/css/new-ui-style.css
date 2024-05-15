@@ -464,6 +464,12 @@ input::placeholder {
     width: 40px;
 }
 
+.videotimer{
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+}
+
 .plans {
     border-radius: 10px;
     padding: 10px 15px 20px 15px;

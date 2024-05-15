@@ -199,6 +199,10 @@
 							<div class="full-hd">
 								<img src="{{asset('assets/images/hd.png')}}" alt="">
 							</div>
+							<div class="videotimer text-light">
+								<i class="zmdi zmdi-circle mr-2"></i>
+								<div id="timer2">00:00:00</div>
+							</div>
 						</div>
 						<div class="text-right px-3 mt-3 w-100">
 							<button id="retakevideo" class="btn btn-danger d-none">
@@ -278,7 +282,6 @@
         $("#audiodiv").hide();
         $('#recordingHeader').text('Record Video');
         $('.recordingTagline').text('Record video to save it as the response.');
-		videoOn();
     });
 </script>
 
@@ -398,17 +401,80 @@
 			let mediaRecorder;
 			let recordedBlobs = [];
 			let downloadLink = document.createElement('a');
+			
+			let startTime;
+			let elapsedTime = 0;
+			let timerInterval;
+			let running = false;
+
+			function startTimer(id) {
+				if (!running) {
+					startTime = Date.now() - elapsedTime;
+					timerInterval = setInterval(() => updateTimer(id), 1000);
+					running = true;
+				}
+			}
+
+			function pauseTimer() {
+				if (running) {
+					clearInterval(timerInterval);
+					elapsedTime = Date.now() - startTime;
+					running = false;
+				}
+			}
+
+			function resumeTimer(id) {
+				if (!running) {
+					startTime = Date.now() - elapsedTime;
+					timerInterval = setInterval(() => updateTimer(id), 1000);
+					running = true;
+				}
+			}
+
+			function stopTimer() {
+				if (running) {
+					clearInterval(timerInterval);
+					elapsedTime = Date.now() - startTime;
+					running = false;
+				}
+			}
+
+			function resetTimer(id) {
+				clearInterval(timerInterval);
+				elapsedTime = 0;
+				running = false;
+				document.getElementById('timer' + id).innerHTML = '00:00:00';
+			}
+
+			function updateTimer(id) {
+				let currentTime = Date.now();
+				let elapsedTime = currentTime - startTime;
+
+				let seconds = Math.floor(elapsedTime / 1000) % 60;
+				let minutes = Math.floor(elapsedTime / (1000 * 60)) % 60;
+				let hours = Math.floor(elapsedTime / (1000 * 60 * 60)) % 24;
+
+				document.getElementById('timer' + id).innerHTML = formatTime(hours) + ':' + formatTime(minutes) + ':' + formatTime(seconds);
+			}
+
+			function formatTime(time) {
+				return (time < 10 ? '0' : '') + time;
+			}
 	
 			$(".startRecordingBtn").click(function() {
 				$(this).toggleClass('d-none');
 				$('.pauseRecordingBtn').toggleClass('d-none');
 				$('.stopRecordingBtn').toggleClass('d-none');
 				$(".liveRecording").removeClass('d-none');
+				$('#videoElement').removeClass('d-none');
 				camOn();
 
 				setTimeout(function() {
 				if (!mediaRecorder) {
 					startRecording();
+					let timer = document.getElementById('timer2');
+					timer.innerHTML = '00:00:00';
+					startTimer(2);
 				}
 				}, 2000);
 	
@@ -419,16 +485,18 @@
 				$(this).toggleClass('d-none');
 				$('.playRecordingBtn').toggleClass('d-none');
 				$(".liveRecording").addClass('d-none');
-	
+				
 				pauseRecording();
+				pauseTimer();
 			});
 	
 			$(".playRecordingBtn").click(function() {
 				$(this).toggleClass('d-none');
 				$('.pauseRecordingBtn').toggleClass('d-none');
 				$(".liveRecording").removeClass('d-none');
-	
+				
 				resumeRecording();
+				resumeTimer(2);
 			});
 	
 			$(".stopRecordingBtn").click(function() {
@@ -440,17 +508,32 @@
 				$('.full-hd').addClass('d-none');
 				$('.controls-container').addClass('d-none');
 				$('#videoElement').addClass('d-none');
+				$('#videoElement1').removeClass('d-none');
+				$('#retakevideo').removeClass('d-none');
+				$('#timer2').addClass('d-none');
+				stopTimer();
 	
-				// setTimeout(function() {
-					stopRecording();
-				// }, 3000);
+				
+				stopRecording();
 				setTimeout(function() {
-                // 	downloadRecording();
-					const blob = new Blob(recordedBlobs, { type: 'video/webm' });
+                	const blob = new Blob(recordedBlobs, { type: 'video/webm' });
 					console.log('Blob:', blob);
 					const videoURL = window.URL.createObjectURL(blob);
 					document.getElementById('videoElement1').src = videoURL;
             	}, 1000);
+			});
+
+			$("#retakevideo").click(function() {
+				$('.startRecordingBtn').removeClass('d-none');
+				$('.full-hd').removeClass('d-none');
+				$('.controls-container').removeClass('d-none');
+				$('#videoElement1').addClass('d-none');
+				$('#retakevideo').addClass('d-none');
+				$('#timer2').removeClass('d-none');
+				resetTimer(2);
+
+				recordedBlobs = [];
+				downloadLink = document.createElement('a');
 			});
 
 			$("#savevid").click(function() {
