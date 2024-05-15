@@ -492,19 +492,19 @@ $page = auth()->user()->page_number;
             </div>
             <div class="collapse show" id="submenu">
                 <li class="nav-item plans my-1">
-                    <a class="nav-link d-flex align-items-center" href="{{url('/cover')}}">
+                    <a class="nav-link d-flex align-items-center" href="{{url('/plans')}}">
                         <img src="{{asset('assets/images/plans-white.png')}}" class="icon-white pr-2">
                         <span class="">Plan & Pricing</span>
                     </a>
                 </li>
                 <li class="nav-item invoices my-1">
-                    <a class="nav-link d-flex align-items-center" href="{{url('/cover')}}">
+                    <a class="nav-link d-flex align-items-center" href="{{url('/invoices')}}">
                         <img src="{{asset('assets/images/invoice-white.png')}}" class="icon-white pr-2">
                         <span class="">Invoices</span>
                     </a>
                 </li>
                 <li class="nav-item settings my-1">
-                    <a class="nav-link d-flex align-items-center" href="{{url('/cover')}}">
+                    <a class="nav-link d-flex align-items-center" href="{{url('/profile')}}">
                         <img src="{{asset('assets/images/setting-white.png')}}" class="icon-white pr-2">
                         <span class="">Settings</span>
                     </a>
