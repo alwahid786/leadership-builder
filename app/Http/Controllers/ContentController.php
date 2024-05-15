@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class ContentController extends Controller
 {
@@ -182,6 +183,12 @@ class ContentController extends Controller
             ->whereDate('created_at', $current_date)
             ->first();
 
+        if ($response_exists==null) {
+            $response_exists['response_type'] = null;
+            $response_exists['q_answer'] = null;
+            $response_exists['video_url'] = null;
+        }
+
         // dd($response_exists);
 
         return view('pages.cover', compact('response_exists'));
@@ -266,12 +273,23 @@ class ContentController extends Controller
         $book = new Book();
         $book->user_id = Auth::user()->id;
         $book->day = Auth::user()->total_days+1;
+        $book->response_type = $request->responsetype;
         if ($request->responsetype == 'audio') {
             $book->q_answer = $request->desire;
         }
         else{
+            if ($request->hasFile('video')) {
+                $book->video_url = auth()->user()->id . '_day' . Auth::user()->total_days+1 . '.' . $request->video->getClientOriginalExtension();
+                $video = $request->file('video');
+                $path = $video->storeAs('videos', $book->video_url, 'public'); // Store in public disk with the specified filename
+                // $video->storeAs('videos', $book->video_url); // Store the video in the storage/videos directory
+                // You can also store the video in the public directory using: $video->move(public_path('videos'), 'recording.mp4');
+                $book->save();
+                return response()->json(['success' => true, 'data' => $path]);
+            } else {
+                return response()->json(['error' => 'No video file found']);
+            }
         }
-        $book->response_type = $request->responsetype;
         $book->save();
         return redirect()->back()->with('responseSuccess', 'Respose Saved Successfully!');
 
