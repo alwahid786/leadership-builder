@@ -104,7 +104,7 @@
             </div>
             <div class="col-md-9">
                 <div class="bg-white edit-profile-view">
-                    <form>
+                    <form class="position-relative" style="z-index: 1">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -133,7 +133,7 @@
                         </div>
                     </form>
                 </div>
-                <button class="save-btn mt-4 ml-auto d-flex align-items-center justify-content-center">Save</button>
+                <button class="save-btn position-relative mt-4 ml-auto d-flex align-items-center justify-content-center">Save</button>
             </div>
         </div>
         <div class="position-absolute" style="right:0; bottom: 0;">

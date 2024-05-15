@@ -647,7 +647,7 @@ input::placeholder {
     border-radius: 10px !important;
     height: 50px !important;
 }
-.save-btn {
+.save-btn, .edit-profile-btn {
     font-family: "Crimson Pro", serif;
     font-size: 20px;
     font-weight: 400;
@@ -658,5 +658,6 @@ input::placeholder {
     height: 54px;
     border: none;
     border-radius: 10px;
+    z-index: 1
 }
 /* Profile view and edit profile css end */
