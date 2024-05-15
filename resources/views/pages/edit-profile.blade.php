@@ -90,7 +90,7 @@
                 <h2 class="profile-heading">
                     PROFILE PICTURE
                 </h2>
-                <div class="mt-2 pr-5">
+                <div class="mt-2">
                     <img src="{{asset('assets/images/profile-image.png')}}" alt="profile iamge" class="profile-img">
                     {{-- Change button  --}}
                     <div style="max-width: 255px">
