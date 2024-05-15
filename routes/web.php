@@ -36,6 +36,12 @@ Route::get('/otp-code', function () {
 Route::get('/reset-password', function () {
     return view('auth.reset-password');
 });
+Route::get('/plans', function () {
+    return view('pages.plans');
+});
+Route::get('/invoice', function () {
+    return view('pages.invoice');
+});
 
 Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');
 Route::post('/signin', [AuthController::class, 'signinFunction'])->name('signinFunction');
@@ -44,7 +50,7 @@ Route::post('/otp-verification', [AuthController::class, 'verifyOtp'])->name('ve
 Route::post('/password-reset', [AuthController::class, 'resetPassword'])->name('resetPassword');
 
 Route::middleware('auth')->group(function () {
-    // Functional Routes 
+    // Functional Routes
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/cover', [ContentController::class, 'coverPage'])->name('coverPage');
     Route::get('/gratitude', [ContentController::class, 'gratitudePage'])->name('gratitudePage');
@@ -68,7 +74,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/page-codes', [ContentController::class, 'pageCodes'])->name('pageCodes');
     Route::post('/updatePageCode', [ContentController::class, 'updatePageCode'])->name('updatePageCode');
 
-    // Submit Forms 
+
+    // Submit Forms
     Route::post('/cover/submit', [ContentController::class, 'submitCover'])->name('submitCover');
     Route::post('/gratitude/submit', [ContentController::class, 'submitGratitude'])->name('submitGratitude');
     Route::post('/desire/submit', [ContentController::class, 'submitDesire'])->name('submitDesire');

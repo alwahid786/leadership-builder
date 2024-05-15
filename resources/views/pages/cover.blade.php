@@ -130,7 +130,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="audiodiv" style="display: none;">
+                    <div id="audiodiv">
                         <form action="{{route('submitresponse')}}" id="desireForm" method="POST">
                             @csrf
                             <div class="row">
@@ -163,7 +163,7 @@
                         </form>
                     </div>
 
-                    <div id="videodiv">
+                    <div id="videodiv" style="display: none;">
                         <div class="video-container">
                             <video id="videoElement" autoplay playsinline></video>
                             <div class="controls-container py-2 text-center">

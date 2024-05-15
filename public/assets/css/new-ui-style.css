@@ -141,6 +141,24 @@ input::placeholder {
     color: white;
 }
 
+.themePrimaryBtn2 {
+    background-color: var(--blue) !important;
+    border-radius: 10px !important;
+    color: white;
+    width: 40%;
+    border: none !important;
+    height: 45px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.themePrimaryBtn2:hover {
+    /* background-color: var(--blue) !important; */
+    text-decoration: none;
+    color: white;
+}
+
 .themePrimaryBtnWhite:hover {
     /* background-color: var(--blue) !important; */
     text-decoration: none;
@@ -433,11 +451,123 @@ input::placeholder {
 .blink {
     animation: blink 2s infinite;
 }
-.full-hd{
+
+.full-hd {
     position: absolute;
     bottom: 15px;
     left: 15px;
 }
-.full-hd img{
+
+.full-hd img {
     width: 40px;
+}
+
+.plans {
+    border-radius: 10px;
+    padding: 10px 15px 20px 15px;
+    cursor: pointer;
+}
+
+.basic-plan {
+    border: 2px solid #ABABFC;
+    background-color: #D7D7F5;
+}
+
+.pro-plan {
+    border: 2px solid #146C00;
+    background-color: #C1ECB7;
+}
+
+.enterprise-plan {
+    border: 2px solid #FFBB19;
+    background-color: #FAE7BA;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.plans:hover {
+    animation: float 1s ease-in-out infinite;
+}
+
+.blue {
+    color: var(--blue);
+}
+
+.tableDiv {
+    background-color: white;
+    padding: 0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* .table thead th,
+.table tbody th,
+.table tbody tr td{
+    display: flex;
+    align-items: center;
+} */
+.table thead th {
+    font-size: 18px;
+    border: none;
+}
+
+.table tbody tr td {
+    font-size: 16px;
+    font-weight: 400;
+    color: #3E4954;
+}
+
+.table tbody tr:hover td {
+    /* box-shadow: 1px 1px 1px #3E4954; */
+}
+
+.basicPlan {
+    color: #9D9DFF !important;
+    font-weight: 500 !important;
+}
+
+.proPlan {
+    color: #11AA29 !important;
+    font-weight: 500 !important;
+}
+
+.enterprisePlan {
+    color: #FAB117 !important;
+    font-weight: 500 !important;
+}
+
+.invoiceCard {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px 50px;
+    overflow: hidden;
+}
+
+.invoiceHeading {
+    color: #C7C7C7;
+    font-weight: 500;
+}
+
+.hotBorder {
+    width: 100%;
+    height: 5px;
+
+}
+
+.hotBorderStriped {
+    width: 100%;
+    height: 2px;
+
 }
