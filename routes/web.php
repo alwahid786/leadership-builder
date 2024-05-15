@@ -42,6 +42,15 @@ Route::get('/plans', function () {
 Route::get('/invoice', function () {
     return view('pages.invoice');
 });
+Route::get('/profile', function () {
+    return view('pages.profile-view');
+});
+Route::get('/edit-profile', function () {
+    return view('pages.edit-profile');
+});
+Route::get('/invoices', function () {
+    return view('pages.invoices');
+});
 
 Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');
 Route::post('/signin', [AuthController::class, 'signinFunction'])->name('signinFunction');
