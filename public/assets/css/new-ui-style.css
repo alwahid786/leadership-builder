@@ -653,6 +653,10 @@ input::placeholder {
     border-radius: 10px !important;
     height: 50px !important;
 }
+.form-group textarea {
+    border: 1px solid rgba(17, 119, 170, 1) !important;
+    border-radius: 10px !important;
+}
 .save-btn, .edit-profile-btn {
     font-family: "Crimson Pro", serif;
     font-size: 20px;
@@ -844,6 +848,12 @@ h1, h2, h3, h4, h5, h6, p, span {
     }
     .dashboard .card-svg {
         width: 150px;
+    }
+    .save-btn, .edit-profile-btn {
+        font-size: 16px;
+        line-height: 22.23px;
+        width: 178px;
+        height: 50px;
     }
 }
 @media (max-width:475px) {

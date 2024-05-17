@@ -91,6 +91,31 @@
                     <h2 class="font-49 crimson primary-color">
                         Edit Plans
                     </h2>
+                    <form class="mt-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="planName">Plan Name</label>
+                                    <input type="text" id="planName" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="price">Price</label>
+                                    <input type="text" id="price" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="planDetails">Plan Details</label>
+                                    <textarea id="planDetails" cols="30" rows="10" class="form-control"></textarea>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button class="save-btn mt-4">Save Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
