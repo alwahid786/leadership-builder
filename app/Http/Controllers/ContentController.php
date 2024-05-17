@@ -44,7 +44,7 @@ class ContentController extends Controller
         }
     }
 
-    // Gratitude FUnction 
+    // Gratitude FUnction
     public function gratitudeFunction(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -62,7 +62,7 @@ class ContentController extends Controller
         }
     }
 
-    // Desire FUnction 
+    // Desire FUnction
     public function desireFunction(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -79,7 +79,7 @@ class ContentController extends Controller
         }
     }
 
-    // WOW FUnction 
+    // WOW FUnction
     public function wowFunction(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -99,7 +99,7 @@ class ContentController extends Controller
         }
     }
 
-    // vision FUnction 
+    // vision FUnction
     public function visionFunction(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -118,7 +118,7 @@ class ContentController extends Controller
         }
     }
 
-    // inspiration FUnction 
+    // inspiration FUnction
     public function inspirationFunction(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -137,7 +137,7 @@ class ContentController extends Controller
         }
     }
 
-    // execution FUnction 
+    // execution FUnction
     public function executionFunction(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -156,7 +156,7 @@ class ContentController extends Controller
         }
     }
 
-    // conclusion FUnction 
+    // conclusion FUnction
     public function conclusionFunction(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -178,7 +178,7 @@ class ContentController extends Controller
     {
         $loginUserId = Auth::user()->id;
         $current_date = Carbon::now()->toDateString();
-        
+
         $response_exists = Book::where('user_id', $loginUserId)
             ->whereDate('created_at', $current_date)
             ->first();
@@ -188,11 +188,12 @@ class ContentController extends Controller
             $response_exists['q_answer'] = null;
             $response_exists['video_url'] = null;
             $response_exists['id'] = 0;
+            $response_exists['day'] = 1;
         }
 
         // dd($response_exists);
         $response_exists['today'] = ($response_exists['response_type']==null ? auth()->user()->total_days+1: auth()->user()->total_days);
-        
+
         return view('pages.cover', compact('response_exists'));
     }
 
@@ -200,7 +201,7 @@ class ContentController extends Controller
     public function pastday($day)
     {
         $loginUserId = Auth::user()->id;
-        
+
         $response_exists = Book::where('user_id', $loginUserId)
             ->whereDate('day', $day)
             ->first();
@@ -214,7 +215,7 @@ class ContentController extends Controller
 
         // dd($response_exists);
         $response_exists['today'] = ($response_exists['response_type']==null ? auth()->user()->total_days+1: auth()->user()->total_days);
-        
+
         return view('pages.cover', compact('response_exists'));
     }
 
@@ -274,7 +275,7 @@ class ContentController extends Controller
         return view('pages.conclusion', compact('book'));
     }
 
-    // submit cover FUnction 
+    // submit cover FUnction
     public function submitCover(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -299,16 +300,16 @@ class ContentController extends Controller
 
             // $userId = Auth::user()->id;
             // $today = Carbon::today();
-    
+
             // // Check if a response from the current user for today's date already exists
             // $existingResponse = Book::where('user_id', $userId)
             //     ->whereDate('created_at', $today)
             //     ->first();
-    
+
             // if ($existingResponse) {
             //     return redirect()->back()->with('nextError', 'Response Already Submitted for today. Please try again Next Day.');
             // }
-    
+
             $data = $request->except('_token');
             $book = new Book();
             $book->user_id = Auth::user()->id;
@@ -323,24 +324,24 @@ class ContentController extends Controller
                     $video = $request->file('video');
                     $path = $video->storeAs('videos', $book->video_url, 'public'); // Store in public disk with the specified filename
                     $book->save();
-    
+
                     // Increment total_days for the current user
                     $user = Auth::user();
                     $user->total_days += 1;
                     $user->save();
-    
+
                     return response()->json(['success' => true, 'data' => $path]);
                 } else {
                     return response()->json(['error' => 'No video file found']);
                 }
             }
             $book->save();
-    
+
             // Increment total_days for the current user
             $user = Auth::user();
             $user->total_days += 1;
             $user->save();
-    
+
             return redirect()->back()->with('responseSuccess', 'Response Saved Successfully!');
         }
         else {
@@ -363,21 +364,21 @@ class ContentController extends Controller
                     $video = $request->file('video');
                     $path = $video->storeAs('videos', $book->video_url, 'public'); // Store in public disk with the specified filename
                     $book->save();
-    
+
                     return response()->json(['success' => true, 'data' => $path]);
                 } else {
                     return response()->json(['error' => 'No video file found']);
                 }
             }
             $book->save();
-    
+
             return redirect()->back()->with('responseSuccess', 'Update Saved Successfully!');
-        
+
         }
 
     }
 
-    // submit Gratitude Function 
+    // submit Gratitude Function
     public function submitGratitude(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -387,7 +388,7 @@ class ContentController extends Controller
         return redirect()->back()->with('gratitudeSuccess', 'Data inserted Successfully!');
     }
 
-    // submit Desire Function 
+    // submit Desire Function
     public function submitDesire(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -397,7 +398,7 @@ class ContentController extends Controller
         return redirect()->back()->with('desireSuccess', 'Data inserted Successfully!');
     }
 
-    // submit Wow Function 
+    // submit Wow Function
     public function submitWow(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -407,7 +408,7 @@ class ContentController extends Controller
         return redirect()->back()->with('wowSuccess', 'Data inserted Successfully!');
     }
 
-    // submit Vision Function 
+    // submit Vision Function
     public function submitVision(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -417,7 +418,7 @@ class ContentController extends Controller
         return redirect()->back()->with('visionSuccess', 'Data inserted Successfully!');
     }
 
-    // submit Inspiration Function 
+    // submit Inspiration Function
     public function submitInspiration(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -427,7 +428,7 @@ class ContentController extends Controller
         return redirect()->back()->with('inspirationSuccess', 'Data inserted Successfully!');
     }
 
-    // submit Execution Function 
+    // submit Execution Function
     public function submitExecution(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -437,7 +438,7 @@ class ContentController extends Controller
         return redirect()->back()->with('executionSuccess', 'Data inserted Successfully!');
     }
 
-    // submit Welcome Function 
+    // submit Welcome Function
     public function submitWelcome(Request $request)
     {
         $loginUserId = Auth::user()->id;
@@ -449,7 +450,7 @@ class ContentController extends Controller
         }
     }
 
-    // Create PDF Function 
+    // Create PDF Function
     public function createPdf()
     {
         $loginUserId = Auth::user()->id;
