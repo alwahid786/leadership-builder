@@ -51,6 +51,15 @@ Route::get('/edit-profile', function () {
 Route::get('/invoices', function () {
     return view('pages.invoices');
 });
+Route::get('/plans-and-pricing', function () {
+    return view('pages.plans-and-pricing');
+});
+Route::get('/dashboard', function () {
+    return view('pages.dashboard');
+});
+Route::get('/edit-plans', function () {
+    return view('pages.edit-plans');
+});
 
 Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');
 Route::post('/signin', [AuthController::class, 'signinFunction'])->name('signinFunction');
