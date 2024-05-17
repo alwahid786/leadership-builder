@@ -464,7 +464,7 @@ input::placeholder {
     width: 40px;
 }
 
-.videotimer{
+.videotimer {
     position: absolute;
     bottom: 25px;
     right: 25px;
@@ -589,20 +589,24 @@ input::placeholder {
     text-align: left;
     color: rgba(113, 117, 121, 1);
 }
+
 .profile-img {
     width: 255px;
     height: 300px;
     object-fit: cover;
     border-radius: 14px;
 }
+
 .profile-view {
     padding: 40px 120px 123px 93px;
     border-radius: 8px;
 }
+
 .edit-profile-view {
     padding: 64px 54px;
     border-radius: 8px;
 }
+
 .profile-view-heading {
     font-family: "Crimson Pro", serif;
     font-size: 38px;
@@ -611,6 +615,7 @@ input::placeholder {
     text-align: left;
     color: rgba(32, 32, 32, 1);
 }
+
 .profile-view p {
     font-family: "Crimson Pro", serif;
     font-size: 16px;
@@ -619,6 +624,7 @@ input::placeholder {
     text-align: left;
     color: rgba(32, 32, 32, 1);
 }
+
 .change-img {
     background: rgba(17, 119, 170, 1);
     border-radius: 10px;
@@ -634,6 +640,7 @@ input::placeholder {
     margin: 20px auto 0 auto;
     position: relative;
 }
+
 .change-img-input {
     position: absolute;
     inset: 0;
@@ -641,23 +648,29 @@ input::placeholder {
     z-index: 99;
     cursor: pointer;
 }
-.form-group label, .form-group input {
+
+.form-group label,
+.form-group input {
     font-family: "Crimson Pro", serif;
     font-size: 20px;
     font-weight: 400;
     line-height: 22.23px;
     text-align: left;
 }
+
 .form-group input {
     border: 1px solid rgba(17, 119, 170, 1) !important;
     border-radius: 10px !important;
     height: 50px !important;
 }
+
 .form-group textarea {
     border: 1px solid rgba(17, 119, 170, 1) !important;
     border-radius: 10px !important;
 }
-.save-btn, .edit-profile-btn {
+
+.save-btn,
+.edit-profile-btn {
     font-family: "Crimson Pro", serif;
     font-size: 20px;
     font-weight: 400;
@@ -670,6 +683,7 @@ input::placeholder {
     border-radius: 10px;
     z-index: 1
 }
+
 /* Profile view and edit profile css end */
 
 /* Plan and pricing css start  */
@@ -678,25 +692,42 @@ input::placeholder {
     padding: 25px 32px 22px 19px;
     border-radius: 10px;
 }
+<<<<<<< HEAD
 .plan-card.basic {
     background: rgba(215, 215, 245, 1);
     border: 1px solid rgba(156, 156, 255, 1);
 }
 .plan-card.professional {
+=======
+
+.basic {
+    background: rgba(215, 215, 245, 1);
+    border: 1px solid rgba(156, 156, 255, 1);
+}
+
+.professional {
+>>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
     background: rgba(193, 236, 183, 1);
     border: 1px solid rgba(156, 156, 255, 1);
     margin-top: 30px;
 }
+<<<<<<< HEAD
 .plan-card.enterprise {
+=======
+
+.enterprise {
+>>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
     background: rgba(250, 231, 186, 1);
     border: 1px solid rgba(156, 156, 255, 1);
     margin-top: 30px;
 }
+
 .plan-card .heading-one {
     font-family: "Crimson Pro", serif;
     font-weight: 400;
     color: #000;
 }
+
 .plan-card .price {
     font-family: "Crimson Pro", serif;
     font-size: 50px;
@@ -704,13 +735,15 @@ input::placeholder {
     line-height: 55.57px;
     color: #000;
 }
+
 .plan-card .para {
     font-family: "Crimson Pro", serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 17.78px;
-    color: rgba(94, 94, 94, 1);     
+    color: rgba(94, 94, 94, 1);
 }
+
 .plan-card .edit-btn {
     font-family: "Crimson Pro", serif;
     font-size: 18px;
@@ -725,45 +758,65 @@ input::placeholder {
 /* Plan and pricing css end */
 
 /* Global styling start */
-h1, h2, h3, h4, h5, h6, p, span {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
     margin-bottom: 0;
 }
+
 .font-63 {
     font-size: 63px;
     line-height: 94px;
 }
+
 .font-49 {
     font-size: 50px;
     line-height: 59px;
 }
+<<<<<<< HEAD
 .font-28 {
     font-size: 28px;
     line-height: 42px;
 }
+=======
+
+>>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
 .font-18 {
     font-size: 18px;
     line-height: 27px;
 }
+
 .font-16 {
     font-size: 16px;
     line-height: 24px;
 }
+
 .font-14 {
     font-size: 14px;
     line-height: 26px;
 }
+
 .font-weight-600 {
     font-weight: 600;
 }
+
 .font-weight-500 {
     font-weight: 500;
 }
+
 .poppins {
     font-family: "Poppins", sans-serif;
 }
+
 .crimson {
     font-family: "Crimson Pro", serif;
 }
+
 .primary-color {
     color: var(--blue);
 }
@@ -794,6 +847,7 @@ a:hover {
     padding: 30px 42px 42px 55px;
     flex: 1;
 }
+
 .dashboard .main-wallet-btn {
     margin-top: 24px;
     background: var(--blue);
@@ -802,25 +856,90 @@ a:hover {
     width: 194px;
     height: 47px;
     gap: 14px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.dashboard .main-wallet-btn:hover {
+    transform: scale(1.05);
+}
+
 .dashboard .right-side-cards {
     gap: 32px;
 }
+
 .dashboard .right-side-cards .right-side-card {
     min-width: 255px;
     padding: 22px 20px 17px 31px;
     border-radius: 12px;
     flex: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
+
+.dashboard .right-side-cards .right-side-card:hover {
+    min-width: 255px;
+    padding: 22px 20px 17px 31px;
+    border-radius: 12px;
+    flex: 1;
+    transform: scale(1.05);
+}
+
+.dashboard .right-side-cards .right-side-card .right-side-card-svg {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.dashboard .right-side-cards .right-side-card:hover .right-side-card-svg {
+    animation: float 1s ease-in-out infinite;
+    fill: white;
+}
+
+.dashboard .right-side-cards .card-green:hover .right-side-card-svg path {
+    fill: rgba(0, 163, 137, 1);
+}
+
+.dashboard .right-side-cards .card-blue:hover .right-side-card-svg path {
+    fill: rgba(74, 82, 255, 1);
+}
+
+.dashboard .right-side-cards .card-pink:hover .right-side-card-svg path {
+    fill: rgba(171, 84, 219, 1);
+}
+
+.dashboard .right-side-cards .card-orange:hover .right-side-card-svg path {
+    fill: rgba(255, 91, 91, 1);
+}
+
+.rotate {
+    transform-origin: center;
+    animation: rotateU 4s infinite ease-in-out;
+}
+
+@keyframes rotateU {
+    0% {
+        transform: rotate(25deg);
+    }
+
+    50% {
+        transform: rotate(-30deg);
+    }
+
+    100% {
+        transform: rotate(25deg);
+    }
+}
+
 .dashboard .right-side-cards .card-green {
     background: rgba(0, 163, 137, 1);
 }
+
 .dashboard .right-side-cards .card-blue {
     background: rgba(74, 82, 255, 1);
 }
+
 .dashboard .right-side-cards .card-pink {
     background: rgba(171, 84, 219, 1);
 }
+
 .dashboard .right-side-cards .card-orange {
     background: rgba(255, 91, 91, 1);
 }
@@ -910,37 +1029,48 @@ a:hover {
         font-size: 50px;
         line-height: 84px;
     }
+
     .font-49 {
         font-size: 39px;
         line-height: 59px;
     }
 }
+
 @media (max-width:1024px) {
     .plan-card .price {
         font-size: 35px;
         line-height: 45.57px;
     }
 }
+
 @media (max-width:576px) {
     .font-63 {
         font-size: 50px;
         line-height: 84px;
     }
+
     .font-49 {
         font-size: 39px;
         line-height: 59px;
     }
+<<<<<<< HEAD
     .font-28 {
         font-size: 22px;
         line-height: 28px;
     }
+=======
+
+>>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
     .dashboard .my-balance-card {
         padding: 16px;
     }
+
     .dashboard .card-svg {
         width: 150px;
     }
-    .save-btn, .edit-profile-btn {
+
+    .save-btn,
+    .edit-profile-btn {
         font-size: 16px;
         line-height: 22.23px;
         width: 178px;
@@ -951,14 +1081,17 @@ a:hover {
         padding: 12px 20px;
     }
 }
+
 @media (max-width:475px) {
     .font-63 {
         font-size: 30px;
     }
+
     .font-49 {
         font-size: 24px;
         line-height: 39px;
     }
+
     .plan-card .price {
         font-size: 20px;
         line-height: 29.57px;
