@@ -60,6 +60,9 @@ Route::get('/dashboard', function () {
 Route::get('/edit-plans', function () {
     return view('pages.edit-plans');
 });
+Route::get('/users', function () {
+    return view('pages.users');
+});
 
 Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');
 Route::post('/signin', [AuthController::class, 'signinFunction'])->name('signinFunction');
