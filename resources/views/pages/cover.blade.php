@@ -82,13 +82,15 @@
 		/* Firefox */
 	}
 </style>
+{{-- @dd($response_exists['today']); --}}
+
 @include('includes.navbar')
 <section class="contentSection position-relative">
 	<div class="container-fluid contentRow">
 		<div class="row">
 			<div class="col-12">
 				<div class="quotation-card day-card">
-					<h2>Quote of the Day!</h2>
+					<h2>Quote of the Day {{$response_exists['day']}}</h2>
 					<div class="d-flex align-items-center">
 						<q>Your time is limited, don't waste it living someone else's dream.</q>
 						<b class="px-2">-</b>
@@ -98,7 +100,7 @@
 			</div>
 			<div class="col-12 mt-3">
 				<div class="question-card day-card">
-					<h2>Question of the Day!</h2>
+					<h2>Question of the Day {{$response_exists['day']}}</h2>
 					<div class="d-flex align-items-center">
 						<q>What's your dream?</q>
 					</div>
@@ -108,22 +110,27 @@
 				<div class="day-card answer-card">
 					<div class="d-flex justify-content-between align-content-center">
 						<div>
-							<div>
+							<input type="hidden" id="responsetypesave" value="{{$response_exists['response_type']}}">
+							<div id="audioheading" class="{{$response_exists['response_type']==null||$response_exists['response_type']=='audio' ? '':'d-none'}}">
 								<h2 id="recordingHeader">Record Audio</h2>
 								<p class="recordingTagline">Record audio to convert to text in the editor below.</p>
+							</div>
+							<div id="videoheading" class="{{$response_exists['response_type']=='video'?'':'d-none'}}">
+								<h2 id="recordingHeader">Record Video</h2>
+								<p class="recordingTagline">Record video to save it as the response.</p>
 							</div>
 						</div>
 						<div>
 							<div class="d-flex align-items-center" style="gap:8px">
 								<div class="recordingTabs audioRecording {{ $response_exists['response_type']==null||$response_exists['response_type']=='audio' ? 'active' : ''}}  d-flex justify-content-between align-items-center"
-									id="audiobtn">
+									id="audiobtn" onclick="selectAudio()">
 									<div>
 										<i class="fas fa-microphone mr-2"></i> Audio Recording
 									</div>
 									<div><i class="fas fa-check-circle {{ $response_exists['response_type']==null||$response_exists['response_type']=='audio' ? '' : 'd-none'}}"></i></div>
 								</div>
 								<div class="recordingTabs videoRecording {{ $response_exists['response_type']=='video' ? 'active' : ''}} d-flex justify-content-between align-items-center"
-									id="videobtn">
+									id="videobtn" onclick="selectVideo()">
 									<div>
 										<i class="fas fa-video mr-2"></i> Video Recording
 									</div>
@@ -132,7 +139,7 @@
 							</div>
 						</div>
 					</div>
-					@if ($response_exists['response_type']===null)
+					{{-- @if ($response_exists['response_type']===null) --}}
 					<div id="audiodiv">
 						<form action="{{route('submitresponse')}}" id="desireForm" method="POST">
 							@csrf
@@ -156,24 +163,30 @@
 									<div class="mt-3">
 										<div id="preview"></div>
 										<div id="editor">
+											{{$response_exists['response_type']===null?'':html_entity_decode(strip_tags($response_exists['q_answer']), ENT_QUOTES | ENT_HTML5, 'UTF-8');}}
 										</div>
 									</div>
 								</div>
 								<input type="hidden" name="desire" id="contentInput" data-class="desire">
 								<input type="hidden" name="responsetype" value="audio" data-class="desire">
+								<input type="hidden" name="getid" value="{{$response_exists['id']}}">
 								<div class="text-right px-3 mt-3 w-100">
-									<button type="submit" data-class="desire" id="save" class="btn btn-primary">
+									<button type="submit" data-class="desire" id="save" class="btn btn-primary {{$response_exists['response_type']===null?'':'d-none'}}">
 										<i class="fas fa-save mr-2"></i>Save</button>
+									<button type="submit" data-class="desire" id="update" class="btn btn-success {{$response_exists['response_type']!==null?'':'d-none'}}">
+										<i class="fas fa-save mr-2"></i>Update and Save</button>
 								</div>
 							</div>
 						</form>
 					</div>
 
-					<div id="videodiv" style="display: none;">
+					<div id="videodiv" class="d-none">
 						<div class="video-container">
-							<video id="videoElement" autoplay playsinline></video>
-							<video id="videoElement1" controls height="600" style="width:100%; object-fit:cover; border-radius: 15px;"></video>
-							<div class="controls-container py-2 text-center">
+							<video id="videoElement" autoplay playsinline class="{{$response_exists['response_type']=='video' ? 'd-none':''}}"></video>
+							<video id="videoElement1" controls height="600" style="width:100%; object-fit:cover; border-radius: 15px;">
+								<source src="{{ asset('storage/videos/' . $response_exists['video_url']) }}" type="video/mp4">
+							</video>
+							<div class="controls-container py-2 text-center {{$response_exists['response_type']=='video' ? 'd-none':''}}">
 								<h5>To Start Recording, Click the <span class="text-danger">Red</span> circle below</h5>
 								<div class="d-flex align-items-center justify-content-center" style="gap: 15px;">
 									<div class="startRecordingBtn recordingBtns">
@@ -196,32 +209,24 @@
 								</div>
 								<h4 class="m-0">REC</h4>
 							</div>
-							<div class="full-hd">
+							<div class="full-hd {{$response_exists['response_type']=='video' ? 'd-none':''}}">
 								<img src="{{asset('assets/images/hd.png')}}" alt="">
 							</div>
-							<div class="videotimer text-light">
+							<div class="videotimer text-light {{$response_exists['response_type']=='video' ? 'd-none':''}}">
 								<i class="zmdi zmdi-circle mr-2"></i>
 								<div id="timer2">00:00:00</div>
 							</div>
+							<input type="hidden" name="getid" id="getid" value="{{$response_exists['id']}}">
 						</div>
 						<div class="text-right px-3 mt-3 w-100">
-							<button id="retakevideo" class="btn btn-danger d-none">
+							<button id="retakevideo" class="btn btn-danger {{$response_exists['response_type']=='video' ? '':'d-none'}}">
 								<i class="fas fa-redo mr-2" aria-hidden="true"></i>Retake</button>
-							<button id="savevid" class="btn btn-primary">
+							<button id="savevid" class="btn btn-primary {{$response_exists['response_type']===null ? '':'d-none'}}">
 								<i class="fas fa-save mr-2"></i>Save</button>
+							<button id="updatevid" class="btn btn-success {{$response_exists['response_type']=='video' ? '':'d-none'}}">
+								<i class="fas fa-save mr-2"></i>Update and Save</button>
 						</div>
 					</div>
-					@else
-					<div class="mt-3" style="height: 600px;">
-						@if ($response_exists['response_type']=='audio')
-							<textarea class="form-control" rows="20">{{	html_entity_decode(strip_tags($response_exists['q_answer']), ENT_QUOTES | ENT_HTML5, 'UTF-8');	}}</textarea>
-						@else
-							<video height="600" controls style="width:100%; object-fit:cover; border-radius: 15px;">
-								<source src="{{ asset('storage/videos/' . $response_exists['video_url']) }}" type="video/mp4">
-							</video>
-						@endif
-					</div>
-					@endif
 				</div>
 			</div>
 		</div>
@@ -270,19 +275,31 @@
         $(this).find(".fa-check-circle").removeClass('d-none');
     });
 
-    $("#audiobtn").click(function() {
-        $("#audiodiv").show();
-        $("#videodiv").hide();
-        $('#recordingHeader').text('Record Audio');
-        $('.recordingTagline').text('Record audio to convert to text in the editor below.');
-		// location.reload();
-    });
-    $("#videobtn").click(function() {
-        $("#videodiv").show();
-        $("#audiodiv").hide();
-        $('#recordingHeader').text('Record Video');
-        $('.recordingTagline').text('Record video to save it as the response.');
-    });
+	$(document).ready(function() {
+		var activeTab = document.querySelector('.recordingTabs.active');
+    	if (activeTab) {
+        	console.log('Active tab:', activeTab.id);  // or any other property you want to log
+			activeTab.click();
+    	} else {
+        	console.log('No active tab found.');
+    	}
+	});
+
+	function selectAudio() {
+        $("#audiodiv").removeClass('d-none');
+        $("#videodiv").addClass('d-none');
+        $('#audioheading').removeClass('d-none');
+		$('#videoheading').addClass('d-none');
+		console.log('Audio recording selected');
+    };
+    
+	function selectVideo() {
+        $("#videodiv").removeClass('d-none');
+		$("#audiodiv").addClass('d-none');
+        $('#videoheading').removeClass('d-none');
+		$('#audioheading').addClass('d-none');
+		console.log('Video recording selected');
+    };
 </script>
 
 <script>
@@ -308,7 +325,25 @@
                     return;
                 }
                 $('#contentInput').val(content);
-                $("#desireForm")[0].submit();
+
+				if (checkType() == 'video'){
+					Swal.fire({
+						text: "Your Video response will be deleted... Are you sure to save this?",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: "#6dabe4",
+						cancelButtonColor: "#ce2c2c",
+						confirmButtonText: 'Yes, Save it!',
+						cancelButtonText: 'No, Cancel it!'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							$("#desireForm")[0].submit();
+						}
+					})
+				}
+				else {
+					$("#desireForm")[0].submit();
+				}
             } else {
                 Swal.fire({
                     title: 'Missing Fields',
@@ -317,7 +352,7 @@
                     confirmButtonColor: "#6dabe4"
                 })
             }
-        })
+        });
 
         function validateForm() {
             let errorCount = 0;
@@ -511,6 +546,7 @@
 				$('#videoElement1').removeClass('d-none');
 				$('#retakevideo').removeClass('d-none');
 				$('#timer2').addClass('d-none');
+				$('#updatevid').removeClass('d-none');
 				stopTimer();
 	
 				
@@ -530,6 +566,7 @@
 				$('#videoElement1').addClass('d-none');
 				$('#retakevideo').addClass('d-none');
 				$('#timer2').removeClass('d-none');
+				$('.videotimer').removeClass('d-none');
 				resetTimer(2);
 
 				recordedBlobs = [];
@@ -539,27 +576,49 @@
 			$("#savevid").click(function() {
 				downloadRecording();
 			});
+
+			$("#updatevid").click(function() {
+				console.log('Update Recording');
+				if (checkType() == 'audio'){
+					Swal.fire({
+						text: "Your Audio/Text response will be deleted... Are you sure to save this?",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: "#6dabe4",
+						cancelButtonColor: "#ce2c2c",
+						confirmButtonText: 'Yes, Save it!',
+						cancelButtonText: 'No, Cancel it!'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							UpdateRecording();
+						}
+					})
+				}
+				else {
+					UpdateRecording();
+				}
+			});
 	
 			function startRecording() {
-			console.log('Starting recording...');
+				console.log('Starting recording...');
+			
+				let options = {
+					mimeType: 'video/webm;codecs=vp9',
+					videoBitsPerSecond : 2500000, // Increase video bitrate (adjust as needed)
+					audioBitsPerSecond : 128000 // Increase audio bitrate (adjust as needed)
+				};
+				try {
+					recordedBlobs = [];
+					mediaRecorder = new MediaRecorder(window.stream, options);
+					console.log('MediaRecorder initialized.');
+				} catch (e) {
+					console.error('Exception while creating MediaRecorder:', e);
+					return;
+				}
 		
-			let options = {
-				mimeType: 'video/webm;codecs=vp9',
-				videoBitsPerSecond : 2500000, // Increase video bitrate (adjust as needed)
-				audioBitsPerSecond : 128000 // Increase audio bitrate (adjust as needed)
-			};
-			try {
-				recordedBlobs = [];
-				mediaRecorder = new MediaRecorder(window.stream, options);
-				console.log('MediaRecorder initialized.');
-			} catch (e) {
-				console.error('Exception while creating MediaRecorder:', e);
-				return;
-			}
-	
-			mediaRecorder.ondataavailable = handleDataAvailable;
-			mediaRecorder.start();
-			console.log('Recording started.');
+				mediaRecorder.ondataavailable = handleDataAvailable;
+				mediaRecorder.start();
+				console.log('Recording started.');
 			}
 	
 			function handleDataAvailable(event) {
@@ -632,8 +691,46 @@
 					console.error('Error saving video:', error);
 				});
 			}
-	
 			
+			function UpdateRecording() {
+				let updateid = $('#getid').val();
+				console.log(updateid);
+				console.log(updateid);
+				console.log(updateid);
+
+				console.log('Rc',recordedBlobs);
+				const blob = new Blob(recordedBlobs, { type: 'video/mp4' });
+        		const formData = new FormData();
+        		formData.append('video', blob, 'recording.mp4');
+				formData.append('responsetype', 'video');
+				formData.append('getid', updateid);
+
+				console.log('Video saved successfully:', blob);
+        		fetch(`{{url('/DayResponse/submit')}}`, {
+            		method: 'POST',
+            		headers: {
+                		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            		},
+            		body: formData
+        		})
+        		.then(response => response.json())
+        		.then(data => {
+            		console.log('Video saved successfully:', data);
+					Swal.fire({
+						title: 'Success',
+						text: 'Video saved successfully',
+						icon: 'success',
+						}).then((result) => {
+							if (result.isConfirmed) {
+							// Reload the page
+							location.reload();
+						}
+					});
+				})
+				.catch(error => {
+					console.error('Error saving video:', error);
+				});
+			}
 	
 		});
 
@@ -658,15 +755,9 @@
 			}
 		}
 
-	// function VideoOFF() {
-	// 	console.log('Camera off');
-		
-	// 	const videoTrack = stream.getVideoTracks()[0];
-    // 	const audioTrack = stream.getAudioTracks()[0];
-
-    // 	// Disable the tracks to turn off camera and microphone
-    // 	videoTrack.stop();
-    // 	audioTrack.stop();
-	// }
+		function checkType() {
+			let type = $('#responsetypesave').val();
+			return type;
+		}
 </script>
 @endsection
