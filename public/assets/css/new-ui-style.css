@@ -653,7 +653,11 @@ input::placeholder {
     border-radius: 10px !important;
     height: 50px !important;
 }
-.save-btn {
+.form-group textarea {
+    border: 1px solid rgba(17, 119, 170, 1) !important;
+    border-radius: 10px !important;
+}
+.save-btn, .edit-profile-btn {
     font-family: "Crimson Pro", serif;
     font-size: 20px;
     font-weight: 400;
@@ -664,5 +668,206 @@ input::placeholder {
     height: 54px;
     border: none;
     border-radius: 10px;
+    z-index: 1
 }
 /* Profile view and edit profile css end */
+
+/* Plan and pricing css start  */
+
+.plan-card {
+    padding: 25px 32px 22px 19px;
+    border-radius: 10px;
+}
+.basic {
+    background: rgba(215, 215, 245, 1);
+    border: 1px solid rgba(156, 156, 255, 1);
+}
+.professional {
+    background: rgba(193, 236, 183, 1);
+    border: 1px solid rgba(156, 156, 255, 1);
+    margin-top: 30px;
+}
+.enterprise {
+    background: rgba(250, 231, 186, 1);
+    border: 1px solid rgba(156, 156, 255, 1);
+    margin-top: 30px;
+}
+.plan-card .heading-one {
+    font-family: "Crimson Pro", serif;
+    font-weight: 400;
+    color: #000;
+}
+.plan-card .price {
+    font-family: "Crimson Pro", serif;
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 55.57px;
+    color: #000;
+}
+.plan-card .para {
+    font-family: "Crimson Pro", serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 17.78px;
+    color: rgba(94, 94, 94, 1);     
+}
+.plan-card .edit-btn {
+    font-family: "Crimson Pro", serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 17.78px;
+    color: #fff;
+    width: 149px;
+    height: 48px;
+    border-radius: 12px;
+}
+
+/* Plan and pricing css end */
+
+/* Global styling start */
+h1, h2, h3, h4, h5, h6, p, span {
+    margin-bottom: 0;
+}
+.font-63 {
+    font-size: 63px;
+    line-height: 94px;
+}
+.font-49 {
+    font-size: 50px;
+    line-height: 59px;
+}
+.font-18 {
+    font-size: 18px;
+    line-height: 27px;
+}
+.font-16 {
+    font-size: 16px;
+    line-height: 24px;
+}
+.font-14 {
+    font-size: 14px;
+    line-height: 26px;
+}
+.font-weight-600 {
+    font-weight: 600;
+}
+.font-weight-500 {
+    font-weight: 500;
+}
+.poppins {
+    font-family: "Poppins", sans-serif;
+}
+.crimson {
+    font-family: "Crimson Pro", serif;
+}
+.primary-color {
+    color: var(--blue);
+}
+
+/* Global styling end */
+
+/* Dashboard css start  */
+
+.dashboard .my-balance-card {
+    background: linear-gradient(102.39deg, #1177AA -57.78%, #5EC8D6 84.66%);
+    border-radius: 12px;
+    padding: 30px 42px 42px 55px;
+    flex: 1;
+}
+.dashboard .main-wallet-btn {
+    margin-top: 24px;
+    background: var(--blue);
+    border-radius: 13px;
+    border: 0;
+    width: 194px;
+    height: 47px;
+    gap: 14px;
+}
+.dashboard .right-side-cards {
+    gap: 32px;
+}
+.dashboard .right-side-cards .right-side-card {
+    min-width: 255px;
+    padding: 22px 20px 17px 31px;
+    border-radius: 12px;
+    flex: 1;
+}
+.dashboard .right-side-cards .card-green {
+    background: rgba(0, 163, 137, 1);
+}
+.dashboard .right-side-cards .card-blue {
+    background: rgba(74, 82, 255, 1);
+}
+.dashboard .right-side-cards .card-pink {
+    background: rgba(171, 84, 219, 1);
+}
+.dashboard .right-side-cards .card-orange {
+    background: rgba(255, 91, 91, 1);
+}
+
+/* Dashboard css end  */
+
+/* Edit plans css start  */
+
+.edit-plans {
+    border-radius: 10px;
+    padding: 25px 22px 50px 20px;
+}
+
+/* Edit plans css end */
+
+/* Media queries start */
+
+@media (max-width:1200px) {
+    .font-63 {
+        font-size: 50px;
+        line-height: 84px;
+    }
+    .font-49 {
+        font-size: 39px;
+        line-height: 59px;
+    }
+}
+@media (max-width:1024px) {
+    .plan-card .price {
+        font-size: 35px;
+        line-height: 45.57px;
+    }
+}
+@media (max-width:576px) {
+    .font-63 {
+        font-size: 50px;
+        line-height: 84px;
+    }
+    .font-49 {
+        font-size: 39px;
+        line-height: 59px;
+    }
+    .dashboard .my-balance-card {
+        padding: 16px;
+    }
+    .dashboard .card-svg {
+        width: 150px;
+    }
+    .save-btn, .edit-profile-btn {
+        font-size: 16px;
+        line-height: 22.23px;
+        width: 178px;
+        height: 50px;
+    }
+}
+@media (max-width:475px) {
+    .font-63 {
+        font-size: 30px;
+    }
+    .font-49 {
+        font-size: 24px;
+        line-height: 39px;
+    }
+    .plan-card .price {
+        font-size: 20px;
+        line-height: 29.57px;
+    }
+}
+
+/* Media queries end */
