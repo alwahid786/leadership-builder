@@ -82,130 +82,163 @@
         /* Firefox */
     }
 </style>
+{{-- @dd($response_exists['today']); --}}
+
 @include('includes.navbar')
 <section class="contentSection position-relative">
-    <div class="container-fluid contentRow">
-        <div class="row">
-            <div class="col-12">
-                <div class="quotation-card day-card">
-                    <h2>Quote of the Day!</h2>
-                    <div class="d-flex align-items-center">
-                        <q>Your time is limited, don't waste it living someone else's dream.</q>
-                        <b class="px-2">-</b>
-                        <em>Steve Jobs</em>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 mt-3">
-                <div class="question-card day-card">
-                    <h2>Question of the Day!</h2>
-                    <div class="d-flex align-items-center">
-                        <q>What's your dream?</q>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 mt-3">
-                <div class="day-card answer-card">
-                    <div class="d-flex justify-content-between align-content-center">
-                        <div>
-                            <div>
-                                <h2 id="recordingHeader">Record Audio</h2>
-                                <p class="recordingTagline">Record audio to convert to text in the editor below.</p>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="d-flex align-items-center" style="gap:8px">
-                                <div class="recordingTabs audioRecording active d-flex justify-content-between align-items-center" id="audiobtn">
-                                    <div>
-                                        <i class="fas fa-microphone mr-2"></i> Audio Recording
-                                    </div>
-                                    <div><i class="fas fa-check-circle"></i></div>
-                                </div>
-                                <div class="recordingTabs videoRecording d-flex justify-content-between align-items-center" id="videobtn">
-                                    <div>
-                                        <i class="fas fa-video mr-2"></i> Video Recording
-                                    </div>
-                                    <div><i class="fas fa-check-circle d-none"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="audiodiv">
-                        <form action="{{route('submitresponse')}}" id="desireForm" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <div id="controls" class="d-flex align-items-center justify-content-between">
-                                        <div>
-                                            <button data-class="desire" type="button" id="startBtn1" data-sr_no="1" data-editor_name="editor" class="startBtn">Start Recording</button>
-                                            <button data-class="desire" type="button" id="stopBtn1" data-sr_no="1" class="btn-danger stopBtn" style="display: none;">Stop
-                                                Recording</button>
-                                            <button data-class="desire" type="button" id="resetBtn1" data-sr_no="1" class="btn-danger resetBtn" style="display: none;">Reset Text</button>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <i class="zmdi zmdi-circle mr-2"></i>
-                                            <div id="timer1">00:00:00</div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3">
-                                        <div id="preview"></div>
-                                        <div id="editor">{{ $response_exists!==null ?
-                                            strip_tags($response_exists['q_answer']):'' }} </div>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="desire" id="contentInput" data-class="desire">
-                                <input type="hidden" name="responsetype" value="audio" data-class="desire">
-                                <div class="text-right px-3 mt-3 w-100">
-                                    <button type="submit" data-class="desire" id="save" class="btn btn-primary" {{
-                                        $response_exists!==null ? 'disabled' :'' }}><i class="fas fa-save mr-2"></i>Save</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+	<div class="container-fluid contentRow">
+		<div class="row">
+			<div class="col-12">
+				<div class="quotation-card day-card">
+					<h2>Quote of the Day {{$response_exists['day']}}</h2>
+					<div class="d-flex align-items-center">
+						<q>Your time is limited, don't waste it living someone else's dream.</q>
+						<b class="px-2">-</b>
+						<em>Steve Jobs</em>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 mt-3">
+				<div class="question-card day-card">
+					<h2>Question of the Day {{$response_exists['day']}}</h2>
+					<div class="d-flex align-items-center">
+						<q>What's your dream?</q>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 mt-3">
+				<div class="day-card answer-card">
+					<div class="d-flex justify-content-between align-content-center">
+						<div>
+							<input type="hidden" id="responsetypesave" value="{{$response_exists['response_type']}}">
+							<div id="audioheading" class="{{$response_exists['response_type']==null||$response_exists['response_type']=='audio' ? '':'d-none'}}">
+								<h2 id="recordingHeader">Record Audio</h2>
+								<p class="recordingTagline">Record audio to convert to text in the editor below.</p>
+							</div>
+							<div id="videoheading" class="{{$response_exists['response_type']=='video'?'':'d-none'}}">
+								<h2 id="recordingHeader">Record Video</h2>
+								<p class="recordingTagline">Record video to save it as the response.</p>
+							</div>
+						</div>
+						<div>
+							<div class="d-flex align-items-center" style="gap:8px">
+								<div class="recordingTabs audioRecording {{ $response_exists['response_type']==null||$response_exists['response_type']=='audio' ? 'active' : ''}}  d-flex justify-content-between align-items-center"
+									id="audiobtn" onclick="selectAudio()">
+									<div>
+										<i class="fas fa-microphone mr-2"></i> Audio Recording
+									</div>
+									<div><i class="fas fa-check-circle {{ $response_exists['response_type']==null||$response_exists['response_type']=='audio' ? '' : 'd-none'}}"></i></div>
+								</div>
+								<div class="recordingTabs videoRecording {{ $response_exists['response_type']=='video' ? 'active' : ''}} d-flex justify-content-between align-items-center"
+									id="videobtn" onclick="selectVideo()">
+									<div>
+										<i class="fas fa-video mr-2"></i> Video Recording
+									</div>
+									<div><i class="fas fa-check-circle {{$response_exists['response_type']=='video' ? '' : 'd-none'}}"></i></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{-- @if ($response_exists['response_type']===null) --}}
+					<div id="audiodiv">
+						<form action="{{route('submitresponse')}}" id="desireForm" method="POST">
+							@csrf
+							<div class="row">
+								<div class="col-12 mt-3">
+									<div id="controls" class="d-flex align-items-center justify-content-between">
+										<div>
+											<button data-class="desire" type="button" id="startBtn1" data-sr_no="1"
+												data-editor_name="editor" class="startBtn">Start Recording</button>
+											<button data-class="desire" type="button" id="stopBtn1" data-sr_no="1"
+												class="btn-danger stopBtn" style="display: none;">Stop
+												Recording</button>
+											<button data-class="desire" type="button" id="resetBtn1" data-sr_no="1"
+												class="btn-danger resetBtn" style="display: none;">Reset Text</button>
+										</div>
+										<div class="d-flex align-items-center">
+											<i class="zmdi zmdi-circle mr-2"></i>
+											<div id="timer1">00:00:00</div>
+										</div>
+									</div>
+									<div class="mt-3">
+										<div id="preview"></div>
+										<div id="editor">
+											{{$response_exists['response_type']===null?'':html_entity_decode(strip_tags($response_exists['q_answer']), ENT_QUOTES | ENT_HTML5, 'UTF-8');}}
+										</div>
+									</div>
+								</div>
+								<input type="hidden" name="desire" id="contentInput" data-class="desire">
+								<input type="hidden" name="responsetype" value="audio" data-class="desire">
+								<input type="hidden" name="getid" value="{{$response_exists['id']}}">
+								<div class="text-right px-3 mt-3 w-100">
+									<button type="submit" data-class="desire" id="save" class="btn btn-primary {{$response_exists['response_type']===null?'':'d-none'}}">
+										<i class="fas fa-save mr-2"></i>Save</button>
+									<button type="submit" data-class="desire" id="update" class="btn btn-success {{$response_exists['response_type']!==null?'':'d-none'}}">
+										<i class="fas fa-save mr-2"></i>Update and Save</button>
+								</div>
+							</div>
+						</form>
+					</div>
 
-                    <div id="videodiv" style="display: none;">
-                        <div class="video-container">
-                            <video id="videoElement" autoplay playsinline></video>
-                            <div class="controls-container py-2 text-center">
-                                <h5>To Start Recording, Click the <span class="text-danger">Red</span> circle below</h5>
-                                <div class="d-flex align-items-center justify-content-center" style="gap: 15px;">
-                                    <div class="startRecordingBtn recordingBtns">
-                                        <img src="{{asset('assets/images/start.png')}}" alt="">
-                                    </div>
-                                    <div class="pauseRecordingBtn recordingBtns d-none">
-                                        <img src="{{asset('assets/images/pause.png')}}" alt="">
-                                    </div>
-                                    <div class="playRecordingBtn recordingBtns d-none">
-                                        <img src="{{asset('assets/images/play.png')}}" alt="">
-                                    </div>
-                                    <div class="stopRecordingBtn recordingBtns d-none">
-                                        <img src="{{asset('assets/images/stop.png')}}" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="liveRecording d-none">
-                                <div>
-                                    <i class="fas fa-circle text-danger blink"></i>
-                                </div>
-                                <h4 class="m-0">REC</h4>
-                            </div>
-                            <div class="full-hd">
-                                <img src="{{asset('assets/images/hd.png')}}" alt="">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="buttonSection d-flex justify-content-end align-items-center mt-5">
-        @if(auth()->user()->unlocked_pages >= 2)
-        <a href="{{url('/wow/con')}}" class="navBtns">Next<i class="fas fa-arrow-right ml-2"></i> </a>
-        @else
-        <a href="javascript:void(0)" class="navBtns" id="nextButton" data-toggle="modal" data-target="#exampleModalCenter">Next<i class="fas fa-arrow-right ml-2"></i> </a>
-        @endif
-    </div>
+					<div id="videodiv" class="d-none">
+						<div class="video-container">
+							<video id="videoElement" autoplay playsinline class="{{$response_exists['response_type']=='video' ? 'd-none':''}}"></video>
+							<video id="videoElement1" controls height="600" style="width:100%; object-fit:cover; border-radius: 15px;">
+								<source src="{{ asset('storage/videos/' . $response_exists['video_url']) }}" type="video/mp4">
+							</video>
+							<div class="controls-container py-2 text-center {{$response_exists['response_type']=='video' ? 'd-none':''}}">
+								<h5>To Start Recording, Click the <span class="text-danger">Red</span> circle below</h5>
+								<div class="d-flex align-items-center justify-content-center" style="gap: 15px;">
+									<div class="startRecordingBtn recordingBtns">
+										<img src="{{asset('assets/images/start.png')}}" alt="">
+									</div>
+									<div class="pauseRecordingBtn recordingBtns d-none">
+										<img src="{{asset('assets/images/pause.png')}}" alt="">
+									</div>
+									<div class="playRecordingBtn recordingBtns d-none">
+										<img src="{{asset('assets/images/play.png')}}" alt="">
+									</div>
+									<div class="stopRecordingBtn recordingBtns d-none">
+										<img src="{{asset('assets/images/stop.png')}}" alt="">
+									</div>
+								</div>
+							</div>
+							<div class="liveRecording d-none">
+								<div>
+									<i class="fas fa-circle text-danger blink"></i>
+								</div>
+								<h4 class="m-0">REC</h4>
+							</div>
+							<div class="full-hd {{$response_exists['response_type']=='video' ? 'd-none':''}}">
+								<img src="{{asset('assets/images/hd.png')}}" alt="">
+							</div>
+							<div class="videotimer text-light {{$response_exists['response_type']=='video' ? 'd-none':''}}">
+								<i class="zmdi zmdi-circle mr-2"></i>
+								<div id="timer2">00:00:00</div>
+							</div>
+							<input type="hidden" name="getid" id="getid" value="{{$response_exists['id']}}">
+						</div>
+						<div class="text-right px-3 mt-3 w-100">
+							<button id="retakevideo" class="btn btn-danger {{$response_exists['response_type']=='video' ? '':'d-none'}}">
+								<i class="fas fa-redo mr-2" aria-hidden="true"></i>Retake</button>
+							<button id="savevid" class="btn btn-primary {{$response_exists['response_type']===null ? '':'d-none'}}">
+								<i class="fas fa-save mr-2"></i>Save</button>
+							<button id="updatevid" class="btn btn-success {{$response_exists['response_type']=='video' ? '':'d-none'}}">
+								<i class="fas fa-save mr-2"></i>Update and Save</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="buttonSection d-flex justify-content-end align-items-center mt-5">
+		@if(auth()->user()->unlocked_pages >= 2)
+		<a href="{{url('/wow/con')}}" class="navBtns">Next<i class="fas fa-arrow-right ml-2"></i> </a>
+		@else
+		<a href="javascript:void(0)" class="navBtns" id="nextButton" data-toggle="modal"
+			data-target="#exampleModalCenter">Next<i class="fas fa-arrow-right ml-2"></i> </a>
+		@endif
+	</div>
 </section>
 
 @endsection
@@ -242,18 +275,31 @@
         $(this).find(".fa-check-circle").removeClass('d-none');
     });
 
-    $("#audiobtn").click(function() {
-        $("#audiodiv").show();
-        $("#videodiv").hide();
-        $('#recordingHeader').text('Record Audio');
-        $('.recordingTagline').text('Record audio to convert to text in the editor below.');
-    });
-    $("#videobtn").click(function() {
-        $("#videodiv").show();
-        $("#audiodiv").hide();
-        $('#recordingHeader').text('Record Video');
-        $('.recordingTagline').text('Record video to save it as the response.');
-    });
+	$(document).ready(function() {
+		var activeTab = document.querySelector('.recordingTabs.active');
+    	if (activeTab) {
+        	console.log('Active tab:', activeTab.id);  // or any other property you want to log
+			activeTab.click();
+    	} else {
+        	console.log('No active tab found.');
+    	}
+	});
+
+	function selectAudio() {
+        $("#audiodiv").removeClass('d-none');
+        $("#videodiv").addClass('d-none');
+        $('#audioheading').removeClass('d-none');
+		$('#videoheading').addClass('d-none');
+		console.log('Audio recording selected');
+    };
+    
+	function selectVideo() {
+        $("#videodiv").removeClass('d-none');
+		$("#audiodiv").addClass('d-none');
+        $('#videoheading').removeClass('d-none');
+		$('#audioheading').addClass('d-none');
+		console.log('Video recording selected');
+    };
 </script>
 
 <script>
@@ -279,7 +325,25 @@
                     return;
                 }
                 $('#contentInput').val(content);
-                $("#desireForm")[0].submit();
+
+				if (checkType() == 'video'){
+					Swal.fire({
+						text: "Your Video response will be deleted... Are you sure to save this?",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: "#6dabe4",
+						cancelButtonColor: "#ce2c2c",
+						confirmButtonText: 'Yes, Save it!',
+						cancelButtonText: 'No, Cancel it!'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							$("#desireForm")[0].submit();
+						}
+					})
+				}
+				else {
+					$("#desireForm")[0].submit();
+				}
             } else {
                 Swal.fire({
                     title: 'Missing Fields',
@@ -288,7 +352,7 @@
                     confirmButtonColor: "#6dabe4"
                 })
             }
-        })
+        });
 
         function validateForm() {
             let errorCount = 0;
@@ -368,204 +432,332 @@
     });
 </script>
 <script>
-    // $(document).ready(function() {
-    //     let mediaRecorder;
-    //     let recordedBlobs;
+		$(document).ready(function() {
+			let mediaRecorder;
+			let recordedBlobs = [];
+			let downloadLink = document.createElement('a');
+			
+			let startTime;
+			let elapsedTime = 0;
+			let timerInterval;
+			let running = false;
 
-    //     $(".startRecordingBtn").click(function() {
-    //         if (!mediaRecorder) {
-    //             startRecording();
-    //         }
-    //         $(this).toggleClass('d-none');
-    //         $('.pauseRecordingBtn').toggleClass('d-none');
-    //         $('.stopRecordingBtn').toggleClass('d-none');
-    //     });
+			function startTimer(id) {
+				if (!running) {
+					startTime = Date.now() - elapsedTime;
+					timerInterval = setInterval(() => updateTimer(id), 1000);
+					running = true;
+				}
+			}
 
-    //     $(".pauseRecordingBtn").click(function() {
-    //         $(this).toggleClass('d-none');
-    //         $('.playRecordingBtn').toggleClass('d-none');
+			function pauseTimer() {
+				if (running) {
+					clearInterval(timerInterval);
+					elapsedTime = Date.now() - startTime;
+					running = false;
+				}
+			}
 
-    //         pauseRecording();
-    //     });
+			function resumeTimer(id) {
+				if (!running) {
+					startTime = Date.now() - elapsedTime;
+					timerInterval = setInterval(() => updateTimer(id), 1000);
+					running = true;
+				}
+			}
 
-    //     $(".playRecordingBtn").click(function() {
-    //         $(this).toggleClass('d-none');
-    //         $('.pauseRecordingBtn').toggleClass('d-none');
+			function stopTimer() {
+				if (running) {
+					clearInterval(timerInterval);
+					elapsedTime = Date.now() - startTime;
+					running = false;
+				}
+			}
 
-    //         resumeRecording();
-    //     });
+			function resetTimer(id) {
+				clearInterval(timerInterval);
+				elapsedTime = 0;
+				running = false;
+				document.getElementById('timer' + id).innerHTML = '00:00:00';
+			}
 
-    //     $(".stopRecordingBtn").click(function() {
-    //         $(this).toggleClass('d-none');
-    //         $('.pauseRecordingBtn').addClass('d-none');
-    //         $('.playRecordingBtn').addClass('d-none');
-    //         $('.startRecordingBtn').removeClass('d-none');
+			function updateTimer(id) {
+				let currentTime = Date.now();
+				let elapsedTime = currentTime - startTime;
 
-    //         stopRecording();
-    //     });
+				let seconds = Math.floor(elapsedTime / 1000) % 60;
+				let minutes = Math.floor(elapsedTime / (1000 * 60)) % 60;
+				let hours = Math.floor(elapsedTime / (1000 * 60 * 60)) % 24;
 
-    //     function startRecording() {
-    //         // Get user media
-    //         navigator.mediaDevices.getUserMedia({
-    //                 video: true,
-    //                 audio: true
-    //             })
-    //             .then(function(stream) {
-    //                 window.stream = stream;
-    //                 let videoElement = document.getElementById('videoElement');
-    //                 videoElement.srcObject = stream;
-    //             })
-    //             .catch(function(err) {
-    //                 console.error('getUserMedia error:', err);
-    //             });
-    //         recordedBlobs = [];
-    //         let options = {
-    //             mimeType: 'video/webm;codecs=vp9'
-    //         };
-    //         try {
-    //             mediaRecorder = new MediaRecorder(window.stream, options);
-    //         } catch (e) {
-    //             console.error('Exception while creating MediaRecorder:', e);
-    //             return;
-    //         }
+				document.getElementById('timer' + id).innerHTML = formatTime(hours) + ':' + formatTime(minutes) + ':' + formatTime(seconds);
+			}
 
-    //         mediaRecorder.ondataavailable = handleDataAvailable;
-    //         mediaRecorder.start();
-    //     }
+			function formatTime(time) {
+				return (time < 10 ? '0' : '') + time;
+			}
+	
+			$(".startRecordingBtn").click(function() {
+				$(this).toggleClass('d-none');
+				$('.pauseRecordingBtn').toggleClass('d-none');
+				$('.stopRecordingBtn').toggleClass('d-none');
+				$(".liveRecording").removeClass('d-none');
+				$('#videoElement').removeClass('d-none');
+				camOn();
 
-    //     function handleDataAvailable(event) {
-    //         if (event.data && event.data.size > 0) {
-    //             recordedBlobs.push(event.data);
-    //         }
-    //     }
+				setTimeout(function() {
+				if (!mediaRecorder) {
+					startRecording();
+					let timer = document.getElementById('timer2');
+					timer.innerHTML = '00:00:00';
+					startTimer(2);
+				}
+				}, 2000);
+	
+				// startRecording();
+			});
+	
+			$(".pauseRecordingBtn").click(function() {
+				$(this).toggleClass('d-none');
+				$('.playRecordingBtn').toggleClass('d-none');
+				$(".liveRecording").addClass('d-none');
+				
+				pauseRecording();
+				pauseTimer();
+			});
+	
+			$(".playRecordingBtn").click(function() {
+				$(this).toggleClass('d-none');
+				$('.pauseRecordingBtn').toggleClass('d-none');
+				$(".liveRecording").removeClass('d-none');
+				
+				resumeRecording();
+				resumeTimer(2);
+			});
+	
+			$(".stopRecordingBtn").click(function() {
+				$(this).toggleClass('d-none');
+				$('.pauseRecordingBtn').addClass('d-none');
+				$('.playRecordingBtn').addClass('d-none');
+				$('.startRecordingBtn').removeClass('d-none');
+				$(".liveRecording").addClass('d-none');
+				$('.full-hd').addClass('d-none');
+				$('.controls-container').addClass('d-none');
+				$('#videoElement').addClass('d-none');
+				$('#videoElement1').removeClass('d-none');
+				$('#retakevideo').removeClass('d-none');
+				$('#timer2').addClass('d-none');
+				$('#updatevid').removeClass('d-none');
+				stopTimer();
+	
+				
+				stopRecording();
+				setTimeout(function() {
+                	const blob = new Blob(recordedBlobs, { type: 'video/webm' });
+					console.log('Blob:', blob);
+					const videoURL = window.URL.createObjectURL(blob);
+					document.getElementById('videoElement1').src = videoURL;
+            	}, 1000);
+			});
 
-    //     function pauseRecording() {
-    //         if (mediaRecorder.state === 'recording') {
-    //             mediaRecorder.pause();
-    //         }
-    //     }
+			$("#retakevideo").click(function() {
+				$('.startRecordingBtn').removeClass('d-none');
+				$('.full-hd').removeClass('d-none');
+				$('.controls-container').removeClass('d-none');
+				$('#videoElement1').addClass('d-none');
+				$('#retakevideo').addClass('d-none');
+				$('#timer2').removeClass('d-none');
+				$('.videotimer').removeClass('d-none');
+				resetTimer(2);
 
-    //     function resumeRecording() {
-    //         if (mediaRecorder.state === 'paused') {
-    //             mediaRecorder.resume();
-    //         }
-    //     }
+				recordedBlobs = [];
+				downloadLink = document.createElement('a');
+			});
 
-    //     function stopRecording() {
-    //         mediaRecorder.stop();
-    //         mediaRecorder = null;
-    //     }
+			$("#savevid").click(function() {
+				downloadRecording();
+			});
 
+			$("#updatevid").click(function() {
+				console.log('Update Recording');
+				if (checkType() == 'audio'){
+					Swal.fire({
+						text: "Your Audio/Text response will be deleted... Are you sure to save this?",
+						icon: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: "#6dabe4",
+						cancelButtonColor: "#ce2c2c",
+						confirmButtonText: 'Yes, Save it!',
+						cancelButtonText: 'No, Cancel it!'
+					}).then((result) => {
+						if (result.isConfirmed) {
+							UpdateRecording();
+						}
+					})
+				}
+				else {
+					UpdateRecording();
+				}
+			});
+	
+			function startRecording() {
+				console.log('Starting recording...');
+			
+				let options = {
+					mimeType: 'video/webm;codecs=vp9',
+					videoBitsPerSecond : 2500000, // Increase video bitrate (adjust as needed)
+					audioBitsPerSecond : 128000 // Increase audio bitrate (adjust as needed)
+				};
+				try {
+					recordedBlobs = [];
+					mediaRecorder = new MediaRecorder(window.stream, options);
+					console.log('MediaRecorder initialized.');
+				} catch (e) {
+					console.error('Exception while creating MediaRecorder:', e);
+					return;
+				}
+		
+				mediaRecorder.ondataavailable = handleDataAvailable;
+				mediaRecorder.start();
+				console.log('Recording started.');
+			}
+	
+			function handleDataAvailable(event) {
+				console.log('Data available:', event.data);
+				if (event.data && event.data.size > 0) {
+					recordedBlobs.push(event.data);
+					console.log('Recorded blobs:', recordedBlobs);
+				}
+			}
+	
+			function pauseRecording() {
+				if (mediaRecorder.state === 'recording') {
+					mediaRecorder.pause();
+				}
+			}
+	
+			function resumeRecording() {
+				if (mediaRecorder.state === 'paused') {
+					mediaRecorder.resume();
+				}
+			}
+	
+			function stopRecording() {
+				if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+					mediaRecorder.stop();
+					console.log('Stop to hogya');
+					mediaRecorder = null;
+					camOff();
+				}
+			}
+	
+			function downloadRecording() {
+				// const blob = new Blob(recordedBlobs, { type: 'video/mp4' });
+				// console.log('Blob:', blob);
+				// const url = window.URL.createObjectURL(blob);
+				// downloadLink.href = url;
+				// downloadLink.download = 'recording.mp4';
+				// downloadLink.click();
+				// window.URL.revokeObjectURL(url);
 
-    // });
-    $(document).ready(function() {
-        let mediaRecorder;
-        let recordedBlobs = [];
-        let downloadLink = document.createElement('a');
+				console.log('Rc',recordedBlobs);
+				const blob = new Blob(recordedBlobs, { type: 'video/mp4' });
+        		const formData = new FormData();
+        		formData.append('video', blob, 'recording.mp4');
+				formData.append('responsetype', 'video');
 
-        $(".startRecordingBtn").click(function() {
-            // if (!mediaRecorder) {
-            //     startRecording();
-            // }
-            $(this).toggleClass('d-none');
-            $('.pauseRecordingBtn').toggleClass('d-none');
-            $('.stopRecordingBtn').toggleClass('d-none');
-            $(".liveRecording").removeClass('d-none');
-        });
+				console.log('Video saved successfully:', blob);
+        		fetch(`{{url('/DayResponse/submit')}}`, {
+            		method: 'POST',
+            		headers: {
+                		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            		},
+            		body: formData
+        		})
+        		.then(response => response.json())
+        		.then(data => {
+            		console.log('Video saved successfully:', data);
+					Swal.fire({
+						title: 'Success',
+						text: 'Video saved successfully',
+						icon: 'success',
+						}).then((result) => {
+							if (result.isConfirmed) {
+							// Reload the page
+							location.reload();
+						}
+					});
+				})
+				.catch(error => {
+					console.error('Error saving video:', error);
+				});
+			}
+			
+			function UpdateRecording() {
+				let updateid = $('#getid').val();
+				console.log(updateid);
+				console.log(updateid);
+				console.log(updateid);
 
-        $(".pauseRecordingBtn").click(function() {
-            $(this).toggleClass('d-none');
-            $('.playRecordingBtn').toggleClass('d-none');
-            $(".liveRecording").addClass('d-none');
+				console.log('Rc',recordedBlobs);
+				const blob = new Blob(recordedBlobs, { type: 'video/mp4' });
+        		const formData = new FormData();
+        		formData.append('video', blob, 'recording.mp4');
+				formData.append('responsetype', 'video');
+				formData.append('getid', updateid);
 
-            pauseRecording();
-        });
+				console.log('Video saved successfully:', blob);
+        		fetch(`{{url('/DayResponse/submit')}}`, {
+            		method: 'POST',
+            		headers: {
+                		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            		},
+            		body: formData
+        		})
+        		.then(response => response.json())
+        		.then(data => {
+            		console.log('Video saved successfully:', data);
+					Swal.fire({
+						title: 'Success',
+						text: 'Video saved successfully',
+						icon: 'success',
+						}).then((result) => {
+							if (result.isConfirmed) {
+							// Reload the page
+							location.reload();
+						}
+					});
+				})
+				.catch(error => {
+					console.error('Error saving video:', error);
+				});
+			}
+	
+		});
 
-        $(".playRecordingBtn").click(function() {
-            $(this).toggleClass('d-none');
-            $('.pauseRecordingBtn').toggleClass('d-none');
-            $(".liveRecording").removeClass('d-none');
+		function camOn() {
+			navigator.mediaDevices.getUserMedia({
+				video: true,
+				audio: true
+			}).then(stream => {
+				window.stream = stream;
+				document.getElementById('videoElement').srcObject = stream;
+			}).catch(error => {
+				console.error('Error accessing media devices.', error);
+			});
+		}
 
-            resumeRecording();
-        });
+		function camOff() {
+			if (stream) {
+        		// Stop all video tracks
+        		stream.getVideoTracks().forEach(track => track.stop());
+        		// Stop all audio tracks
+        		stream.getAudioTracks().forEach(track => track.stop());
+			}
+		}
 
-        $(".stopRecordingBtn").click(function() {
-            $(this).toggleClass('d-none');
-            $('.pauseRecordingBtn').addClass('d-none');
-            $('.playRecordingBtn').addClass('d-none');
-            $('.startRecordingBtn').removeClass('d-none');
-            $(".liveRecording").addClass('d-none');
-
-            stopRecording();
-            downloadRecording();
-        });
-
-        function startRecording() {
-
-            recordedBlobs = [];
-            let options = {
-                mimeType: 'video/webm;codecs=vp9'
-            };
-            try {
-                mediaRecorder = new MediaRecorder(window.stream, options);
-            } catch (e) {
-                console.error('Exception while creating MediaRecorder:', e);
-                return;
-            }
-
-            mediaRecorder.ondataavailable = handleDataAvailable;
-            mediaRecorder.start();
-        }
-
-        function handleDataAvailable(event) {
-            if (event.data && event.data.size > 0) {
-                recordedBlobs.push(event.data);
-            }
-        }
-
-        function pauseRecording() {
-            if (mediaRecorder.state === 'recording') {
-                mediaRecorder.pause();
-            }
-        }
-
-        function resumeRecording() {
-            if (mediaRecorder.state === 'paused') {
-                mediaRecorder.resume();
-            }
-        }
-
-        function stopRecording() {
-            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-                mediaRecorder.stop();
-                mediaRecorder = null;
-            }
-        }
-
-        function downloadRecording() {
-            const blob = new Blob(recordedBlobs, {
-                type: 'video/webm'
-            });
-            const url = window.URL.createObjectURL(blob);
-            downloadLink.href = url;
-            downloadLink.download = 'recording.webm';
-            downloadLink.click();
-            window.URL.revokeObjectURL(url);
-        }
-        // Get user media
-        navigator.mediaDevices.getUserMedia({
-                video: true,
-                audio: true
-            })
-            .then(function(stream) {
-                window.stream = stream;
-                let videoElement = document.getElementById('videoElement');
-                videoElement.srcObject = stream;
-            })
-            .catch(function(err) {
-                console.error('getUserMedia error:', err);
-            });
-
-    });
+		function checkType() {
+			let type = $('#responsetypesave').val();
+			return type;
+		}
 </script>
 @endsection

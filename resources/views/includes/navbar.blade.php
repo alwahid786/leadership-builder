@@ -514,27 +514,28 @@ $page = auth()->user()->page_number;
                 DAYS <i class="fas fa-caret-down ml-2"></i>
             </div>
             <div class="collapse show" id="days">
-                <li class="nav-item my-1 active">
+                <li class="nav-item my-1 {{ request()->is('cover') ? 'active' : '' }}">
+                {{-- <li class="nav-item my-1"> --}}
                     <a class="nav-link d-flex align-items-center" href="{{url('/cover')}}">
-                        <span class="">Day 1 (Today)</span>
+                        <span class="">Day {{
+                            // $today = $response_exists['response_type']==null ? auth()->user()->total_days+1: auth()->user()->total_days
+                            $response_exists['today']
+                        }} (Today)</span>
                     </a>
                 </li>
-                <div style="font-size: 16px;padding-left:28px;" class="nav-menu" data-toggle="collapse" data-target="#pastDays" aria-expanded="false" aria-controls="submenu">
-                    Past Days <i class="fas fa-caret-down ml-2"></i>
-                </div>
-                <div class="collapse" id="pastDays">
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" style="margin-left: 15px;" href="{{url('/cover')}}">
-                            <span class="">Day {{ auth()->user()->total_days }} (Today)</span>
+            </div>
+            <div class="nav-menu my-1" data-toggle="collapse" data-target="#pastdays" aria-expanded="false" aria-controls="submenu">
+                PAST DAYS <i class="fas fa-caret-down ml-2"></i>
+            </div>
+            <div class="collapse show" id="pastdays">
+                    @for ($i = 1 ; $i < $response_exists['today']; $i++)
+                    <li class="nav-item my-1 {{ request()->is('pastday/'.$i) ? 'active' : '' }}">
+                    {{-- <li class="nav-item my-1"> --}}
+                        <a class="nav-link d-flex align-items-center" style="margin-left: 15px; font-size: 15px;" href="{{ url('/pastday/'.$i) }}">
+                            <span class="">Day {{$i}}</span>
                         </a>
                     </li>
-                    {{-- <div style="font-size: 16px;padding-left:28px;" class="nav-menu my-1" data-toggle="collapse" data-target="#upcomingDays" aria-expanded="false" aria-controls="submenu">
-                        Upcoming Days <i class="fas fa-caret-down ml-2"></i>
-                    </div> --}}
-                </div>
-                {{-- <div style="font-size: 16px;padding-left:28px;" class="nav-menu my-1" data-toggle="collapse" data-target="#upcomingDays" aria-expanded="false" aria-controls="submenu">
-                    Upcoming Days <i class="fas fa-caret-down ml-2"></i>
-                </div> --}}
+                    @endfor
             </div>
             {{--<li class="nav-item my-1 <?php if ($page < 7) echo "disabled-item"; ?>">
                 <a class="nav-link sidenav-item d-flex align-items-center" <?php if ($page < 7) echo "style='pointer-events: none'"; ?> href="{{url('wow ')}}">

@@ -105,6 +105,9 @@ Route::middleware('auth')->group(function () {
 
     // Submit Day Response
     Route::post('/DayResponse/submit', [ContentController::class, 'submitresponse'])->name('submitresponse');
+    
+    // Past Days
+    Route::get('/pastday/{day}', [ContentController::class, 'pastday'])->name('pastday');
 
     Route::get('/welcome', function () {
         return view('pages.welcome');

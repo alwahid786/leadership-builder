@@ -187,10 +187,34 @@ class ContentController extends Controller
             $response_exists['response_type'] = null;
             $response_exists['q_answer'] = null;
             $response_exists['video_url'] = null;
+            $response_exists['id'] = 0;
         }
 
         // dd($response_exists);
+        $response_exists['today'] = ($response_exists['response_type']==null ? auth()->user()->total_days+1: auth()->user()->total_days);
+        
+        return view('pages.cover', compact('response_exists'));
+    }
 
+    // Show Past Day Data
+    public function pastday($day)
+    {
+        $loginUserId = Auth::user()->id;
+        
+        $response_exists = Book::where('user_id', $loginUserId)
+            ->whereDate('day', $day)
+            ->first();
+
+        if ($response_exists==null) {
+            $response_exists['response_type'] = null;
+            $response_exists['q_answer'] = null;
+            $response_exists['video_url'] = null;
+            $response_exists['id'] = 0;
+        }
+
+        // dd($response_exists);
+        $response_exists['today'] = ($response_exists['response_type']==null ? auth()->user()->total_days+1: auth()->user()->total_days);
+        
         return view('pages.cover', compact('response_exists'));
     }
 
@@ -269,35 +293,88 @@ class ContentController extends Controller
     // Submit Day to Day Response
     public function submitresponse(Request $request)
     {
-        $data = $request->except('_token');
-        $book = new Book();
-        $book->user_id = Auth::user()->id;
-        $book->day = Auth::user()->total_days+1;
-        $book->response_type = $request->responsetype;
-        if ($request->responsetype == 'audio') {
-            $book->q_answer = $request->desire;
-        }
-        else{
-            if ($request->hasFile('video')) {
-                $book->video_url = auth()->user()->id . '_day' . Auth::user()->total_days+1 . '.' . $request->video->getClientOriginalExtension();
-                $video = $request->file('video');
-                $path = $video->storeAs('videos', $book->video_url, 'public'); // Store in public disk with the specified filename
-                // $video->storeAs('videos', $book->video_url); // Store the video in the storage/videos directory
-                // You can also store the video in the public directory using: $video->move(public_path('videos'), 'recording.mp4');
-                $book->save();
-                return response()->json(['success' => true, 'data' => $path]);
-            } else {
-                return response()->json(['error' => 'No video file found']);
-            }
-        }
-        $book->save();
-        return redirect()->back()->with('responseSuccess', 'Respose Saved Successfully!');
+        // dd($request->all());
 
-        // $loginUserId = Auth::user()->id;
-        // $book = Book::where('user_id', $loginUserId)->first();
-        // $book->day_response = $request->day_response;
-        // $book->save();
-        // return redirect()->back()->with('responseSuccess', 'Data inserted Successfully!');
+        if ($request->getid == 0) {
+
+            // $userId = Auth::user()->id;
+            // $today = Carbon::today();
+    
+            // // Check if a response from the current user for today's date already exists
+            // $existingResponse = Book::where('user_id', $userId)
+            //     ->whereDate('created_at', $today)
+            //     ->first();
+    
+            // if ($existingResponse) {
+            //     return redirect()->back()->with('nextError', 'Response Already Submitted for today. Please try again Next Day.');
+            // }
+    
+            $data = $request->except('_token');
+            $book = new Book();
+            $book->user_id = Auth::user()->id;
+            $book->day = Auth::user()->total_days+1;
+            $book->response_type = $request->responsetype;
+            if ($request->responsetype == 'audio') {
+                $book->q_answer = $request->desire;
+            }
+            else{
+                if ($request->hasFile('video')) {
+                    $book->video_url = auth()->user()->id . '_day' . Auth::user()->total_days+1 . '.' . $request->video->getClientOriginalExtension();
+                    $video = $request->file('video');
+                    $path = $video->storeAs('videos', $book->video_url, 'public'); // Store in public disk with the specified filename
+                    $book->save();
+    
+                    // Increment total_days for the current user
+                    $user = Auth::user();
+                    $user->total_days += 1;
+                    $user->save();
+    
+                    return response()->json(['success' => true, 'data' => $path]);
+                } else {
+                    return response()->json(['error' => 'No video file found']);
+                }
+            }
+            $book->save();
+    
+            // Increment total_days for the current user
+            $user = Auth::user();
+            $user->total_days += 1;
+            $user->save();
+    
+            return redirect()->back()->with('responseSuccess', 'Response Saved Successfully!');
+        }
+        else {
+            $data = $request->except('_token');
+            $book = Book::find($request->getid);
+            $book->response_type = $request->responsetype;
+            if ($request->responsetype == 'audio') {
+                $book->q_answer = $request->desire;
+                $book->video_url = null;
+            }
+            else{
+                $book->q_answer = null;
+                if ($book->video_url) {
+                    // Delete the previous video file
+                    Storage::disk('public')->delete('videos/' . $book->video_url);
+                }
+
+                if ($request->hasFile('video')) {
+                    $book->video_url = $book->user_id . '_day' . $book->day . '.' . $request->video->getClientOriginalExtension();
+                    $video = $request->file('video');
+                    $path = $video->storeAs('videos', $book->video_url, 'public'); // Store in public disk with the specified filename
+                    $book->save();
+    
+                    return response()->json(['success' => true, 'data' => $path]);
+                } else {
+                    return response()->json(['error' => 'No video file found']);
+                }
+            }
+            $book->save();
+    
+            return redirect()->back()->with('responseSuccess', 'Update Saved Successfully!');
+        
+        }
+
     }
 
     // submit Gratitude Function 
