@@ -678,16 +678,16 @@ input::placeholder {
     padding: 25px 32px 22px 19px;
     border-radius: 10px;
 }
-.basic {
+.plan-card.basic {
     background: rgba(215, 215, 245, 1);
     border: 1px solid rgba(156, 156, 255, 1);
 }
-.professional {
+.plan-card.professional {
     background: rgba(193, 236, 183, 1);
     border: 1px solid rgba(156, 156, 255, 1);
     margin-top: 30px;
 }
-.enterprise {
+.plan-card.enterprise {
     background: rgba(250, 231, 186, 1);
     border: 1px solid rgba(156, 156, 255, 1);
     margin-top: 30px;
@@ -736,6 +736,10 @@ h1, h2, h3, h4, h5, h6, p, span {
     font-size: 50px;
     line-height: 59px;
 }
+.font-28 {
+    font-size: 28px;
+    line-height: 42px;
+}
 .font-18 {
     font-size: 18px;
     line-height: 27px;
@@ -762,6 +766,22 @@ h1, h2, h3, h4, h5, h6, p, span {
 }
 .primary-color {
     color: var(--blue);
+}
+.primary-btn {
+    font-family: "Crimson Pro", serif;
+    font-size: 20px;
+    line-height: 17.78px;
+    color: #fff;
+    padding: 16px 24px;
+    border-radius: 10px;
+    background: var(--blue);
+    border: 0;
+}
+a:hover {
+    text-decoration: none !important;
+}
+.mt-30 {
+    margin-top: 30px;
 }
 
 /* Global styling end */
@@ -816,6 +836,73 @@ h1, h2, h3, h4, h5, h6, p, span {
 
 /* Edit plans css end */
 
+/* users css start  */
+
+.profile-card {
+    background-color: #fff;
+    transition: box-shadow .3s ease;
+    border-radius: 12px;
+    padding: 45px 31px 16px;
+    display: block;
+    position: relative;
+    margin-top: 60px;
+}
+.profile-card:hover {
+    box-shadow: 0px 4px 30px 0px rgba(17, 119, 170, 0.6); 
+}
+.profile-card .profile-img {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: -25%;
+    left: 50%;
+    transform: translate(-50%, 0px);
+}
+.profile-card .profile-img::before {
+    content: '';
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: rgba(0, 163, 137, 1);
+    position: absolute;
+    bottom: -11%;
+    right: 41%;
+    border: 3px solid #fff;
+}
+.profile-card .tel {
+    gap: 9px;
+    color: rgba(70, 66, 85, 1);
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    margin-top: 20px;
+    padding: 12px 25px;
+}
+.profile-card .email {
+    gap: 9px;
+    color: rgba(70, 66, 85, 1);
+    border: 0;
+    border-radius: 6px;
+    padding: 12px 25px;
+    background-color: rgba(17, 119, 170, 0.3);
+}
+.profile-card .basic {
+    color: rgba(157, 157, 255, 1);
+}
+.profile-card .professional {
+    color: rgba(17, 170, 41, 1);
+}
+.profile-card .enterprise {
+    color: rgba(250, 177, 23, 1);
+}
+.profile-card .free {
+    color: rgba(255, 157, 157, 1);
+}
+
+/* users css end  */
+
+
 /* Media queries start */
 
 @media (max-width:1200px) {
@@ -843,6 +930,10 @@ h1, h2, h3, h4, h5, h6, p, span {
         font-size: 39px;
         line-height: 59px;
     }
+    .font-28 {
+        font-size: 22px;
+        line-height: 28px;
+    }
     .dashboard .my-balance-card {
         padding: 16px;
     }
@@ -854,6 +945,10 @@ h1, h2, h3, h4, h5, h6, p, span {
         line-height: 22.23px;
         width: 178px;
         height: 50px;
+    }
+    .primary-btn {
+        font-size: 16px;
+        padding: 12px 20px;
     }
 }
 @media (max-width:475px) {
