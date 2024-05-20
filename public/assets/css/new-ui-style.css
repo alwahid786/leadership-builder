@@ -692,27 +692,17 @@ input::placeholder {
     padding: 25px 32px 22px 19px;
     border-radius: 10px;
 }
-<<<<<<< HEAD
 .plan-card.basic {
     background: rgba(215, 215, 245, 1);
     border: 1px solid rgba(156, 156, 255, 1);
 }
 .plan-card.professional {
-=======
-
-.basic {
-    background: rgba(215, 215, 245, 1);
-    border: 1px solid rgba(156, 156, 255, 1);
-}
-
-.professional {
->>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
     background: rgba(193, 236, 183, 1);
     border: 1px solid rgba(156, 156, 255, 1);
     margin-top: 30px;
 }
 
-.enterprise {
+.plan-card.enterprise {
     background: rgba(250, 231, 186, 1);
     border: 1px solid rgba(156, 156, 255, 1);
     margin-top: 30px;
@@ -774,14 +764,10 @@ span {
     font-size: 50px;
     line-height: 59px;
 }
-<<<<<<< HEAD
 .font-28 {
     font-size: 28px;
     line-height: 42px;
 }
-=======
-
->>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
 .font-18 {
     font-size: 18px;
     line-height: 27px;
@@ -935,6 +921,79 @@ span {
 
 /* Edit plans css end */
 
+/* users css start  */
+
+.profile-card {
+    background-color: #fff;
+    transition: box-shadow .3s ease;
+    border-radius: 12px;
+    padding: 45px 31px 16px;
+    display: block;
+    position: relative;
+    margin-top: 60px;
+}
+.profile-card:hover {
+    box-shadow: 0px 4px 30px 0px rgba(17, 119, 170, 0.6); 
+}
+.profile-card .profile-img {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: -25%;
+    left: 50%;
+    transform: translate(-50%, 0px);
+}
+.profile-card .profile-img img {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profile-card .profile-img::before {
+    content: '';
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: rgba(0, 163, 137, 1);
+    position: absolute;
+    bottom: -11%;
+    right: 41%;
+    border: 3px solid #fff;
+}
+.profile-card .tel {
+    gap: 9px;
+    color: rgba(70, 66, 85, 1);
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    margin-top: 20px;
+    padding: 12px 25px;
+}
+.profile-card .email {
+    gap: 9px;
+    color: rgba(70, 66, 85, 1);
+    border: 0;
+    border-radius: 6px;
+    padding: 12px 25px;
+    background-color: rgba(17, 119, 170, 0.3);
+}
+.profile-card .basic {
+    color: rgba(157, 157, 255, 1);
+}
+.profile-card .professional {
+    color: rgba(17, 170, 41, 1);
+}
+.profile-card .enterprise {
+    color: rgba(250, 177, 23, 1);
+    margin-top: 0;
+}
+.profile-card .free {
+    color: rgba(255, 157, 157, 1);
+}
+
+/* users css end  */
+
 /* Media queries start */
 
 @media (max-width:1200px) {
@@ -966,14 +1025,10 @@ span {
         font-size: 39px;
         line-height: 59px;
     }
-<<<<<<< HEAD
     .font-28 {
         font-size: 22px;
         line-height: 28px;
     }
-=======
-
->>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
     .dashboard .my-balance-card {
         padding: 16px;
     }
