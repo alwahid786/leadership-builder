@@ -601,13 +601,18 @@ input::placeholder {
     padding: 40px 120px 123px 93px;
     border-radius: 8px;
 }
+.user-detail-view {
+    padding: 40px 37px 23px 93px;
+    border-radius: 8px;
+}
+
 
 .edit-profile-view {
     padding: 64px 54px;
     border-radius: 8px;
 }
 
-.profile-view-heading {
+.profile-view-heading, .user-detail-heading {
     font-family: "Crimson Pro", serif;
     font-size: 38px;
     font-weight: 700;
@@ -616,7 +621,7 @@ input::placeholder {
     color: rgba(32, 32, 32, 1);
 }
 
-.profile-view p {
+.profile-view p, .user-detail-view p {
     font-family: "Crimson Pro", serif;
     font-size: 16px;
     font-weight: 400;
@@ -994,6 +999,38 @@ span {
 
 /* users css end  */
 
+/* Users detail page start  */
+
+.user-detail .remove-user {
+    background: rgba(255, 125, 125, 1);
+    width: 169px;
+    height: 48px;
+    border-radius: 12px;
+    border: none;
+}
+.user-detail .enterprise-user {
+    color: rgba(250, 177, 23, 1);
+    background: rgba(255, 233, 187, 1);
+    width: 130px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    position: absolute;
+    top: 6%;
+    right: 5%;
+}
+.user-detail-view .label {
+    color: rgba(118, 118, 118, 1) !important;
+}
+.user-detail-view .left-side {
+    flex-basis: 60%;
+}
+.user-detail-view .right-side {
+    flex-basis: 40%;
+}
+
+/* Users detail page end  */
+
 /* Media queries start */
 
 @media (max-width:1200px) {
@@ -1013,6 +1050,10 @@ span {
         font-size: 35px;
         line-height: 45.57px;
     }
+    .profile-view, .user-detail-view {
+        padding: 30px 50px 50px 53px;
+    }
+    
 }
 
 @media (max-width:576px) {
@@ -1044,6 +1085,20 @@ span {
         width: 178px;
         height: 50px;
     }
+    .profile-view, .user-detail-view {
+        padding: 20px 15px;
+    }
+    .profile-view-heading, .user-detail-heading {
+        font-size: 26px;
+        line-height: normal;
+    }
+    .user-detail .enterprise-user {
+        position: unset;
+    }
+    .user-detail .remove-user {
+        width: 129px;
+        height: 38px;
+    }
 }
 
 @media (max-width:475px) {
@@ -1056,9 +1111,21 @@ span {
         line-height: 39px;
     }
 
+    .font-18 {
+        font-size: 16px;
+    }
+
     .plan-card .price {
         font-size: 20px;
         line-height: 29.57px;
+    }
+
+    .save-btn,
+    .edit-profile-btn {
+        font-size: 16px;
+        line-height: 22.23px;
+        width: 148px;
+        height: 40px;
     }
 }
 

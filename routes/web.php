@@ -62,8 +62,8 @@ Route::get('/dashboard', function () {
 Route::get('/edit-plans', function () {
     return view('pages.edit-plans');
 });
-Route::get('/users-detail', function () {
-    return view('pages.users-detail');
+Route::get('/user-detail', function () {
+    return view('pages.user-detail');
 });
 Route::get('/users', function () {
     return view('pages.users');

@@ -94,7 +94,7 @@
                     <img src="{{asset('assets/images/profile-image.png')}}" alt="profile iamge" class="profile-img">
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 mt-3 mt-md-0">
                 <div class="bg-white profile-view">
                     <div class="w-75 position-relative" style="z-index: 1">
                         <h3 class="profile-view-heading">
