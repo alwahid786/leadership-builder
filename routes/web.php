@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,9 +43,10 @@ Route::get('/plans', function () {
 Route::get('/invoice', function () {
     return view('pages.invoice');
 });
-Route::get('/profile', function () {
-    return view('pages.profile-view');
-});
+
+// Profile View
+Route::get('/profile', [ProfileController::class, 'profileView'])->name('profileView');
+
 Route::get('/edit-profile', function () {
     return view('pages.edit-profile');
 });
@@ -59,9 +61,6 @@ Route::get('/dashboard', function () {
 });
 Route::get('/edit-plans', function () {
     return view('pages.edit-plans');
-});
-Route::get('/users', function () {
-    return view('pages.users');
 });
 
 Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');

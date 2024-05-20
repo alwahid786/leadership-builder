@@ -515,12 +515,16 @@ $page = auth()->user()->page_number;
             </div>
             <div class="collapse show" id="days">
                 <li class="nav-item my-1 {{ request()->is('cover') ? 'active' : '' }}">
-                {{-- <li class="nav-item my-1"> --}}
+                    {{-- <li class="nav-item my-1"> --}}
                     <a class="nav-link d-flex align-items-center" href="{{url('/cover')}}">
-                        <span class="">Day {{
-                            // $today = $response_exists['response_type']==null ? auth()->user()->total_days+1: auth()->user()->total_days
-                            $response_exists['today']
-                        }} (Today)</span>
+                        <span class="">Day
+
+                            <?php
+                            if (isset($response_exists['today'])) {
+                                echo $response_exists['today'];
+                            }
+                            ?>
+                            (Today)</span>
                     </a>
                 </li>
             </div>
@@ -528,14 +532,15 @@ $page = auth()->user()->page_number;
                 PAST DAYS <i class="fas fa-caret-down ml-2"></i>
             </div>
             <div class="collapse show" id="pastdays">
-                    @for ($i = 1 ; $i < $response_exists['today']; $i++)
-                    <li class="nav-item my-1 {{ request()->is('pastday/'.$i) ? 'active' : '' }}">
+                @if(isset($response_exists['today']))
+                @for ($i = 1 ; $i < $response_exists['today']; $i++) <li class="nav-item my-1 {{ request()->is('pastday/'.$i) ? 'active' : '' }}">
                     {{-- <li class="nav-item my-1"> --}}
-                        <a class="nav-link d-flex align-items-center" style="margin-left: 15px; font-size: 15px;" href="{{ url('/pastday/'.$i) }}">
-                            <span class="">Day {{$i}}</span>
-                        </a>
+                    <a class="nav-link d-flex align-items-center" style="margin-left: 15px; font-size: 15px;" href="{{ url('/pastday/'.$i) }}">
+                        <span class="">Day {{$i}}</span>
+                    </a>
                     </li>
                     @endfor
+                    @endif
             </div>
             {{--<li class="nav-item my-1 <?php if ($page < 7) echo "disabled-item"; ?>">
                 <a class="nav-link sidenav-item d-flex align-items-center" <?php if ($page < 7) echo "style='pointer-events: none'"; ?> href="{{url('wow ')}}">
