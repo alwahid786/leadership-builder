@@ -692,31 +692,17 @@ input::placeholder {
     padding: 25px 32px 22px 19px;
     border-radius: 10px;
 }
-<<<<<<< HEAD
 .plan-card.basic {
     background: rgba(215, 215, 245, 1);
     border: 1px solid rgba(156, 156, 255, 1);
 }
 .plan-card.professional {
-=======
-
-.basic {
-    background: rgba(215, 215, 245, 1);
-    border: 1px solid rgba(156, 156, 255, 1);
-}
-
-.professional {
->>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
     background: rgba(193, 236, 183, 1);
     border: 1px solid rgba(156, 156, 255, 1);
     margin-top: 30px;
 }
-<<<<<<< HEAD
-.plan-card.enterprise {
-=======
 
 .enterprise {
->>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
     background: rgba(250, 231, 186, 1);
     border: 1px solid rgba(156, 156, 255, 1);
     margin-top: 30px;
@@ -778,14 +764,6 @@ span {
     font-size: 50px;
     line-height: 59px;
 }
-<<<<<<< HEAD
-.font-28 {
-    font-size: 28px;
-    line-height: 42px;
-}
-=======
-
->>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
 .font-18 {
     font-size: 18px;
     line-height: 27px;
@@ -1053,14 +1031,6 @@ a:hover {
         font-size: 39px;
         line-height: 59px;
     }
-<<<<<<< HEAD
-    .font-28 {
-        font-size: 22px;
-        line-height: 28px;
-    }
-=======
-
->>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
     .dashboard .my-balance-card {
         padding: 16px;
     }
