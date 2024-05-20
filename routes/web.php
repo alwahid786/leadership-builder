@@ -68,6 +68,9 @@ Route::get('/user-detail', function () {
 Route::get('/users', function () {
     return view('pages.users');
 });
+Route::get('/all-questions', function () {
+    return view('pages.all-questions');
+});
 
 Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');
 Route::post('/signin', [AuthController::class, 'signinFunction'])->name('signinFunction');
