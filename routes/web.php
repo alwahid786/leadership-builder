@@ -19,8 +19,8 @@ use App\Http\Controllers\ProfileController;
 
 
 Route::get('/', function () {
-    return view('auth.login')->name('login');
-});
+    return view('auth.login');
+})->name('login');
 Route::get('/login', function () {
     return view('auth.login');
 });
@@ -132,7 +132,7 @@ Route::middleware('auth')->group(function () {
         // Past Days
         Route::get('/pastday/{day}', [ContentController::class, 'pastday'])->name('pastday');
     });
-    
+
     Route::get('/welcome', function () {
         return view('pages.welcome');
     });

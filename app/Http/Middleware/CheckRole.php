@@ -27,6 +27,6 @@ class CheckRole
         // if (!in_array($request->user()->type, $roles)) {
         //     return redirect()->route('login');
         // }
-        return redirect('/login');
+        return redirect('/');
     }
 }
