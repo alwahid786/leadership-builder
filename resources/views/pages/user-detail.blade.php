@@ -101,7 +101,8 @@
                     PROFILE PICTURE
                 </h2>
                 <div class="mt-2">
-                    <img src="{{asset('assets/images/profile-image.png')}}" alt="profile iamge" class="profile-img">
+                    <img src="{{asset('storage/images/'.($user->profile_img ==null ?'profile.png':$user->profile_img))}}" alt="profile iamge" class="profile-img">
+
                 </div>
             </div>
             <div class="col-lg-9 mt-3 mt-lg-0">
