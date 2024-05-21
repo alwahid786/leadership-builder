@@ -33,7 +33,10 @@
         font-weight: 500;
         letter-spacing: 0.5px !important;
     }
-    .nav-link:hover svg path {
+    .sidenav .nav-item:hover .nav-link svg path {
+        fill: var(--blue);
+    }
+    .sidenav .nav-item.active .nav-link svg path {
         fill: var(--blue);
     }
 
