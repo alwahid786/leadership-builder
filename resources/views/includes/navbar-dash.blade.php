@@ -33,13 +33,22 @@
         font-weight: 500;
         letter-spacing: 0.5px !important;
     }
-    .nav-link:hover svg rect, .nav-link:hover svg circle, .nav-link:hover svg path {
-        fill: var(--blue);
-    }
-    .nav-link svg rect, .nav-link svg circle, .nav-link svg path {
+    .sidenav .nav-item .nav-link svg rect, 
+    .sidenav .nav-item .nav-link svg circle, 
+    .sidenav .nav-item .nav-link svg path {
         transition: fill .3s ease;
     }
 
+    .sidenav .nav-item:hover .nav-link svg rect,
+    .sidenav .nav-item:hover .nav-link svg circle,
+    .sidenav .nav-item:hover .nav-link svg path {
+        fill: var(--blue);
+    }
+    .sidenav .nav-item.active .nav-link svg rect,
+    .sidenav .nav-item.active .nav-link svg circle,
+    .sidenav .nav-item.active .nav-link svg path {
+        fill: var(--blue);
+    }
 
     .nav-second-level li {
         list-style: none !important;

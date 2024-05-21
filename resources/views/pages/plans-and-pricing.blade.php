@@ -128,9 +128,9 @@
                         </div>
                     </div>
                     <div class="mt-5 d-flex justify-content-end">
-                        <div class="edit-btn d-flex align-items-center justify-content-center" style="background-color: rgba(99, 99, 255, 1);">
+                        <button class="edit-btn d-flex align-items-center justify-content-center" style="background-color: rgba(99, 99, 255, 1);">
                             Edit
-                        </div>
+                        </button>
                     </div>
                 </div>
                 <div class="plan-card professional">
@@ -174,9 +174,9 @@
                         </div>
                     </div>
                     <div class="mt-5 d-flex justify-content-end">
-                        <div class="edit-btn d-flex align-items-center justify-content-center" style="background-color: rgba(79, 143, 64, 1)">
+                        <button class="edit-btn d-flex align-items-center justify-content-center" style="background-color: rgba(79, 143, 64, 1)">
                             Edit
-                        </div>
+                        </button>
                     </div>
                 </div>
                 <div class="plan-card enterprise">
@@ -220,9 +220,9 @@
                         </div>
                     </div>
                     <div class="mt-5 d-flex justify-content-end">
-                        <div class="edit-btn d-flex align-items-center justify-content-center" style="background-color: rgba(168, 118, 0, 1);">
+                        <button class="edit-btn d-flex align-items-center justify-content-center" style="background-color: rgba(168, 118, 0, 1);">
                             Edit
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
