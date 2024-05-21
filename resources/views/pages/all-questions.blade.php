@@ -95,38 +95,40 @@
         </div>
         <div class="row mt-1 question-cards">
             <div class="col-md-6 col-lg-4">
-                <div class="all-question-card bg-white">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center" style="gap: 12px">
-                            <span class="red-dot"></span>
-                            <span class="red-question open">
-                                Question 1
-                            </span>
+                <a href="{{url('/question-detail')}}">
+                    <div class="all-question-card bg-white">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center" style="gap: 12px">
+                                <span class="red-dot"></span>
+                                <span class="red-question open">
+                                    Question 1
+                                </span>
+                            </div>
+                            <button style="border: none;background:transparent;">
+                                <svg width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5" />
+                                    <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5" />
+                                    <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5" />
+                                </svg>
+                            </button>
                         </div>
-                        <button style="border: none;background:transparent;">
-                            <svg width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5"/>
-                            </svg>                                
-                        </button>
-                    </div>
-                    <h5 class="font-18 cairo font-weight-600 py-2 question">
-                        Button contact not working when clicked
-                    </h5>
-                    <div class="red-line my-3"></div>
-                    <div class="d-flex align-items-center justify-content-between pt-3">
-                        <div class="profile-images d-flex flex-row-reverse align-items-center">
-                            <img src="{{asset('assets/images/user-profile-image-1.png')}}" alt="profile image">
-                            <img src="{{asset('assets/images/user-profile-image-2.png')}}" alt="profile image">
-                            <img src="{{asset('assets/images/user-profile-image-3.png')}}" alt="profile image">
-                            <img src="{{asset('assets/images/user-profile-image-4.png')}}" alt="profile image">
+                        <h5 class="font-18 cairo font-weight-600 py-2 question">
+                            Button contact not working when clicked
+                        </h5>
+                        <div class="red-line my-3"></div>
+                        <div class="d-flex align-items-center justify-content-between pt-3">
+                            <div class="profile-images d-flex flex-row-reverse align-items-center">
+                                <img src="{{asset('assets/images/user-profile-image-1.png')}}" alt="profile image">
+                                <img src="{{asset('assets/images/user-profile-image-2.png')}}" alt="profile image">
+                                <img src="{{asset('assets/images/user-profile-image-3.png')}}" alt="profile image">
+                                <img src="{{asset('assets/images/user-profile-image-4.png')}}" alt="profile image">
+                            </div>
+                            <h6 class="total-answers font-14 open font-weight-600">
+                                Answers 23
+                            </h6>
                         </div>
-                        <h6 class="total-answers font-14 open font-weight-600">
-                            Answers 23
-                        </h6>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-6 col-lg-4 mt-4 mt-md-0">
                 <div class="all-question-card bg-white">
@@ -139,10 +141,10 @@
                         </div>
                         <button style="border: none;background:transparent;">
                             <svg width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5"/>
-                            </svg>                                
+                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5" />
+                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5" />
+                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5" />
+                            </svg>
                         </button>
                     </div>
                     <h5 class="font-18 cairo font-weight-600 py-2 question">
@@ -173,10 +175,10 @@
                         </div>
                         <button style="border: none;background:transparent;">
                             <svg width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5"/>
-                            </svg>                                
+                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5" />
+                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5" />
+                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5" />
+                            </svg>
                         </button>
                     </div>
                     <h5 class="font-18 cairo font-weight-600 py-2 question">
@@ -207,10 +209,10 @@
                         </div>
                         <button style="border: none;background:transparent;">
                             <svg width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5"/>
-                            </svg>                                
+                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5" />
+                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5" />
+                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5" />
+                            </svg>
                         </button>
                     </div>
                     <h5 class="font-18 cairo font-weight-600 py-2 question">
@@ -241,10 +243,10 @@
                         </div>
                         <button style="border: none;background:transparent;">
                             <svg width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5"/>
-                            </svg>                                
+                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5" />
+                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5" />
+                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5" />
+                            </svg>
                         </button>
                     </div>
                     <h5 class="font-18 cairo font-weight-600 py-2 question">
@@ -275,10 +277,10 @@
                         </div>
                         <button style="border: none;background:transparent;">
                             <svg width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5"/>
-                            </svg>                                
+                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5" />
+                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5" />
+                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5" />
+                            </svg>
                         </button>
                     </div>
                     <h5 class="font-18 cairo font-weight-600 py-2 question">
@@ -309,10 +311,10 @@
                         </div>
                         <button style="border: none;background:transparent;">
                             <svg width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5"/>
-                            </svg>                                
+                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5" />
+                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5" />
+                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5" />
+                            </svg>
                         </button>
                     </div>
                     <h5 class="font-18 cairo font-weight-600 py-2 question">
@@ -343,10 +345,10 @@
                         </div>
                         <button style="border: none;background:transparent;">
                             <svg width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5"/>
-                            </svg>                                
+                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5" />
+                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5" />
+                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5" />
+                            </svg>
                         </button>
                     </div>
                     <h5 class="font-18 cairo font-weight-600 py-2 question">
@@ -377,10 +379,10 @@
                         </div>
                         <button style="border: none;background:transparent;">
                             <svg width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5"/>
-                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5"/>
-                            </svg>                                
+                                <circle cx="4.39798" cy="13.5132" r="2.74173" transform="rotate(-90 4.39798 13.5132)" fill="#A5A5A5" />
+                                <circle cx="13.1714" cy="13.5132" r="2.74173" transform="rotate(-90 13.1714 13.5132)" fill="#A5A5A5" />
+                                <circle cx="21.9449" cy="13.5132" r="2.74173" transform="rotate(-90 21.9449 13.5132)" fill="#A5A5A5" />
+                            </svg>
                         </button>
                     </div>
                     <h5 class="font-18 cairo font-weight-600 py-2 question">
@@ -402,7 +404,7 @@
             </div>
         </div>
     </div>
-   
+
 </section>
 
 @endsection
