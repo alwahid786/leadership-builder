@@ -121,6 +121,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/execution/submit', [ContentController::class, 'submitExecution'])->name('submitExecution');
     Route::get('/welcome/submit', [ContentController::class, 'submitWelcome'])->name('submitWelcome');
 
+    Route::group(['middleware' => ['auth', 'roles:admin']], function () {
+        Route::get('/dashboard', [ContentController::class, 'coverPage'])->name('adminDashboard');
+    });
+
     Route::group(['middleware' => ['auth', 'roles:user']], function () {
         Route::get('/cover', [ContentController::class, 'coverPage'])->name('coverPage');
         // Submit Day Response
@@ -134,4 +138,4 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Auth::routes();
+// Auth::routes();

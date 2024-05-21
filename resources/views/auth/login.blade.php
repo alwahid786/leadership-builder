@@ -15,7 +15,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label class="label" for="name">Email</label>
-                            <input type="text" class="form-control validate" id="email" placeholder="Enter Email" autocomplete="off" required>
+                            <input type="text" class="form-control validate" id="email" placeholder="Enter Email" required>
                         </div>
                         <div class="form-group mb-2">
                             <label class="label" for="password">Password</label>
@@ -117,12 +117,10 @@
                         };
                         url = dataResult.data.page_number;
                         if (dataResult.data.type == 'user') {
-                            console.log('lab gya eee');
-                            console.log('lab gya eee');
-                            console.log('lab gya eee');
-                            console.log('lab gya eee');
-
                             window.location.href = `{{route('coverPage')}}`;
+                        }
+                        else if (dataResult.data.type == 'admin') {
+                            window.location.href = `{{route('adminDashboard')}}`;
                         }
                         else{
                             Swal.fire({
