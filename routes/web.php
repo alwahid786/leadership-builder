@@ -17,10 +17,9 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::resource('videos', MediaController::class);
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('auth.login')->name('login');
 });
 Route::get('/login', function () {
     return view('auth.login');
@@ -47,9 +46,12 @@ Route::get('/invoice', function () {
 // Profile View
 Route::get('/profile', [ProfileController::class, 'profileView'])->name('profileView');
 
-Route::get('/edit-profile', function () {
-    return view('pages.edit-profile');
-});
+// Profile Edit View
+Route::get('/profile-edit-view', [ProfileController::class, 'profileView'])->name('profileEditView');
+
+// Profile Edit
+Route::post('/profile-edit', [ProfileController::class, 'profileEdit'])->name('profileEdit');
+
 Route::get('/invoices', function () {
     return view('pages.invoices');
 });
@@ -75,7 +77,6 @@ Route::post('/password-reset', [AuthController::class, 'resetPassword'])->name('
 Route::middleware('auth')->group(function () {
     // Functional Routes
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/cover', [ContentController::class, 'coverPage'])->name('coverPage');
     Route::get('/gratitude', [ContentController::class, 'gratitudePage'])->name('gratitudePage');
     Route::get('/wow', [ContentController::class, 'wowPage'])->name('wowPage');
     Route::get('/desire', [ContentController::class, 'desirePage'])->name('desirePage');
@@ -108,13 +109,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/execution/submit', [ContentController::class, 'submitExecution'])->name('submitExecution');
     Route::get('/welcome/submit', [ContentController::class, 'submitWelcome'])->name('submitWelcome');
 
-    // Submit Day Response
-    Route::post('/DayResponse/submit', [ContentController::class, 'submitresponse'])->name('submitresponse');
+    Route::group(['middleware' => ['auth', 'roles:user']], function () {
+        Route::get('/cover', [ContentController::class, 'coverPage'])->name('coverPage');
+        // Submit Day Response
+        Route::post('/DayResponse/submit', [ContentController::class, 'submitresponse'])->name('submitresponse');
+        // Past Days
+        Route::get('/pastday/{day}', [ContentController::class, 'pastday'])->name('pastday');
+    });
     
-    // Past Days
-    Route::get('/pastday/{day}', [ContentController::class, 'pastday'])->name('pastday');
-
     Route::get('/welcome', function () {
         return view('pages.welcome');
     });
 });
+
+Auth::routes();

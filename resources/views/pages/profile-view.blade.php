@@ -91,7 +91,7 @@
                     PROFILE PICTURE
                 </h2>
                 <div class="mt-2">
-                    <img src="{{asset('assets/images/profile-image.png')}}" alt="profile iamge" class="profile-img">
+                    <img src="{{asset('storage/images/'.($response_exists['profile_img']==null?'profile.png':$response_exists['profile_img']))}}" alt="profile iamge" class="profile-img">
                 </div>
             </div>
             <div class="col-md-9">
@@ -103,11 +103,11 @@
                         <div class="d-flex align-items-center justify-content-between" style="margin-top: 36px">
                             <div>
                                 <p>First Name</p>
-                                <p style="margin-top: 27px">John</p>
+                                <p style="margin-top: 27px">{{ $response_exists['name'] }}</p>
                             </div>
                             <div>
-                                <p>First Name</p>
-                                <p style="margin-top: 27px">Smith</p>
+                                <p>Last Name</p>
+                                <p style="margin-top: 27px">{{ $response_exists['last_name'] }}</p>
                             </div>
                         </div>
                         <h3 class="profile-view-heading" style="margin-top: 50px;">
@@ -116,23 +116,24 @@
                         <div class="d-flex align-items-center justify-content-between mt-3">
                             <div>
                                 <p>Email</p>
-                                <p style="margin-top: 27px">Johnsmith123@xyz.com</p>
+                                <p style="margin-top: 27px">{{ $response_exists['email'] }}</p>
                             </div>
                             <div>
                                 <p>Phone Number</p>
-                                <p style="margin-top: 27px">+123-345-567</p>
+                                <p style="margin-top: 27px">{{ $response_exists['phone'] }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button role="button" class="edit-profile-btn position-relative mt-4 ml-auto d-flex align-items-center justify-content-center" style="gap:20px">
+                <button onclick="window.location.href='{{ url('/profile-edit-view') }}'" role="button" class="edit-profile-btn position-relative mt-4 ml-auto d-flex align-items-center justify-content-center" style="gap:20px">
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.9684 2.0667L2.08301 8.95209L5.7211 12.5902L12.6065 5.70479L8.9684 2.0667Z" fill="white"/>
                         <path d="M14.4501 2.92754L11.7632 0.202536C11.4964 -0.0642478 11.0772 -0.0642478 10.8294 0.18348C10.8294 0.18348 10.8294 0.18348 10.8104 0.202536L9.62891 1.38401L13.2686 5.04276L14.4501 3.86129C14.7169 3.5945 14.7169 3.17527 14.4501 2.92754Z" fill="white"/>
                         <path d="M1.5507 9.74963L0.0452766 13.7895C-0.0881154 14.1325 0.0833886 14.5136 0.426396 14.647C0.578844 14.7042 0.750348 14.7042 0.902796 14.647L4.94267 13.1225L1.5507 9.74963Z" fill="white"/>
-                    </svg>                        
+                    </svg>
                     Edit
                 </button>
+                
             </div>
         </div>
         <div class="position-absolute" style="right:0; bottom: 0;">

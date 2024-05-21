@@ -116,12 +116,28 @@
                             13: 'conclusion'
                         };
                         url = dataResult.data.page_number;
-                        if (routeMapping.hasOwnProperty(url)) {
-                            var route = routeMapping[url];
-                            window.location.href = `{{url('${route}')}}`;
-                        } else {
-                            console.error('No route found for page number:', url);
+                        if (dataResult.data.type == 'user') {
+                            console.log('lab gya eee');
+                            console.log('lab gya eee');
+                            console.log('lab gya eee');
+                            console.log('lab gya eee');
+
+                            window.location.href = `{{route('coverPage')}}`;
                         }
+                        else{
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Invalid User',
+                                icon: 'error',
+                                confirmButtonColor: "#6dabe4"
+                            });
+                        }
+                        // if (routeMapping.hasOwnProperty(url)) {
+                        //     var route = routeMapping[url];
+                        //     window.location.href = `{{url('${route}')}}`;
+                        // } else {
+                        //     console.error('No route found for page number:', url);
+                        // }
                     }
                 },
                 error: function(jqXHR, exception) {

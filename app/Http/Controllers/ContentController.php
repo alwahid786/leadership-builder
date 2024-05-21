@@ -177,22 +177,29 @@ class ContentController extends Controller
     public function coverPage(Request $request)
     {
         $loginUserId = Auth::user()->id;
-        $current_date = Carbon::now()->toDateString();
+        // $current_date = Carbon::now()->toDateString();
 
-        $response_exists = Book::where('user_id', $loginUserId)
-            ->whereDate('created_at', $current_date)
-            ->first();
+        // $response_exists = Book::where('user_id', $loginUserId)
+        //     ->whereDate('created_at', $current_date)
+        //     ->first();
 
-        if ($response_exists==null) {
-            $response_exists['response_type'] = null;
-            $response_exists['q_answer'] = null;
-            $response_exists['video_url'] = null;
-            $response_exists['id'] = 0;
-            $response_exists['day'] = 1;
-        }
+        //     // dd($response_exists);
+
+        // if ($response_exists==null) {
+        //     $response_exists['response_type'] = null;
+        //     $response_exists['q_answer'] = null;
+        //     $response_exists['video_url'] = null;
+        //     $response_exists['id'] = 0;
+        //     $response_exists['day'] = auth()->user()->total_days+1;
+        //     $response_exists['today'] = auth()->user()->total_days+1;
+        // }
+        // else {
+        //     $response_exists['today'] = auth()->user()->total_days;
+        // }
+        $response_exists = $this->navbardynamic($loginUserId);
 
         // dd($response_exists);
-        $response_exists['today'] = ($response_exists['response_type']==null ? auth()->user()->total_days+1: auth()->user()->total_days);
+        // $response_exists['today'] = ($response_exists['response_type']==null ? auth()->user()->total_days+1: auth()->user()->total_days);
 
         return view('pages.cover', compact('response_exists'));
     }
@@ -203,20 +210,40 @@ class ContentController extends Controller
         $loginUserId = Auth::user()->id;
 
         $response_exists = Book::where('user_id', $loginUserId)
-            ->whereDate('day', $day)
+            ->where('day', $day)
             ->first();
+        
+        $today = $this->navbardynamic($loginUserId);
+
+        $response_exists['today'] = $today['today'];
+        // dd($response_exists);
+
+        return view('pages.cover', compact('response_exists'));
+    }
+
+    public function navbardynamic($loginUserId){
+        
+        $current_date = Carbon::now()->toDateString();
+
+        $response_exists = Book::where('user_id', $loginUserId)
+            ->whereDate('created_at', $current_date)
+            ->first();
+
+            // dd($response_exists);
 
         if ($response_exists==null) {
             $response_exists['response_type'] = null;
             $response_exists['q_answer'] = null;
             $response_exists['video_url'] = null;
             $response_exists['id'] = 0;
+            $response_exists['day'] = auth()->user()->total_days+1;
+            $response_exists['today'] = auth()->user()->total_days+1;
+        }
+        else {
+            $response_exists['today'] = auth()->user()->total_days;
         }
 
-        // dd($response_exists);
-        $response_exists['today'] = ($response_exists['response_type']==null ? auth()->user()->total_days+1: auth()->user()->total_days);
-
-        return view('pages.cover', compact('response_exists'));
+        return $response_exists;
     }
 
     // Show gratitude Page

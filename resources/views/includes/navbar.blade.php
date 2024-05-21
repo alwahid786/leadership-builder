@@ -503,7 +503,7 @@ $page = auth()->user()->page_number;
                         <span class="">Invoices</span>
                     </a>
                 </li>
-                <li class="nav-item settings my-1">
+                <li class="nav-item settings my-1 {{ request()->is('profile')||request()->is('profile-edit-view') ? 'active' : '' }}">
                     <a class="nav-link d-flex align-items-center" href="{{url('/profile')}}">
                         <img src="{{asset('assets/images/setting-white.png')}}" class="icon-white pr-2">
                         <span class="">Settings</span>
@@ -519,11 +519,7 @@ $page = auth()->user()->page_number;
                     <a class="nav-link d-flex align-items-center" href="{{url('/cover')}}">
                         <span class="">Day
 
-                            <?php
-                            if (isset($response_exists['today'])) {
-                                echo $response_exists['today'];
-                            }
-                            ?>
+                            {{ $response_exists['today'] }}
                             (Today)</span>
                     </a>
                 </li>
@@ -532,7 +528,7 @@ $page = auth()->user()->page_number;
                 PAST DAYS <i class="fas fa-caret-down ml-2"></i>
             </div>
             <div class="collapse show" id="pastdays">
-                @if(isset($response_exists['today']))
+                {{-- @if(isset($response_exists['today'])) --}}
                 @for ($i = 1 ; $i < $response_exists['today']; $i++) <li class="nav-item my-1 {{ request()->is('pastday/'.$i) ? 'active' : '' }}">
                     {{-- <li class="nav-item my-1"> --}}
                     <a class="nav-link d-flex align-items-center" style="margin-left: 15px; font-size: 15px;" href="{{ url('/pastday/'.$i) }}">
@@ -540,7 +536,7 @@ $page = auth()->user()->page_number;
                     </a>
                     </li>
                     @endfor
-                    @endif
+                    {{-- @endif --}}
             </div>
             {{--<li class="nav-item my-1 <?php if ($page < 7) echo "disabled-item"; ?>">
                 <a class="nav-link sidenav-item d-flex align-items-center" <?php if ($page < 7) echo "style='pointer-events: none'"; ?> href="{{url('wow ')}}">
