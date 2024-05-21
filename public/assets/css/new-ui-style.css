@@ -744,6 +744,7 @@ input::placeholder {
     width: 149px;
     height: 48px;
     border-radius: 12px;
+    border: 0;
 }
 
 /* Plan and pricing css end */
