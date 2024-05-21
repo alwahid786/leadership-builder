@@ -478,7 +478,7 @@ $page = auth()->user()->page_number;
         <form class="form-inline  mt-2 mt-md-0 ml-auto navbar-header-right-section pt-2 pt-lg-0">
             <div class="form-group has-search profile mr-2">
                 <span class="mr-3 text-white">{{auth()->user()->name}} {{auth()->user()->last_name}}</span>
-                <img src="{{asset('assets/images/profile.png')}}">
+                <img src="{{asset('storage/images/'.(auth()->user()->profile_img ==null ?'profile.png':auth()->user()->profile_img))}}" alt="profile iamge" class="profile-img">
             </div>
             <div class="form-group has-search">
                 <div class="dropdown dropdown-logout">
@@ -494,7 +494,7 @@ $page = auth()->user()->page_number;
         </form>
         <ul class="navbar-nav mr-auto sidenav pb-5" id="navAccordion">
             <div class="collapse show" id="submenu">
-                <li class="nav-item plans my-1">
+                <li class="nav-item plans my-1 {{ request()->is('dashboard') ? 'active' : '' }}">
                     <a class="nav-link d-flex align-items-center" style="gap:19px" href="{{url('/dashboard')}}">
                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="9.42857" height="9.42857" rx="2" fill="white"/>
@@ -505,7 +505,7 @@ $page = auth()->user()->page_number;
                         <span class="">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item invoices my-1">
+                <li class="nav-item invoices my-1 {{ request()->is('invoices') ? 'active' : '' }}">
                     <a class="nav-link d-flex align-items-center" style="gap:19px" href="{{url('/invoices')}}">
                         <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M21 0H4.66667C4.38711 0.00321878 4.118 0.106722 3.90833 0.291667C4.74033 0.584385 5.47234 1.10689 6.01952 1.79861C6.56671 2.49034 6.90667 3.32297 7 4.2C7.01784 4.35504 7.01784 4.51162 7 4.66667V24.5C6.99945 24.7231 7.0629 24.9418 7.18284 25.1299C7.30277 25.3181 7.47416 25.4679 7.67667 25.5617C7.87965 25.6551 8.1052 25.6883 8.3265 25.6573C8.5478 25.6263 8.75553 25.5323 8.925 25.3867L12.25 22.54L15.575 25.3867C15.7863 25.5674 16.0553 25.6667 16.3333 25.6667C16.6114 25.6667 16.8803 25.5674 17.0917 25.3867L20.4167 22.54L23.7417 25.3867C23.953 25.5674 24.2219 25.6667 24.5 25.6667C24.6688 25.6655 24.8355 25.6297 24.99 25.5617C25.1925 25.4679 25.3639 25.3181 25.4838 25.1299C25.6038 24.9418 25.6672 24.7231 25.6667 24.5V4.66667C25.6667 3.42899 25.175 2.242 24.2998 1.36684C23.4247 0.491665 22.2377 0 21 0ZM19.8333 16.3333H12.8333C12.5239 16.3333 12.2272 16.2104 12.0084 15.9916C11.7896 15.7728 11.6667 15.4761 11.6667 15.1667C11.6667 14.8572 11.7896 14.5605 12.0084 14.3417C12.2272 14.1229 12.5239 14 12.8333 14H19.8333C20.1428 14 20.4395 14.1229 20.6583 14.3417C20.8771 14.5605 21 14.8572 21 15.1667C21 15.4761 20.8771 15.7728 20.6583 15.9916C20.4395 16.2104 20.1428 16.3333 19.8333 16.3333ZM19.8333 11.6667H12.8333C12.5239 11.6667 12.2272 11.5438 12.0084 11.325C11.7896 11.1062 11.6667 10.8094 11.6667 10.5C11.6667 10.1906 11.7896 9.89384 12.0084 9.67504C12.2272 9.45625 12.5239 9.33333 12.8333 9.33333H19.8333C20.1428 9.33333 20.4395 9.45625 20.6583 9.67504C20.8771 9.89384 21 10.1906 21 10.5C21 10.8094 20.8771 11.1062 20.6583 11.325C20.4395 11.5438 20.1428 11.6667 19.8333 11.6667ZM19.8333 7H12.8333C12.5239 7 12.2272 6.87708 12.0084 6.65829C11.7896 6.4395 11.6667 6.14275 11.6667 5.83333C11.6667 5.52391 11.7896 5.22717 12.0084 5.00838C12.2272 4.78958 12.5239 4.66667 12.8333 4.66667H19.8333C20.1428 4.66667 20.4395 4.78958 20.6583 5.00838C20.8771 5.22717 21 5.52391 21 5.83333C21 6.14275 20.8771 6.4395 20.6583 6.65829C20.4395 6.87708 20.1428 7 19.8333 7ZM4.66667 4.66667V14H1.16667C0.857247 14 0.560501 13.8771 0.341709 13.6583C0.122916 13.4395 0 13.1428 0 12.8333V4.66667C0 4.50333 0 4.35167 0 4.2C0.0618838 3.58116 0.367066 3.01225 0.848409 2.61843C1.32975 2.2246 1.94783 2.03812 2.56667 2.1C3.18551 2.16188 3.75441 2.46707 4.14824 2.94841C4.54207 3.42975 4.72855 4.04783 4.66667 4.66667Z" fill="white"/>
@@ -513,7 +513,7 @@ $page = auth()->user()->page_number;
                         <span class="">Invoices</span>
                     </a>
                 </li>
-                <li class="nav-item settings my-1">
+                <li class="nav-item settings my-1 {{ request()->is('users') ? 'active' : '' }}">
                     <a class="nav-link d-flex align-items-center" style="gap:19px" href="{{url('/users')}}">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.8002 7.19961C10.8002 9.18783 9.18842 10.7996 7.2002 10.7996C5.21197 10.7996 3.6002 9.18783 3.6002 7.19961C3.6002 5.21138 5.21197 3.59961 7.2002 3.59961C9.18842 3.59961 10.8002 5.21138 10.8002 7.19961Z" fill="white"/>
@@ -524,7 +524,7 @@ $page = auth()->user()->page_number;
                         <span class="">Users</span>
                     </a>
                 </li>
-                <li class="nav-item settings my-1">
+                <li class="nav-item settings my-1 {{ request()->is('all-questions') ? 'active' : '' }}">
                     <a class="nav-link d-flex align-items-center" style="gap:19px" href="{{url('/all-questions')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16">
                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247m2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"></path>
@@ -532,7 +532,7 @@ $page = auth()->user()->page_number;
                         <span class="">Questions</span>
                     </a>
                 </li>
-                <li class="nav-item settings my-1">
+                <li class="nav-item settings my-1 {{ request()->is('plans-and-pricing') ? 'active' : '' }}">
                     <a class="nav-link d-flex align-items-center" style="gap:19px" href="{{url('/plans-and-pricing')}}">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_44_2572)">

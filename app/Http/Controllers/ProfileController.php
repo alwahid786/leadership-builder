@@ -61,6 +61,22 @@ class ProfileController extends Controller
         return redirect()->route('profileEditView')->with(['response_exists' => $response_exists, 'responseSuccess' => 'Profile updated successfully!']);
     }
 
+    public function plans(Request $request)
+    {
+        $userid = Auth::user()->id;
+        $response_exists = $this->navbardynamic($userid);
+
+        return view('pages.plans', compact('response_exists'));
+    }
+
+    public function invoice(Request $request)
+    {
+        $userid = Auth::user()->id;
+        $response_exists = $this->navbardynamic($userid);
+
+        return view('pages.invoice', compact('response_exists'));
+    }
+
     public function navbardynamic($loginUserId){
         
         $current_date = Carbon::now()->toDateString();
