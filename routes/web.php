@@ -58,9 +58,7 @@ Route::get('/invoices', function () {
 Route::get('/plans-and-pricing', function () {
     return view('pages.plans-and-pricing');
 });
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-});
+
 Route::get('/edit-plans', function () {
     return view('pages.edit-plans');
 });
@@ -122,10 +120,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/welcome/submit', [ContentController::class, 'submitWelcome'])->name('submitWelcome');
 
     Route::group(['middleware' => ['auth', 'roles:admin']], function () {
-        Route::get('/dashboard', [ContentController::class, 'coverPage'])->name('adminDashboard');
+        Route::get('/dashboard', function () {
+            return view('pages.dashboard');
+        })->name('adminDashboard');
     });
 
     Route::group(['middleware' => ['auth', 'roles:user']], function () {
+        Route::get('/user-dashboard', [ContentController::class, 'coverPage']);
         Route::get('/cover', [ContentController::class, 'coverPage'])->name('coverPage');
         // Submit Day Response
         Route::post('/DayResponse/submit', [ContentController::class, 'submitresponse'])->name('submitresponse');
