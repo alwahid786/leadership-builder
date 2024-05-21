@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Cairo:wght@200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
     --blue: #1177AA;
@@ -601,13 +601,18 @@ input::placeholder {
     padding: 40px 120px 123px 93px;
     border-radius: 8px;
 }
+.user-detail-view {
+    padding: 40px 37px 23px 93px;
+    border-radius: 8px;
+}
+
 
 .edit-profile-view {
     padding: 64px 54px;
     border-radius: 8px;
 }
 
-.profile-view-heading {
+.profile-view-heading, .user-detail-heading {
     font-family: "Crimson Pro", serif;
     font-size: 38px;
     font-weight: 700;
@@ -616,7 +621,7 @@ input::placeholder {
     color: rgba(32, 32, 32, 1);
 }
 
-.profile-view p {
+.profile-view p, .user-detail-view p {
     font-family: "Crimson Pro", serif;
     font-size: 16px;
     font-weight: 400;
@@ -692,31 +697,17 @@ input::placeholder {
     padding: 25px 32px 22px 19px;
     border-radius: 10px;
 }
-<<<<<<< HEAD
 .plan-card.basic {
     background: rgba(215, 215, 245, 1);
     border: 1px solid rgba(156, 156, 255, 1);
 }
 .plan-card.professional {
-=======
-
-.basic {
-    background: rgba(215, 215, 245, 1);
-    border: 1px solid rgba(156, 156, 255, 1);
-}
-
-.professional {
->>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
     background: rgba(193, 236, 183, 1);
     border: 1px solid rgba(156, 156, 255, 1);
     margin-top: 30px;
 }
-<<<<<<< HEAD
-.plan-card.enterprise {
-=======
 
-.enterprise {
->>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
+.plan-card.enterprise {
     background: rgba(250, 231, 186, 1);
     border: 1px solid rgba(156, 156, 255, 1);
     margin-top: 30px;
@@ -778,14 +769,10 @@ span {
     font-size: 50px;
     line-height: 59px;
 }
-<<<<<<< HEAD
 .font-28 {
     font-size: 28px;
     line-height: 42px;
 }
-=======
-
->>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
 .font-18 {
     font-size: 18px;
     line-height: 27px;
@@ -813,6 +800,13 @@ span {
     font-family: "Poppins", sans-serif;
 }
 
+.open {
+    font-family: "Open Sans", sans-serif;
+}
+.cairo {
+    font-family: "Cairo", sans-serif;
+}
+
 .crimson {
     font-family: "Crimson Pro", serif;
 }
@@ -820,21 +814,13 @@ span {
 .primary-color {
     color: var(--blue);
 }
+
 .primary-btn {
-    font-family: "Crimson Pro", serif;
-    font-size: 20px;
-    line-height: 17.78px;
-    color: #fff;
-    padding: 16px 24px;
-    border-radius: 10px;
+    width: 166px;
+    height: 54px;
     background: var(--blue);
+    border-radius: 10px;
     border: 0;
-}
-a:hover {
-    text-decoration: none !important;
-}
-.mt-30 {
-    margin-top: 30px;
 }
 
 /* Global styling end */
@@ -979,6 +965,12 @@ a:hover {
     left: 50%;
     transform: translate(-50%, 0px);
 }
+.profile-card .profile-img img {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 .profile-card .profile-img::before {
     content: '';
     width: 17px;
@@ -1014,6 +1006,7 @@ a:hover {
 }
 .profile-card .enterprise {
     color: rgba(250, 177, 23, 1);
+    margin-top: 0;
 }
 .profile-card .free {
     color: rgba(255, 157, 157, 1);
@@ -1021,6 +1014,135 @@ a:hover {
 
 /* users css end  */
 
+/* Users detail page start  */
+
+.user-detail .remove-user {
+    background: rgba(255, 125, 125, 1);
+    width: 169px;
+    height: 48px;
+    border-radius: 12px;
+    border: none;
+}
+.user-detail .enterprise-user {
+    color: rgba(250, 177, 23, 1);
+    background: rgba(255, 233, 187, 1);
+    width: 130px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    position: absolute;
+    top: 6%;
+    right: 5%;
+}
+.user-detail-view .label {
+    color: rgba(118, 118, 118, 1) !important;
+}
+.user-detail-view .left-side {
+    flex-basis: 60%;
+}
+.user-detail-view .right-side {
+    flex-basis: 40%;
+}
+
+/* Users detail page end  */
+
+/* All questions css start  */
+
+.question-cards .all-question-card {
+    border-radius: 14px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.04);
+    padding: 32px;
+    height: 100%;
+}
+.all-question-card .red-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: rgba(255, 74, 85, 1); 
+}
+.all-question-card .green-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: rgba(56, 226, 93, 1); 
+}
+.all-question-card .pink-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: rgba(227, 40, 175, 1); 
+}
+.all-question-card .red-question {
+    color: rgba(255, 74, 85, 1); 
+}
+.all-question-card .pink-question {
+    color: rgba(227, 40, 175, 1); 
+}
+.all-question-card .green-question {
+    color: rgba(56, 226, 93, 1); 
+}
+.all-question-card .question {
+    color: rgba(15, 15, 15, 1);
+}
+.all-question-card .total-answers {
+    color: rgba(165, 165, 165, 1);
+}
+.all-question-card .red-line {
+    background: rgba(255, 74, 85, 1);
+    width: 100%;
+    height: 8px;
+    border-radius: 16px;
+}
+.all-question-card .green-line {
+    background: rgba(56, 226, 93, 1);
+    width: 100%;
+    height: 8px;
+    border-radius: 16px;
+}
+.all-question-card .pink-line {
+    background: rgba(227, 40, 175, 1);
+    width: 100%;
+    height: 8px;
+    border-radius: 16px;
+}
+.all-question-card .profile-images img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    
+}
+.all-question-card .profile-images img {
+    margin-left: -10px;
+    z-index: 0;
+}
+
+/* All questions css end  */
+
+/* Question detail css start  */
+.question-detail .question {
+    background: linear-gradient(102.39deg, #1177AA -57.78%, #5EC8D6 84.66%);
+    border-radius: 12px;
+    height: 100%;
+}
+.question-detail .quotation {
+    background: linear-gradient(102.39deg, #04ad07 -57.78%, #5ed662 84.66%);
+    border-radius: 12px;
+    height: 100%;
+}
+.question-detail .total-answers {
+    background: linear-gradient(102.39deg, #6f11aa -57.78%, #a05ed6 84.66%);
+    border-radius: 12px;
+    height: 100%;
+}
+.question-detail .table-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+/* Question detail css end  */
 
 /* Media queries start */
 
@@ -1041,6 +1163,10 @@ a:hover {
         font-size: 35px;
         line-height: 45.57px;
     }
+    .profile-view, .user-detail-view {
+        padding: 30px 50px 50px 53px;
+    }
+    
 }
 
 @media (max-width:576px) {
@@ -1053,20 +1179,19 @@ a:hover {
         font-size: 39px;
         line-height: 59px;
     }
-<<<<<<< HEAD
     .font-28 {
         font-size: 22px;
         line-height: 28px;
     }
-=======
-
->>>>>>> 509a316e732911ec859dd5bdb584779dc17eaaff
     .dashboard .my-balance-card {
         padding: 16px;
     }
 
     .dashboard .card-svg {
         width: 150px;
+    }
+    .question-cards .question-card {
+        padding: 20px;
     }
 
     .save-btn,
@@ -1076,9 +1201,19 @@ a:hover {
         width: 178px;
         height: 50px;
     }
-    .primary-btn {
-        font-size: 16px;
-        padding: 12px 20px;
+    .profile-view, .user-detail-view {
+        padding: 20px 15px;
+    }
+    .profile-view-heading, .user-detail-heading {
+        font-size: 20px;
+        line-height: normal;
+    }
+    .user-detail .enterprise-user {
+        position: unset;
+    }
+    .user-detail .remove-user {
+        width: 129px;
+        height: 38px;
     }
 }
 
@@ -1092,9 +1227,21 @@ a:hover {
         line-height: 39px;
     }
 
+    .font-18 {
+        font-size: 16px;
+    }
+
     .plan-card .price {
         font-size: 20px;
         line-height: 29.57px;
+    }
+
+    .save-btn,
+    .edit-profile-btn {
+        font-size: 16px;
+        line-height: 22.23px;
+        width: 148px;
+        height: 40px;
     }
 }
 

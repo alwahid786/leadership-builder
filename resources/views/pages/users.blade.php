@@ -1,3 +1,4 @@
+@ -0,0 +1,376 @@
 @extends('layouts.default-layout')
 @section('content')
 <style>
@@ -91,7 +92,7 @@
                     <h2 class="font-28 primary-color poppins font-weight-500">
                         All Users
                     </h2>
-                    <button class="primary-btn">Add New Users</button>
+                    <button class="primary-btn crimson font-20 text-white">Add New Users</button>
                 </div>
             </div>
         </div>

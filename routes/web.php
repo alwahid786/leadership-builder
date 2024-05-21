@@ -64,8 +64,17 @@ Route::get('/dashboard', function () {
 Route::get('/edit-plans', function () {
     return view('pages.edit-plans');
 });
+Route::get('/user-detail', function () {
+    return view('pages.user-detail');
+});
 Route::get('/users', function () {
     return view('pages.users');
+});
+Route::get('/all-questions', function () {
+    return view('pages.all-questions');
+});
+Route::get('/question-detail', function () {
+    return view('pages.question-detail');
 });
 
 Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');
