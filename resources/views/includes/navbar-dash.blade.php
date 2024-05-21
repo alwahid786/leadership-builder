@@ -522,7 +522,7 @@ $page = auth()->user()->page_number;
                         <span class="">Invoices</span>
                     </a>
                 </li>
-                <li class="nav-item settings my-1 {{ request()->is('users') ? 'active' : '' }}">
+                <li class="nav-item settings my-1 {{ request()->is('users')||request()->is('user-detail') ? 'active' : '' }}">
                     <a class="nav-link d-flex align-items-center" style="gap:19px" href="{{url('/users')}}">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.8002 7.19961C10.8002 9.18783 9.18842 10.7996 7.2002 10.7996C5.21197 10.7996 3.6002 9.18783 3.6002 7.19961C3.6002 5.21138 5.21197 3.59961 7.2002 3.59961C9.18842 3.59961 10.8002 5.21138 10.8002 7.19961Z" fill="white"/>

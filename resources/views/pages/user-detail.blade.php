@@ -118,11 +118,11 @@
                         <div class="d-flex align-items-center justify-content-between" style="margin-top: 36px">
                             <div class="left-side">
                                 <p class="label">First Name</p>
-                                <p style="margin-top: 27px">John</p>
+                                <p style="margin-top: 27px">{{ $user->name }}</p>
                             </div>
                             <div class="right-side">
                                 <p class="label">Last Name</p>
-                                <p style="margin-top: 27px">Smith</p>
+                                <p style="margin-top: 27px">{{ $user->last_name }}</p>
                             </div>
                         </div>
                         <h3 class="user-detail-heading" style="margin-top: 50px;">
@@ -131,11 +131,11 @@
                         <div class="d-flex align-items-center justify-content-between mt-3">
                             <div class="left-side">
                                 <p class="label">Email</p>
-                                <p style="margin-top: 27px">Johnsmith123@xyz.com</p>
+                                <p style="margin-top: 27px">{{ $user->email }}</p>
                             </div>
                             <div class="right-side">
                                 <p class="label">Phone Number</p>
-                                <p style="margin-top: 27px">+123-345-567</p>
+                                <p style="margin-top: 27px">{{ $user->phone }}</p>
                             </div>
                         </div>
                         <h3 class="user-detail-heading" style="margin-top: 50px;">
@@ -144,11 +144,11 @@
                         <div class="d-flex align-items-center justify-content-between mt-3">
                             <div class="left-side">
                                 <p class="label">Days</p>
-                                <p style="margin-top: 27px">23</p>
+                                <p style="margin-top: 27px">{{ $user->total_days }}</p>
                             </div>
                             <div class="right-side">
                                 <p class="label">Given Answers</p>
-                                <p style="margin-top: 27px">23</p>
+                                <p style="margin-top: 27px">{{ $user->total_days }}</p>
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-between mt-3">

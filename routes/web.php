@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,19 +37,6 @@ Route::get('/otp-code', function () {
 Route::get('/reset-password', function () {
     return view('auth.reset-password');
 });
-Route::get('/invoice', function () {
-    return view('pages.invoice');
-});
-
-// Profile View
-Route::get('/profile', [ProfileController::class, 'profileView'])->name('profileView');
-
-// Profile Edit View
-Route::get('/profile-edit-view', [ProfileController::class, 'profileView'])->name('profileEditView');
-
-// Profile Edit
-Route::post('/profile-edit', [ProfileController::class, 'profileEdit'])->name('profileEdit');
-
 
 Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');
 Route::post('/signin', [AuthController::class, 'signinFunction'])->name('signinFunction');
@@ -59,6 +47,13 @@ Route::post('/password-reset', [AuthController::class, 'resetPassword'])->name('
 Route::middleware('auth')->group(function () {
     // Functional Routes
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    // Profile View
+    Route::get('/profile', [ProfileController::class, 'profileView'])->name('profileView');
+    // Profile Edit View
+    Route::get('/profile-edit-view', [ProfileController::class, 'profileView'])->name('profileEditView');
+    // Profile Edit
+    Route::post('/profile-edit', [ProfileController::class, 'profileEdit'])->name('profileEdit');
+
     // Route::get('/gratitude', [ContentController::class, 'gratitudePage'])->name('gratitudePage');
     // Route::get('/wow', [ContentController::class, 'wowPage'])->name('wowPage');
     // Route::get('/desire', [ContentController::class, 'desirePage'])->name('desirePage');
@@ -103,12 +98,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit-plans', function () {
             return view('pages.edit-plans');
         });
-        Route::get('/user-detail', function () {
-            return view('pages.user-detail');
-        });
-        Route::get('/users', function () {
-            return view('pages.users');
-        });
+        Route::get('/user-detail/{id}', [AdminController::class, 'userDetail'])->name('userDetail');
+        Route::get('/users', [AdminController::class, 'users'])->name('users');
+        
         Route::get('/all-questions', function () {
             return view('pages.all-questions');
         });
@@ -117,6 +109,9 @@ Route::middleware('auth')->group(function () {
         });
         Route::get('/add-question', function () {
             return view('pages.add-question');
+        });
+        Route::get('/plans-and-pricing', function () {
+            return view('pages.plans-and-pricing');
         });
 
     });
