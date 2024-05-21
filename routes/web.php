@@ -71,6 +71,9 @@ Route::get('/users', function () {
 Route::get('/all-questions', function () {
     return view('pages.all-questions');
 });
+Route::get('/question-detail', function () {
+    return view('pages.question-detail');
+});
 
 Route::post('/register', [AuthController::class, 'signupFunction'])->name('signupFunction');
 Route::post('/signin', [AuthController::class, 'signinFunction'])->name('signinFunction');

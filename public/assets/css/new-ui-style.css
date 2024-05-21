@@ -815,6 +815,14 @@ span {
     color: var(--blue);
 }
 
+.primary-btn {
+    width: 166px;
+    height: 54px;
+    background: var(--blue);
+    border-radius: 10px;
+    border: 0;
+}
+
 /* Global styling end */
 
 /* Dashboard css start  */
@@ -1111,6 +1119,30 @@ span {
 }
 
 /* All questions css end  */
+
+/* Question detail css start  */
+.question-detail .question {
+    background: linear-gradient(102.39deg, #1177AA -57.78%, #5EC8D6 84.66%);
+    border-radius: 12px;
+    height: 100%;
+}
+.question-detail .quotation {
+    background: linear-gradient(102.39deg, #04ad07 -57.78%, #5ed662 84.66%);
+    border-radius: 12px;
+    height: 100%;
+}
+.question-detail .total-answers {
+    background: linear-gradient(102.39deg, #6f11aa -57.78%, #a05ed6 84.66%);
+    border-radius: 12px;
+    height: 100%;
+}
+.question-detail .table-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+/* Question detail css end  */
 
 /* Media queries start */
 
