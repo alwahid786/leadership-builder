@@ -83,7 +83,7 @@
         /* Firefox */
     }
 </style>
-@include('includes.navbar')
+@include('includes.navbar-dash')
 <section class="contentSection position-relative">
     <div class="container-fluid contentRow position-relative">
         <div class="row">

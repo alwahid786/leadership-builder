@@ -823,6 +823,10 @@ span {
     border: 0;
 }
 
+a:hover {
+    text-decoration: none !important;
+}
+
 /* Global styling end */
 
 /* Dashboard css start  */

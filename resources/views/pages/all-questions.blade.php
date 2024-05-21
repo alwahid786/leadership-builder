@@ -82,12 +82,17 @@
         /* Firefox */
     }
 </style>
-@include('includes.navbar')
+@include('includes.navbar-dash')
 <section class="contentSection position-relative">
     <div class="container-fluid contentRow position-relative">
-        <h2 class="font-49 primary-color crimson mb-3">
-            All Questions
-        </h2>
+        <div class="d-flex align-items-center justify-content-between mb-2">
+            <h2 class="font-49 primary-color crimson mb-3">
+                All Questions
+            </h2>
+            <a href="{{url('/add-question')}}" class="primary-btn d-flex align-items-center justify-content-center text-white font-weight-500 crimson">
+                Add Question
+            </a>
+        </div>
         <div class="row mt-1 question-cards">
             <div class="col-md-6 col-lg-4">
                 <div class="all-question-card bg-white">
