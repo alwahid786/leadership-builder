@@ -110,6 +110,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/add-question', [AdminController::class, 'addQuestion'])->name('addQuestion');
         Route::get('/edit-question-page/{id}', [AdminController::class, 'editQuestionPage'])->name('editQuestionPage');
         Route::post('/edit-question', [AdminController::class, 'editQuestion'])->name('editQuestion');
+        // Route::get('/daycheck/{day}', [AdminController::class, 'checkDay'])->name('checkDay');
 
         Route::get('/plans-and-pricing', function () {
             return view('pages.plans-and-pricing');

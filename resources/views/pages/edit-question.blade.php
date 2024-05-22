@@ -92,10 +92,15 @@
                         <h2 class="font-49 crimson primary-color">
                             Add Question
                         </h2>
-                        {{-- <button class="d-flex align-items-center justify-content-center font-18 poppins primary-btn text-white font-weight-500 position-relative" style="gap:8px;cursor:pointer;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
-                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-                                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+                        {{-- <button
+                            class="d-flex align-items-center justify-content-center font-18 poppins primary-btn text-white font-weight-500 position-relative"
+                            style="gap:8px;cursor:pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-upload" viewBox="0 0 16 16">
+                                <path
+                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                                <path
+                                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z" />
                             </svg>
                             Import
                             <input type="file" class="add-file" id="add-file" name="" accept=".">
@@ -107,24 +112,28 @@
                             <div class="col-1">
                                 <div class="form-group">
                                     <label for="day">Day</label>
-                                    <input type="text" id="day" name="day" class="form-control text-center" onchange="changeDay()" value="{{ $question->day }}" required>
+                                    <input type="text" id="day" name="day" class="form-control text-center"
+                                        value="{{ $question->day }}" required readonly>
                                     <input type="hidden" id="id" name="id" value="{{ $question->id }}">
                                 </div>
                             </div>
                             <div class="col-11">
                                 <div class="form-group">
                                     <label for="question">Question</label>
-                                    <input type="text" id="question" name="question" value="{{ $question->question }}" class="form-control" required>
+                                    <input type="text" id="question" name="question" value="{{ $question->question }}"
+                                        class="form-control" required>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="quotation">Quotation</label>
-                                    <textarea id="quotation" cols="30" rows="5" name="quotation" class="form-control" required>{{ $question->quotation }}</textarea>
+                                    <textarea id="quotation" cols="30" rows="5" name="quotation" class="form-control"
+                                        required>{{ $question->quotation }}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="author">Author</label>
-                                    <input type="text" id="author" name="author" value="{{ $question->author }}" class="form-control">
+                                    <input type="text" id="author" name="author" value="{{ $question->author }}"
+                                        class="form-control">
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="submit" class="save-btn mt-4">Save Changes</button>
@@ -136,7 +145,7 @@
             </div>
         </div>
     </div>
-   
+
 </section>
 
 @endsection
@@ -151,7 +160,7 @@
         text: `{{ session('responseSuccess') }}`,
         icon: 'success',
         confirmButtonColor: "#6dabe4"
-    })
+    });
 </script>
 @endif
 @if(session()->has('nextError'))
@@ -161,17 +170,54 @@
         text: `{{ session('nextError') }}`,
         icon: 'error',
         confirmButtonColor: "#6dabe4"
-    })
+    });
 </script>
 @endif
 
-<script>
+{{-- <script>
+
     function changeDay() {
-        let day = document.getElementById('day').value;
+        let day = $('#day').val();
+        let oldday = $('#dayold').val();
         console.log(day);
         console.log(day);
         console.log(day);
-    }
-</script>
+
+        fetch(`{{url('/daycheck/')}}/${day}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.available) {
+                    console.log('Day is available');
+                    console.log(data[0]);
+                    Swal.fire({
+                    text: "This Day Question is Already available... Are you sure to keep this change?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: "#6dabe4",
+                    cancelButtonColor: "#ce2c2c",
+                    confirmButtonText: 'Yes, Save it!',
+                    cancelButtonText: 'No, Cancel it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $('#day').val(data[0].day);
+                        }
+                        else{
+                            $('#day').val(oldday);
+                            console.log(oldday);
+                            console.log(oldday);
+                            console.log(oldday);
+                        }
+                    })
+                }
+                else{
+                    console.log('Day is not available');
+                }
+            })
+            .catch(error => {
+                console.error('Error checking day availability:', error);
+            })
+
+        }
+</script> --}}
 
 @endsection

@@ -107,7 +107,7 @@
                             <div class="col-1">
                                 <div class="form-group">
                                     <label for="day">Day</label>
-                                    <input type="text" id="day" name="day" class="form-control text-center" value="{{ $lastday }}" required>
+                                    <input type="text" id="day" name="day" class="form-control text-center" readonly value="{{ $lastday }}" required>
                                 </div>
                             </div>
                             <div class="col-11">

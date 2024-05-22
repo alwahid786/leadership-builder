@@ -96,7 +96,6 @@ class AdminController extends Controller
         ]);
 
         $question = Question::find($request->id);
-        $question->day = $request->day;
         $question->question = $request->question;
         $question->quotation = $request->quotation;
         if ($request->author != null) {
@@ -107,4 +106,17 @@ class AdminController extends Controller
 
         return redirect()->back()->with('responseSuccess', 'Question updated successfully');
     }
+
+    // public function checkDay($day)
+    // {
+    //     $questions = Question::where('day', $day)->first();
+
+    //     // dd($questions);
+    //     if ($questions == null) {
+    //         return response()->json(['Day found', 'available' => false]);
+    //     }
+
+
+    //     return response()->json([$questions, 'available' => true]);
+    // }
 }
