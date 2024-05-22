@@ -107,7 +107,7 @@
                             <div class="col-1">
                                 <div class="form-group">
                                     <label for="day">Day</label>
-                                    <input type="text" id="day" name="day" class="form-control text-center" value="{{ $question->day }}" required>
+                                    <input type="text" id="day" name="day" class="form-control text-center" onchange="changeDay()" value="{{ $question->day }}" required>
                                     <input type="hidden" id="id" name="id" value="{{ $question->id }}">
                                 </div>
                             </div>
@@ -164,5 +164,14 @@
     })
 </script>
 @endif
+
+<script>
+    function changeDay() {
+        let day = document.getElementById('day').value;
+        console.log(day);
+        console.log(day);
+        console.log(day);
+    }
+</script>
 
 @endsection

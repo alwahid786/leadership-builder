@@ -152,7 +152,7 @@
                                 </button>
                                 <div class="dropdown-content">
                                     <!-- Add your dropdown content here -->
-                                    <a href="{{url('/question-detail/'.$question->id)}}">View</a>
+                                    <a href="{{url('/question-detail')}}">View</a>
                                     <a href="{{url('/edit-question-page/'.$question->id)}}">Edit</a>
                                     <!-- You can add more options as needed -->
                                 </div>
