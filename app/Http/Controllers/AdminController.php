@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Book;
+use App\Models\Question;
 use Carbon\Carbon;
 use App\Http\Traits\ResponseTrait;
 use Illuminate\Support\Facades\Session;
@@ -30,5 +31,80 @@ class AdminController extends Controller
         $user = User::find($id);
 
         return view('pages.user-detail', compact('user'));
+    }
+
+    public function allQuestions()
+    {
+        $questions = Question::orderBy('day', 'asc')->get();
+
+        // dd($questions);
+
+        return view('pages.all-questions', compact('questions'));
+    }
+
+    public function addQuestionPage()
+    {
+        $questions = Question::orderBy('day', 'asc')->get();
+        $lastQuestion = $questions->last();
+
+        $lastday = 0;
+
+        if ($lastQuestion==null) {
+            $lastday = 1;
+        } else {
+            $lastday = $lastQuestion->day + 1;
+        }
+
+        return view('pages.add-question', compact('lastday'));
+    }
+
+    public function addQuestion(Request $request)
+    {
+        $request->validate([
+            'day' => 'required',
+            'question' => 'required',
+            'quotation' => 'required',
+        ]);
+
+        $question = new Question();
+        $question->day = $request->day;
+        $question->question = $request->question;
+        $question->quotation = $request->quotation;
+        if ($request->author != null) {
+            $question->author = $request->author;
+        }
+
+        // dd($question);
+        $question->save();
+
+        return redirect()->back()->with('responseSuccess', 'Question added successfully');
+    }
+
+    public function editQuestionPage($id)
+    {
+        $question = Question::find($id);
+
+        return view('pages.edit-question', compact('question'));
+    }
+
+    public function editQuestion(Request $request){
+
+        $request->validate([
+            'day' => 'required',
+            'question' => 'required',
+            'quotation' => 'required',
+        ]);
+
+        $question = Question::find($request->id);
+        $question->day = $request->day;
+        $question->question = $request->question;
+        $question->quotation = $request->quotation;
+        if ($request->author != null) {
+            $question->author = $request->author;
+        }
+
+        $question->save();
+
+        return redirect()->back()->with('responseSuccess', 'Question updated successfully');
     }
 }

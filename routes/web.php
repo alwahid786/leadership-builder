@@ -101,15 +101,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/user-detail/{id}', [AdminController::class, 'userDetail'])->name('userDetail');
         Route::get('/users', [AdminController::class, 'users'])->name('users');
         
-        Route::get('/all-questions', function () {
-            return view('pages.all-questions');
-        });
+        Route::get('/all-questions', [AdminController::class, 'allQuestions'])->name('allQuestions');
+
         Route::get('/question-detail', function () {
             return view('pages.question-detail');
         });
-        Route::get('/add-question', function () {
-            return view('pages.add-question');
-        });
+        Route::get('/add-question-page', [AdminController::class, 'addQuestionPage'])->name('addQuestionPage');
+        Route::post('/add-question', [AdminController::class, 'addQuestion'])->name('addQuestion');
+        Route::get('/edit-question-page/{id}', [AdminController::class, 'editQuestionPage'])->name('editQuestionPage');
+        Route::post('/edit-question', [AdminController::class, 'editQuestion'])->name('editQuestion');
+
         Route::get('/plans-and-pricing', function () {
             return view('pages.plans-and-pricing');
         });
