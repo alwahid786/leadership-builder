@@ -71,13 +71,25 @@ class QuestionsTableSeeder extends Seeder
             ]
         ];
 
+        $questions = Question::orderBy('day', 'asc')->get();
+        $lastQuestion = $questions->last();
+
+        $startDay = 0;
+
+        if ($lastQuestion==null) {
+            $startDay = 1;
+        } else {
+            $startDay = $lastQuestion->day + 1;
+        }
+
         foreach ($quotations as $data) {
             Question::create([
                 'author' => $data['author'],
                 'quotation' => $data['quotation'],
                 'question' => $data['question'],
-                'day' => $data['day']
+                'day' => $startDay
             ]);
+            $startDay++;
         }
     }
 }

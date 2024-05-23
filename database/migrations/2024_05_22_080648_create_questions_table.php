@@ -14,12 +14,12 @@ class CreateQuestionsTable extends Migration
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->id();
-            $table->longText('question');
-            $table->longText('quotation');
+            $table->id(); // This will create a primary key auto-incrementing column called 'id'
+            $table->text('question');
+            $table->text('quotation');
             $table->string('author')->default('Anonymous');
-            $table->integer('day');
-            $table->timestamps(); 
+            $table->integer('day'); // Auto-increment 'day' without being a primary key
+            $table->timestamps();
         });
     }
 

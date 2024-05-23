@@ -103,9 +103,10 @@ Route::middleware('auth')->group(function () {
         
         Route::get('/all-questions', [AdminController::class, 'allQuestions'])->name('allQuestions');
 
-        Route::get('/question-detail', function () {
-            return view('pages.question-detail');
-        });
+        Route::get('/importpage', [AdminController::class, 'importPage'])->name('importPage');
+        Route::post('/import', [AdminController::class, 'import'])->name('import');
+
+        Route::get('/question-detail/{id}', [AdminController::class, 'questionDetail'])->name('questionDetail');
         Route::get('/add-question-page', [AdminController::class, 'addQuestionPage'])->name('addQuestionPage');
         Route::post('/add-question', [AdminController::class, 'addQuestion'])->name('addQuestion');
         Route::get('/edit-question-page/{id}', [AdminController::class, 'editQuestionPage'])->name('editQuestionPage');

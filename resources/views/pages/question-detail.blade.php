@@ -89,20 +89,20 @@
             <div class="col-md-4">
                 <div class="question p-3 px-md-5 py-md-4">
                     <h3 class="font-28 text-white font-weight-600 poppins">
-                        Question one
+                        Question {{ $question->day }}
                     </h3>
                     <p class="font-14 text-white poppins mt-2">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                        {{ $question->question }}
                     </p>
                 </div>
             </div>
             <div class="col-md-5 mt-4 mt-md-0">
                 <div class="quotation p-3 px-md-5 py-md-4">
                     <h3 class="font-28 text-white font-weight-600 poppins">
-                        Quotation one
+                        Quotation {{ $question->day }}
                     </h3>
                     <p class="font-14 text-white poppins mt-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae repellat repudiandae eveniet.
+                        {{ $question->quotation }}
                     </p>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                     </svg>
                     <div>
                         <p class="font-16 text-white poppins">Total Answers</p>
-                        <h3 class="font-28 font-weight-600 text-white poppins mt-2 text-right">135</h3>
+                        <h3 class="font-28 font-weight-600 text-white poppins mt-2 text-right">0</h3>
                     </div>
                 </div>
             </div>

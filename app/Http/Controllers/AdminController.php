@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Book;
 use App\Models\Question;
+use App\Imports\QuestionsImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 use App\Http\Traits\ResponseTrait;
 use Illuminate\Support\Facades\Session;
@@ -105,6 +107,40 @@ class AdminController extends Controller
         $question->save();
 
         return redirect()->back()->with('responseSuccess', 'Question updated successfully');
+    }
+
+    public function questionDetail($id){
+
+        $question = Question::find($id);
+
+        return view('pages.question-detail', compact('question'));
+    }
+
+    public function importPage(){
+
+        return view('pages.import-questions');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'add-file' => 'required|mimes:xlsx,csv,xls'
+        ]);
+
+        $questions = Question::orderBy('day', 'asc')->get();
+        $lastQuestion = $questions->last();
+
+        $startDay = 0;
+
+        if ($lastQuestion==null) {
+            $startDay = 1;
+        } else {
+            $startDay = $lastQuestion->day + 1;
+        }
+
+        Excel::import(new QuestionsImport($startDay), $request->file('add-file'));
+
+        return redirect()->back()->with('responseSuccess', 'Questions imported successfully.');
     }
 
     // public function checkDay($day)

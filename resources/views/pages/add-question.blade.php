@@ -92,14 +92,21 @@
                         <h2 class="font-49 crimson primary-color">
                             Add Question
                         </h2>
-                        <button class="d-flex align-items-center justify-content-center font-18 poppins primary-btn text-white font-weight-500 position-relative" style="gap:8px;cursor:pointer;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
-                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-                                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+                        <a href="{{ url('/importpage') }}"
+                            class="d-flex align-items-center justify-content-center font-18 poppins primary-btn text-white font-weight-500 position-relative"
+                            style="gap:8px;cursor:pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-upload" viewBox="0 0 16 16">
+                                <path
+                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                                <path
+                                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z" />
                             </svg>
                             Import
-                            <input type="file" class="add-file" id="add-file" name="" accept=".">
-                        </button>
+
+                            {{-- <input type="file" class="add-file" id="add-file" name="add-file"
+                                accept=".xlsx,.csv,.xls" onchange="previewFile(event)"> --}}
+                        </a>
                     </div>
                     <form class="mt-4" action="{{ route('addQuestion') }}" method="POST">
                         @csrf
@@ -107,7 +114,8 @@
                             <div class="col-1">
                                 <div class="form-group">
                                     <label for="day">Day</label>
-                                    <input type="text" id="day" name="day" class="form-control text-center" readonly value="{{ $lastday }}" required>
+                                    <input type="text" id="day" name="day" class="form-control text-center" readonly
+                                        value="{{ $lastday }}" required>
                                 </div>
                             </div>
                             <div class="col-11">
@@ -119,13 +127,18 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="quotation">Quotation</label>
-                                    <textarea id="quotation" cols="30" rows="5" name="quotation" class="form-control" required></textarea>
+                                    <textarea id="quotation" cols="30" rows="5" name="quotation" class="form-control"
+                                        required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="author">Author</label>
                                     <input type="text" id="author" name="author" class="form-control">
                                 </div>
                                 <div class="d-flex justify-content-end">
+                                    <a href="{{ url('/all-questions') }}"
+                                        class="d-flex align-items-center justify-content-center mt-4 font-18 poppins btn btn-danger text-white font-weight-500 position-relative"
+                                        style="gap:8px;cursor:pointer;right: 30px;width: 150px;border-radius: 10px;">Back
+                                    </a>
                                     <button type="submit" class="save-btn mt-4">Save Details</button>
                                 </div>
                             </div>
@@ -135,7 +148,7 @@
             </div>
         </div>
     </div>
-   
+
 </section>
 
 @endsection
@@ -150,6 +163,8 @@
         text: `{{ session('responseSuccess') }}`,
         icon: 'success',
         confirmButtonColor: "#6dabe4"
+    }).then(() => {
+        window.location.href = "{{ url('/all-questions') }}";
     })
 </script>
 @endif
@@ -163,5 +178,45 @@
     })
 </script>
 @endif
+
+{{-- <script>
+    function previewFile(event) {
+        var input = event.target;
+        console.log(input.files[0]);
+        
+        Swal.fire({
+            text: "Are you sure to Import Questions from this File ("+input.files[0].name+")?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: "#6dabe4",
+            cancelButtonColor: "#ce2c2c",
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No, Cancel it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log(input.files[0]);
+
+                var formData = new FormData();
+                // Append the file to the form data
+                formData.append('file', input.files[0]);
+                formData.append('_token', '{{ csrf_token() }}');
+
+                // Submit the form using Fetch API
+                fetch(`{{url('/import')}}`, {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                }).catch((error) => {
+                    console.error('Error:', error);
+                });
+            }
+            else{
+                console.log('Sorry!');
+            }
+        })
+    }
+</script> --}}
 
 @endsection

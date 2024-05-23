@@ -136,6 +136,10 @@
                                         class="form-control">
                                 </div>
                                 <div class="d-flex justify-content-end">
+                                    <a href="{{ url('/all-questions') }}"
+                                        class="d-flex align-items-center justify-content-center mt-4 font-18 poppins btn btn-danger text-white font-weight-500 position-relative"
+                                        style="gap:8px;cursor:pointer;right: 30px;width: 150px;border-radius: 10px;">Back
+                                    </a>
                                     <button type="submit" class="save-btn mt-4">Save Changes</button>
                                 </div>
                             </div>
@@ -175,7 +179,6 @@
 @endif
 
 {{-- <script>
-
     function changeDay() {
         let day = $('#day').val();
         let oldday = $('#dayold').val();

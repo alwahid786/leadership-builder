@@ -130,15 +130,24 @@
             </a>
         </div>
         <div class="row mt-1 question-cards">
-            @foreach ($questions as $question)
-                
+            @foreach ($questions as $index => $question)
+            @php
+            $colorClass = '';
+            if ($index % 9 < 3) {
+                $colorClass = 'red';
+            } elseif ($index % 9 < 6) {
+                $colorClass = 'green';
+            } else {
+                $colorClass = 'pink';
+            }
+            @endphp
             <div class="col-md-6 col-lg-4 mt-2">
                 {{-- <a href="{{url('/question-detail')}}"> --}}
                     <div class="all-question-card bg-white">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center" style="gap: 12px">
-                                <span class="red-dot"></span>
-                                <span class="red-question open">
+                                <span class="{{$colorClass}}-dot"></span>
+                                <span class="{{$colorClass}}-question open">
                                     Question {{$question->day}}
                                 </span>
                             </div>
@@ -152,7 +161,7 @@
                                 </button>
                                 <div class="dropdown-content">
                                     <!-- Add your dropdown content here -->
-                                    <a href="{{url('/question-detail')}}">View</a>
+                                    <a href="{{url('/question-detail/'.$question->id)}}">View</a>
                                     <a href="{{url('/edit-question-page/'.$question->id)}}">Edit</a>
                                     <!-- You can add more options as needed -->
                                 </div>
@@ -161,7 +170,7 @@
                         <h5 class="font-18 cairo font-weight-600 py-2 question">
                             {{$question->question}}
                         </h5>
-                        <div class="red-line my-3"></div>
+                        <div class="{{$colorClass}}-line my-3"></div>
                         <div class="d-flex align-items-center justify-content-between pt-3">
                             <div class="profile-images d-flex flex-row-reverse align-items-center">
                                 <img src="{{asset('assets/images/user-profile-image-1.png')}}" alt="profile image">
