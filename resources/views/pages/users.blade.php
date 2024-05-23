@@ -91,7 +91,11 @@
                     <h2 class="font-28 primary-color poppins font-weight-500">
                         All Users
                     </h2>
-                    <button class="primary-btn crimson font-20 text-white">Add New Users</button>
+                    <a href="{{ url('/adduserpage') }}"
+                            class="d-flex align-items-center justify-content-center font-18 poppins primary-btn text-white font-weight-500 position-relative"
+                            style="gap:8px;cursor:pointer;">
+                            Add New User
+                        </a>
                 </div>
             </div>
         </div>

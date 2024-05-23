@@ -84,7 +84,7 @@ Route::middleware('auth')->group(function () {
     // Route::post('/vision/submit', [ContentController::class, 'submitVision'])->name('submitVision');
     // Route::post('/inspiration/submit', [ContentController::class, 'submitInspiration'])->name('submitInspiration');
     // Route::post('/execution/submit', [ContentController::class, 'submitExecution'])->name('submitExecution');
-    // Route::get('/welcome/submit', [ContentController::class, 'submitWelcome'])->name('submitWelcome');
+    Route::get('/welcome/submit', [ContentController::class, 'submitWelcome'])->name('submitWelcome');
 
     Route::group(['middleware' => ['auth', 'roles:admin']], function () {
         Route::get('/dashboard', function () {
@@ -100,6 +100,9 @@ Route::middleware('auth')->group(function () {
         });
         Route::get('/user-detail/{id}', [AdminController::class, 'userDetail'])->name('userDetail');
         Route::get('/users', [AdminController::class, 'users'])->name('users');
+        Route::get('/adduserpage', function () {
+            return view('pages.add-user');
+        });
         
         Route::get('/all-questions', [AdminController::class, 'allQuestions'])->name('allQuestions');
 
