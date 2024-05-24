@@ -54,7 +54,10 @@
 @include('includes.navbar-dash')
 <section class="contentSection position-relative">
     <div class="container-fluid contentRow">
-        <form>
+        <a href="{{ url('/import-users-page') }}"
+                        class="save-btn position-relative mt-4 ml-auto d-flex align-items-center justify-content-center"
+                        style="color: white; text-decoration: none;">Import Users</a>
+        <form action="{{ route('addUser') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row py-5">
                 <div class="col-md-3">
@@ -62,9 +65,8 @@
                         PROFILE PICTURE
                     </h2>
                     <div class="mt-2">
-                        <img id="profile-img"
-                            src="{{asset('storage/images/profile.png')}}"
-                            alt="profile iamge" class="profile-img">
+                        <img id="profile-img" src="{{asset('storage/images/profile.png')}}" alt="profile iamge"
+                            class="profile-img">
                         {{-- Change button --}}
                         <div style="max-width: 255px">
                             <button class="change-img d-flex align-items-center justify-content-center"
@@ -76,9 +78,9 @@
                                         fill="white" />
                                 </svg>
 
-                                Change Image
-                                <input type="file" class="change-img-input" id="change-img-input" name="profile_img" accept=".jpg, .jpeg, .png"
-                                    onchange="previewImage(event)">
+                                Upload Image
+                                <input type="file" class="change-img-input" id="change-img-input" name="profile_img"
+                                    accept=".jpg, .jpeg, .png" onchange="previewImage(event)">
                             </button>
                         </div>
                     </div>
@@ -89,46 +91,46 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="firstName" class="text-left">First Name</label>
-                                    <input type="text" class="form-control validate mt-2" id="firstName"
-                                        value="" name="name">
+                                    <input type="text" class="form-control validate mt-2" id="firstName" value=""
+                                        name="name" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="lastName" class="text-left">Last Name</label>
-                                    <input type="text" class="form-control validate mt-2" id="lastName"
-                                        value="" name="last_name">
+                                    <input type="text" class="form-control validate mt-2" id="lastName" value=""
+                                        name="last_name" required>
                                 </div>
                             </div>
                             <div class="col-6 mt-3">
                                 <div class="form-group">
                                     <label for="email" class="text-left">Email</label>
-                                    <input type="email" class="form-control validate mt-2" id="email"
-                                        value="" name="email">
+                                    <input type="email" class="form-control validate mt-2" id="email" value=""
+                                        name="email" required>
                                 </div>
                             </div>
                             <div class="col-6 mt-3">
                                 <div class="form-group">
                                     <label for="tel" class="text-left">Phone Number</label>
-                                    <input type="tel" class="form-control validate mt-2" id="tel"
-                                        value="" name="phone">
+                                    <input type="tel" class="form-control validate mt-2" id="tel" value="" name="phone" required>
                                 </div>
                             </div>
                             <div class="col-6 mt-3">
                                 <div class="form-group">
                                     <label for="password" class="text-left">Password</label>
-                                    <input type="password" class="form-control validate mt-2" id="password">
+                                    <input type="password" class="form-control validate mt-2" id="password" name="password" required>
                                 </div>
                             </div>
                             <div class="col-6 mt-3">
                                 <div class="form-group">
                                     <label for="password" class="text-left">Confirm Password</label>
-                                    <input type="password" class="form-control validate mt-2" id="passwordConfirmation">
+                                    <input type="password" class="form-control validate mt-2" id="passwordConfirmation" name="password_confirmation" required>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button id="adduser" class="save-btn position-relative mt-4 ml-auto d-flex align-items-center justify-content-center">Save</button>
+                    <button id="adduser"
+                        class="save-btn position-relative mt-4 ml-auto d-flex align-items-center justify-content-center">Save</button>
                 </div>
             </div>
         </form>
@@ -185,80 +187,5 @@
             reader.readAsDataURL(file);
         }
     }
-
-    $(document).ready(function() {
-        // Click Signup Button
-        let errors = 0;
-        $("#adduser").click(function() {
-            $(".validate").each(function() {
-                if ($(this).val() == '') {
-                    errors++;
-                    $(this).css('border', '1px solid red');
-                } else {
-                    errors--;
-                    $(this).css('border', '1px solid var(--blue)');
-                }
-            })
-            if (errors > 0) {
-                Swal.fire({
-                    title: 'Empty Fields',
-                    text: 'All fields are required',
-                    icon: 'error',
-                    confirmButtonColor: "#6dabe4"
-                })
-                return;
-            }
-            var data = {
-                name: $('#firstName').val(),
-                last_name: $('#lastName').val(),
-                email: $('#email').val(),
-                phone: $('#tel').val(),
-                password: $('#password').val(),
-                password_confirmation: $('#passwordConfirmation').val()
-            }
-
-            // Ajax REQUEST START
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: `{{url('/register')}}`,
-                type: "POST",
-                data: data,
-                cache: false,
-                success: function(dataResult) {
-                    if (dataResult.success == false) {
-                        Swal.fire({
-                            title: 'Error',
-                            text: dataResult.message,
-                            icon: 'error',
-                            confirmButtonColor: "#6dabe4"
-                        })
-                        return;
-                    } else {
-                        Swal.fire({
-                            title: 'SUCCESS',
-                            text: dataResult.message,
-                            icon: 'success',
-                            confirmButtonColor: "#6dabe4"
-                        })
-                        // .then((result) => {
-                        //     window.location.href = `{{url('/login')}}`;
-                        // });
-                    }
-                },
-                error: function(jqXHR, exception) {
-                    Swal.fire({
-                        title: 'Validation Error',
-                        text: jqXHR.responseJSON.message,
-                        icon: 'error',
-                        confirmButtonColor: "#6dabe4"
-                    })
-                }
-            });
-            // Ajax REQUEST END
-        });
-    });
 </script>
 @endsection

@@ -103,6 +103,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/adduserpage', function () {
             return view('pages.add-user');
         });
+        Route::post('/add-user', [AdminController::class, 'addUser'])->name('addUser');
+        Route::get('/import-users-page', function () {
+            return view('pages.import-users');
+        });
+        Route::post('/import-users', [AdminController::class, 'importUsers'])->name('import-users');
         
         Route::get('/all-questions', [AdminController::class, 'allQuestions'])->name('allQuestions');
 
@@ -115,6 +120,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit-question-page/{id}', [AdminController::class, 'editQuestionPage'])->name('editQuestionPage');
         Route::post('/edit-question', [AdminController::class, 'editQuestion'])->name('editQuestion');
         // Route::get('/daycheck/{day}', [AdminController::class, 'checkDay'])->name('checkDay');
+        Route::get('/remove-user/{id}', [AdminController::class, 'removeUser'])->name('removeUser');
 
         Route::get('/plans-and-pricing', function () {
             return view('pages.plans-and-pricing');

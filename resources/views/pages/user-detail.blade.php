@@ -91,9 +91,11 @@
                     <h2 class="font-28 primary-color font-weight-500 poppins">
                         User Details
                     </h2>
-                    <button class="remove-user crimson text-white font-weight-600 font-18">
-                        Remove user
-                    </button>
+                    <a href="{{ url('/remove-user/'.$user->id) }}">
+                        <button class="remove-user crimson text-white font-weight-600 font-18">
+                            Remove user
+                        </button>
+                    </a>
                 </div>
             </div>
             <div class="col-lg-3">
