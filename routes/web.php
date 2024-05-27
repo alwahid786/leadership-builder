@@ -87,17 +87,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/welcome/submit', [ContentController::class, 'submitWelcome'])->name('submitWelcome');
 
     Route::group(['middleware' => ['auth', 'roles:admin']], function () {
-        Route::get('/dashboard', function () {
-            return view('pages.dashboard');
-        })->name('adminDashboard');
-
+        
+        Route::get('/dashboard', [AdminController::class, 'adminDashboard'])->name('adminDashboard');
         Route::get('/invoices', function () {
             return view('pages.invoices');
         });
         
-        Route::get('/edit-plans', function () {
-            return view('pages.edit-plans');
-        });
         Route::get('/user-detail/{id}', [AdminController::class, 'userDetail'])->name('userDetail');
         Route::get('/users', [AdminController::class, 'users'])->name('users');
         Route::get('/adduserpage', function () {
@@ -122,9 +117,11 @@ Route::middleware('auth')->group(function () {
         // Route::get('/daycheck/{day}', [AdminController::class, 'checkDay'])->name('checkDay');
         Route::get('/remove-user/{id}', [AdminController::class, 'removeUser'])->name('removeUser');
 
-        Route::get('/plans-and-pricing', function () {
-            return view('pages.plans-and-pricing');
-        });
+        Route::get('/plans-and-pricing', [AdminController::class, 'plansAndPricing'])->name('plansAndPricing');
+        Route::get('/add-plan-page', function () {  return view('pages.add-plan');  });
+        Route::post('/add-plan', [AdminController::class, 'addPlan'])->name('addPlan');
+        Route::get('/edit-plan-page/{id}', [AdminController::class, 'editPlanPage'])->name('editPlanPage');
+        Route::post('/edit-plan', [AdminController::class, 'editPlan'])->name('editPlan');
 
     });
 
@@ -136,7 +133,7 @@ Route::middleware('auth')->group(function () {
         // Past Days
         Route::get('/pastday/{day}', [ContentController::class, 'pastday'])->name('pastday');
         Route::get('/plans', [ProfileController::class, 'plans'])->name('plans');
-        Route::get('/invoice', [ProfileController::class, 'invoice'])->name('invoice');
+        Route::get('/invoice-user', [ProfileController::class, 'userInvoice'])->name('invoice-user');
     });
 
     Route::get('/welcome', function () {

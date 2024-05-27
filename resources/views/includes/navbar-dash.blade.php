@@ -541,7 +541,7 @@ $page = auth()->user()->page_number;
                         <span class="">Questions</span>
                     </a>
                 </li>
-                <li class="nav-item settings my-1 {{ request()->is('plans-and-pricing') ? 'active' : '' }}">
+                <li class="nav-item settings my-1 {{ request()->is('plans-and-pricing')||request()->is('add-plan-page')||request()->is('edit-plan-page/*') ? 'active' : '' }}">
                     <a class="nav-link d-flex align-items-center" style="gap:19px" href="{{url('/plans-and-pricing')}}">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_44_2572)">

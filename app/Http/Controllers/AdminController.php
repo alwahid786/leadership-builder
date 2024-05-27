@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Book;
+use App\Models\PlansPricing;
 use App\Models\Question;
 use App\Imports\QuestionsImport;
 use App\Imports\UsersImport;
@@ -21,14 +22,20 @@ class AdminController extends Controller
 {
     use ResponseTrait;
 
+    public function adminDashboard(){
+
+        $users = User::where('type', 'user')->count();
+        $questions = Question::count();
+        $plans = PlansPricing::count();
+
+        return view('pages.dashboard', compact('users', 'questions', 'plans'));
+    }
+
     public function users(Request $request)
     {
         $users = User::where('type', 'user')->get();
 
-        // dd($users);
-        
         return view('pages.users', compact('users'));
-
     }
 
     public function userDetail($id)
@@ -41,8 +48,6 @@ class AdminController extends Controller
     public function allQuestions()
     {
         $questions = Question::orderBy('day', 'asc')->get();
-
-        // dd($questions);
 
         return view('pages.all-questions', compact('questions'));
     }
@@ -205,6 +210,54 @@ class AdminController extends Controller
             $book->delete();
         }
         return redirect()->route('users')->with('responseSuccess', 'User deleted successfully');
+    }
+
+    public function addPlan(Request $request){
+
+        $request->validate([
+            'name' => 'required',
+            'details' => 'required',
+            'price' => 'required',
+        ]);
+
+        $plan = new PlansPricing();
+        $plan->name = $request->name;
+        $plan->price = $request->price;
+        $plan->details = $request->details;
+        $plan->save();
+
+        return redirect(url('/plans-and-pricing'))->with('responseSuccess', 'Plan added successfully');
+    }
+
+    public function plansAndPricing(){
+
+        $plans = PlansPricing::all();
+
+        return view('pages.plans-and-pricing', compact('plans'));
+    }
+
+    public function editPlanPage($id){
+
+        $plan = PlansPricing::find($id);
+
+        return view('pages.edit-plans', compact('plan'));
+    }
+
+    public function editPlan(Request $request){
+        // dd($request->all());
+        $request->validate([
+            'name' => 'required',
+            'details' => 'required',
+            'price' => 'required',
+        ]);
+
+        $plan = PlansPricing::find($request->id);
+        $plan->name = $request->name;
+        $plan->price = $request->price;
+        $plan->details = $request->details;
+        $plan->save();
+
+        return redirect(url('/plans-and-pricing'))->with('responseSuccess', 'Plan updated successfully');
     }
     // public function checkDay($day)
     // {

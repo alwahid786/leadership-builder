@@ -120,6 +120,7 @@
                             window.location.href = `{{route('coverPage')}}`;
                         }
                         else if (dataResult.data.type == 'admin') {
+                            console.log('admin');
                             window.location.href = `{{route('adminDashboard')}}`;
                         }
                         else{

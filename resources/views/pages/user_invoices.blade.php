@@ -50,99 +50,44 @@
         background-color: #6dabe4;
         color: white;
     }
+
+    .startBtn {
+        background-color: #6dabe4;
+        border-radius: 5px;
+        padding: 5px 15px;
+        border: none;
+        color: white;
+    }
+
+    .stopBtn {
+        background-color: #ce2c2c;
+        border-radius: 5px;
+        padding: 5px 15px;
+        border: none;
+        color: white;
+    }
+
+    .resetBtn {
+        background-color: #2cb0ce;
+        border-radius: 5px;
+        padding: 5px 15px;
+        border: none;
+        color: white;
+    }
+
+    #pageCode::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: gray !important;
+        opacity: 1 !important;
+        /* Firefox */
+    }
 </style>
 @include('includes.navbar')
 <section class="contentSection position-relative">
-    <div class="container-fluid contentRow">
-        <div class="row"> 
-            @foreach ($plans as $index => $plan)
-                @php
-                $colorClass = '';
-                if ($index % 3 == 0) {
-                    $colorClass = 'basic-plan';
-                } elseif ($index+1 % 3 == 2) {
-                    $colorClass = 'pro-plan';
-                } else {
-                    $colorClass = 'enterprise-plan';
-                }
-                @endphp
-            <div class="col-md-4">
-                <div class="plans {{ $colorClass }} h-100">
-                    <div class="d-flex justify-content-between checkbox">
-                        <h6 class="m-0">Plan Pricing</h6>
-                        <input type="radio" id="basic" name="plan">
-                    </div>
-                    <h1>{{ $plan->name }}</h1>
-                    <ul class="ml-4">
-                        <p>{{ $plan->details }}</p>
-                    </ul>
-                    <h1 class="align-self-end">${{ $plan->price }} <small>/month</small></h1>
-                </div>
-            </div>
-            @endforeach
-            {{-- <div class="col-md-4">
-                <div class="plans pro-plan">
-                    <div class="d-flex justify-content-between checkbox">
-                        <h6 class="m-0">Plan Pricing</h6>
-                        <input type="checkbox" id="basic">
-                    </div>
-                    <h1>Professional</h1>
-                    <ul class="ml-4">
-                        <li>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </li>
-                        <li>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </li>
-                        <li>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </li>
-                        <li>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </li>
-                        <li>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </li>
-                    </ul>
-                    <h1>$700 <small>/month</small></h1>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="plans enterprise-plan">
-                    <div class="d-flex justify-content-between checkbox">
-                        <h6 class="m-0">Plan Pricing</h6>
-                        <input type="checkbox" id="basic">
-                    </div>
-                    <h1>Enterprise</h1>
-                    <ul class="ml-4">
-                        <li>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </li>
-                        <li>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </li>
-                        <li>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </li>
-                        <li>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </li>
-                        <li>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </li>
-                    </ul>
-                    <h1>$900 <small>/month</small></h1>
-                </div>
-            </div> --}}
-        </div>
-        <div class="row">
-            <div class="col-md-6 offset-md-6 d-flex justify-content-end my-3">
-                <button class="themePrimaryBtn2 form-control btn btn-primary rounded submit px-3">Purchase</button>
-            </div>
-        </div>
+    <div class="container-fluid contentRow position-relative">
         <div class="row">
             <div class="col-12">
-                <h1 class="blue">Purchase History</h1>
+                <h1 class="blue">All Invoices</h1>
                 <div class="mt-3 tableDiv">
                     <table class="table">
                         <thead>
@@ -152,6 +97,7 @@
                                 <th scope="col">Contact</th>
                                 <th scope="col">Amount</th>
                                 <th scope="col">Plan</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -168,6 +114,14 @@
                                 </td>
                                 <td style="color: #FAB117;"><strong>$512</strong></td>
                                 <td class="basicPlan">Basic</td>
+                                <td>
+                                    <a href="{{url('/invoice')}}">
+                                        <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                        </svg>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding-left:40px">#12341</td>
@@ -182,6 +136,14 @@
                                 </td>
                                 <td style="color: #FAB117;"><strong>$212</strong></td>
                                 <td class="proPlan">Professional</td>
+                                <td>
+                                    <a href="{{url('/invoice')}}">
+                                        <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                        </svg>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding-left:40px">#12341</td>
@@ -196,6 +158,14 @@
                                 </td>
                                 <td style="color: #FAB117;"><strong>$234</strong></td>
                                 <td class="basicPlan">Basic</td>
+                                <td>
+                                    <a href="{{url('/invoice')}}">
+                                        <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                        </svg>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding-left:40px">#12341</td>
@@ -210,6 +180,14 @@
                                 </td>
                                 <td style="color: #FAB117;"><strong>$56</strong></td>
                                 <td class="enterprisePlan">Enterprise</td>
+                                <td>
+                                    <a href="{{url('/invoice')}}">
+                                        <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                        </svg>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding-left:40px">#12341</td>
@@ -224,6 +202,14 @@
                                 </td>
                                 <td style="color: #FAB117;"><strong>$512</strong></td>
                                 <td class="basicPlan">Basic</td>
+                                <td>
+                                    <a href="{{url('/invoice')}}">
+                                        <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                        </svg>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding-left:40px">#12341</td>
@@ -238,6 +224,14 @@
                                 </td>
                                 <td style="color: #FAB117;"><strong>$512</strong></td>
                                 <td class="proPlan">Professional</td>
+                                <td>
+                                    <a href="{{url('/invoice')}}">
+                                        <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                        </svg>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding-left:40px">#12341</td>
@@ -252,6 +246,14 @@
                                 </td>
                                 <td style="color: #FAB117;"><strong>$512</strong></td>
                                 <td class="basicPlan">Basic</td>
+                                <td>
+                                    <a href="{{url('/invoice')}}">
+                                        <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                        </svg>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding-left:40px">#12341</td>
@@ -266,6 +268,14 @@
                                 </td>
                                 <td style="color: #FAB117;"><strong>$512</strong></td>
                                 <td class="basicPlan">Basic</td>
+                                <td>
+                                    <a href="{{url('/invoice')}}">
+                                        <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                        </svg>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding-left:40px">#12341</td>
@@ -280,6 +290,14 @@
                                 </td>
                                 <td style="color: #FAB117;"><strong>$512</strong></td>
                                 <td class="enterprisePlan">Enterprise</td>
+                                <td>
+                                    <a href="{{url('/invoice')}}">
+                                        <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                        </svg>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding-left:40px">#12341</td>
@@ -294,6 +312,14 @@
                                 </td>
                                 <td style="color: #FAB117;"><strong>$512</strong></td>
                                 <td class="basicPlan">Basic</td>
+                                <td>
+                                    <a href="{{url('/invoice')}}">
+                                        <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                        </svg>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -301,6 +327,7 @@
             </div>
         </div>
     </div>
+   
 </section>
 
 @endsection
@@ -327,11 +354,6 @@
     })
 </script>
 @endif
-<script>
-    $(".plans").click(function() {
-        var checkbox = $(this).find('input[type="radio"]');
-        checkbox.prop("selected", !checkbox.prop("checked"));
-    });
-</script>
+
 
 @endsection

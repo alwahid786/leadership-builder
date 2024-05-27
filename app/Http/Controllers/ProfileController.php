@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Book;
+use App\Models\PlansPricing;
 use Carbon\Carbon;
 use App\Http\Traits\ResponseTrait;
 use Illuminate\Support\Facades\Session;
@@ -66,15 +67,17 @@ class ProfileController extends Controller
         $userid = Auth::user()->id;
         $response_exists = $this->navbardynamic($userid);
 
-        return view('pages.plans', compact('response_exists'));
+        $plans = PlansPricing::all();
+
+        return view('pages.plans', compact('response_exists', 'plans'));
     }
 
-    public function invoice(Request $request)
+    public function userInvoice(Request $request)
     {
         $userid = Auth::user()->id;
         $response_exists = $this->navbardynamic($userid);
 
-        return view('pages.invoice', compact('response_exists'));
+        return view('pages.user_invoices', compact('response_exists'));
     }
 
     public function navbardynamic($loginUserId){
