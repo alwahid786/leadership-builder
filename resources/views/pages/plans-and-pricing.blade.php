@@ -87,7 +87,7 @@
     <div class="container-fluid contentRow position-relative">
         <div class="d-flex align-items-center justify-content-between mt-2 mb-5">
             <h2 class="font-49 primary-color crimson mb-3">
-                All Questions
+                Plans & Pricing
             </h2>
             <a href="{{ url('/add-plan-page') }}"
                 class="d-flex align-items-center justify-content-center font-18 poppins primary-btn text-white font-weight-500 position-relative"
