@@ -69,7 +69,9 @@ class ProfileController extends Controller
 
         $plans = PlansPricing::all();
 
-        return view('pages.plans', compact('response_exists', 'plans'));
+        $intent = auth()->user()->createSetupIntent();
+
+        return view('pages.plans', compact('response_exists', 'plans', 'intent'));
     }
 
     public function userInvoice(Request $request)

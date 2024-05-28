@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnInPlansPricing extends Migration
+class AddStripePriceColumnInPlansPricing extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddColumnInPlansPricing extends Migration
     public function up()
     {
         Schema::table('plans_pricings', function (Blueprint $table) {
-            $table->string('slug');
-            $table->string('stripe_plan')->nullable();
+            $table->string('stripe_price_id')->nullable();
         });
     }
 

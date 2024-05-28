@@ -212,8 +212,8 @@ class AdminController extends Controller
         return redirect()->route('users')->with('responseSuccess', 'User deleted successfully');
     }
 
-    public function addPlan(Request $request){
-
+    public function addPlan(Request $request)
+    {
         $request->validate([
             'name' => 'required',
             'details' => 'required',
@@ -224,27 +224,14 @@ class AdminController extends Controller
         $plan->name = $request->name;
         $plan->price = $request->price;
         $plan->details = $request->details;
+        $plan->slug = \Str::slug($request->name);
         $plan->save();
 
         return redirect(url('/plans-and-pricing'))->with('responseSuccess', 'Plan added successfully');
     }
 
-    public function plansAndPricing(){
-
-        $plans = PlansPricing::all();
-
-        return view('pages.plans-and-pricing', compact('plans'));
-    }
-
-    public function editPlanPage($id){
-
-        $plan = PlansPricing::find($id);
-
-        return view('pages.edit-plans', compact('plan'));
-    }
-
-    public function editPlan(Request $request){
-        // dd($request->all());
+    public function editPlan(Request $request)
+    {
         $request->validate([
             'name' => 'required',
             'details' => 'required',
@@ -255,9 +242,31 @@ class AdminController extends Controller
         $plan->name = $request->name;
         $plan->price = $request->price;
         $plan->details = $request->details;
+        $plan->slug = \Str::slug($request->name);
         $plan->save();
 
         return redirect(url('/plans-and-pricing'))->with('responseSuccess', 'Plan updated successfully');
+    }
+
+
+    public function editPlanPage($id)
+    {
+        $plan = PlansPricing::find($id);
+        return view('pages.edit-plans', compact('plan'));
+    }
+
+    public function removePlan($id)
+    {
+        $plan = PlansPricing::find($id);
+        $plan->delete();
+
+        return redirect(url('/plans-and-pricing'))->with('responseSuccess', 'Plan deleted successfully');
+    }
+
+    public function plansAndPricing()
+    {
+        $plans = PlansPricing::all();
+        return view('pages.plans-and-pricing', compact('plans'));
     }
     // public function checkDay($day)
     // {
