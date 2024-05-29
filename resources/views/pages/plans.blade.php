@@ -82,40 +82,39 @@
 @include('includes.navbar')
 <section class="contentSection position-relative">
     <div class="container-fluid contentRow">
-        <div class="row">
-            <form action="/seller/subscribe" method="POST" id="subscribe-form">
-                <div class="form-group">
-                    <div class="row">
-                        @foreach ($plans as $index => $plan)
-                        @php
-                        $colorClass = '';
-                        if ($index % 3 == 0) {
-                        $colorClass = 'basic-plan';
-                        } elseif ($index+1 % 3 == 2) {
-                        $colorClass = 'pro-plan';
-                        } else {
-                        $colorClass = 'enterprise-plan';
-                        }
-                        @endphp
-                        <div class="col-md-4 modal-open" data-toggle="modal" data-target="#exampleModal">
-                            <div class="plans {{ $colorClass }} h-100">
-                                <div class="d-flex justify-content-between checkbox">
-                                    <h6 class="m-0">Plan Pricing</h6>
-                                    <input class="form-radio-input" type="radio" id="plan-{{ $plan->id }}" name="plan">
-                                </div>
-                                <h1>{{ $plan->name }}</h1>
-                                <ul class="ml-4">
-                                    <p>{{ $plan->details }}</p>
-                                </ul>
-                                <h1 class="align-self-end">${{ $plan->price }} <small>/month</small></h1>
+        <div class="row mb-5">
+            <div class="form-group">
+                <div class="row">
+                    @foreach ($plans as $index => $plan)
+                    @php
+                    $colorClass = '';
+                    if ($index % 3 == 0) {
+                    $colorClass = 'basic-plan';
+                    } elseif ($index+1 % 3 == 2) {
+                    $colorClass = 'pro-plan';
+                    } else {
+                    $colorClass = 'enterprise-plan';
+                    }
+                    @endphp
+                    <div class="col-md-4 modal-open" onclick="openPaymentModal({{ $plan->id }})">
+                        <div class="plans {{ $colorClass }} h-100">
+                            <div class="d-flex justify-content-between checkbox">
+                                <h6 class="m-0">Plan Pricing</h6>
                             </div>
+                            <h1>{{ $plan->name }}</h1>
+                            <ul class="ml-4">
+                                <p>{{ $plan->details }}</p>
+                            </ul>
+                            <h1 class="align-self-end">${{ $plan->price }} <small>/month</small></h1>
                         </div>
-                        @endforeach
                     </div>
+                    @endforeach
                 </div>
+            </div>
+            <form action="{{ route('singleCharge') }}" method="POST" id="subscribe-form">
                 @csrf
 
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                <div class="modal fade" id="paymentmodal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -129,6 +128,7 @@
                                 <div class="form-row">
                                     <label for="card-holder-name">Card Holder Name</label>
                                     <input class="form-control" id="card-holder-name" type="text">
+                                    <input type="hidden" name="plan_id" id="plan_id_for_payment">
 
                                     <label for="card-element">Credit or debit card</label>
                                     <div id="card-element" class="form-control">
@@ -159,11 +159,11 @@
                 </div>
             </form>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-6 offset-md-6 d-flex justify-content-end my-3">
                 <button class="themePrimaryBtn2 form-control btn btn-primary rounded submit px-3">Purchase</button>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-12">
                 <h1 class="blue">Purchase History</h1>
@@ -416,6 +416,15 @@
         var checkbox = $(this).find('input[type="radio"]');
         checkbox.prop("checked", !checkbox.prop("checked"));
     });
+
+    function openPaymentModal(plan) {
+        console.log(plan);
+        console.log(plan);
+        console.log(plan);
+
+        $('#plan_id_for_payment').val(plan);
+        $('#paymentmodal').modal('show');
+    }
 </script>
 
 <script src="https://js.stripe.com/v3/"></script>
@@ -452,6 +461,7 @@
     const cardButton = document.getElementById('card-button');
     const clientSecret = cardButton.dataset.secret;
     cardButton.addEventListener('click', async (e) => {
+        e.preventDefault();
         console.log("attempting");
         const { setupIntent, error } = await stripe.confirmCardSetup(
             clientSecret, {

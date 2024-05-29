@@ -134,6 +134,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/pastday/{day}', [ContentController::class, 'pastday'])->name('pastday');
         Route::get('/plans', [ProfileController::class, 'plans'])->name('plans');
         Route::get('/invoice-user', [ProfileController::class, 'userInvoice'])->name('invoice-user');
+
+        Route::post('/single-charge', [ProfileController::class, 'singleCharge'])->name('singleCharge');
     });
 
     Route::get('/welcome', function () {

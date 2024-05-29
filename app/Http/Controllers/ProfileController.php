@@ -82,6 +82,35 @@ class ProfileController extends Controller
         return view('pages.user_invoices', compact('response_exists'));
     }
 
+    public function singleCharge(Request $request)
+    {
+        $getplan = PlansPricing::where('id', $request->plan_id)->first();
+
+        $amount = $getplan->price*100;
+        $paymentMethod = $request->payment_method;
+
+        $user = auth()->user();
+        $user->createOrGetStripeCustomer();
+
+        if ($paymentMethod != null) {
+            // $user->addPaymentMethod($paymentMethod);
+            $paymentMethod = $user->addPaymentMethod($paymentMethod);
+        }
+        $user->charge($amount, $paymentMethod->id);
+
+        try {
+            $user->newSubscription(
+                'default', $getplan->stripe_price_id
+                )->create($paymentMethod->id);
+        } catch (Exception $th) {
+            return back()->with([
+                'nextError' => 'Something went wrong!', $th->getMessage()
+            ]);
+        }
+
+        return redirect()->route('plans')->with('responseSuccess', 'Payment successful!');
+    }
+
     public function navbardynamic($loginUserId){
         
         $current_date = Carbon::now()->toDateString();
