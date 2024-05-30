@@ -72,7 +72,9 @@ class ProfileController extends Controller
 
         $intent = auth()->user()->createSetupIntent();
 
-        return view('pages.plans', compact('response_exists', 'plans', 'intent'));
+        $invoices = Invoices::with(['plan', 'user'])->where('user_id', $userid)->get();
+
+        return view('pages.plans', compact('response_exists', 'plans', 'intent', 'invoices'));
     }
 
     public function userInvoice(Request $request)
