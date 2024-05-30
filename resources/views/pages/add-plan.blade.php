@@ -109,10 +109,18 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="planDetails">Plan Details</label>
-                                    <textarea id="planDetails" cols="30" rows="10" name="details" class="form-control" required></textarea>
+                                    {{-- <textarea id="planDetails" cols="30" rows="10" name="details"
+                                        class="form-control" required></textarea> --}}
+                                    <div class="mt-3">
+                                        <div id="preview"></div>
+                                        <div id="editor">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="details" name="details">
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <button type="submit" class="save-btn mt-4">Save Details</button>
+                                    <button type="submit" class="save-btn mt-4" onclick="saveDetails()">Save
+                                        Details</button>
                                 </div>
                             </div>
                         </div>
@@ -121,12 +129,13 @@
             </div>
         </div>
     </div>
-   
+
 </section>
 
 @endsection
 @section('insertjavascript')
 
+<script src="{{asset('assets/js/voice-recognition.js')}}"></script>
 
 @if(session()->has('responseSuccess'))
 <script>
@@ -148,3 +157,30 @@
     })
 </script>
 @endif
+
+<script>
+    function saveDetails() {
+        var content = CKEDITOR.instances['editor'].getData();
+        if (content == "") {
+            Swal.fire({
+                title: 'Error',
+                text: `Please enter details`,
+                icon: 'error',
+                confirmButtonColor: "#6dabe4"
+            })
+        }
+        else {
+            
+            const textarea = document.createElement('textarea');
+            
+            textarea.innerHTML = content;
+            let decodedString = textarea.value;
+        
+            decodedString = decodedString.replace(/<\/?[^>]+(>|$)/g, '');
+        
+            document.getElementById('details').value = decodedString;
+        }
+    }
+</script>
+
+@endsection

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Book;
+use App\Models\Invoices;
 use App\Models\PlansPricing;
 use Carbon\Carbon;
 use App\Http\Traits\ResponseTrait;
@@ -79,7 +80,10 @@ class ProfileController extends Controller
         $userid = Auth::user()->id;
         $response_exists = $this->navbardynamic($userid);
 
-        return view('pages.user_invoices', compact('response_exists'));
+        $invoices = Invoices::with(['plan', 'user'])->where('user_id', $userid)->get();
+        // dd($invoices);
+
+        return view('pages.user_invoices', compact('response_exists', 'invoices'));
     }
 
     public function singleCharge(Request $request)
@@ -108,7 +112,24 @@ class ProfileController extends Controller
             ]);
         }
 
-        return redirect()->route('plans')->with('responseSuccess', 'Payment successful!');
+        $invoice = new Invoices();
+        $invoice->user_id = Auth::user()->id;
+        $invoice->plan_id = $request->plan_id;
+        $invoice->save();
+
+        $lastInsertedId = $invoice->id;
+
+        // return redirect()->route('plans')->with('responseSuccess', 'Payment successful!');
+        return redirect()->route('invoice', ['id' => $lastInsertedId])->with('responseSuccess', 'Payment successful!');
+    }
+
+    public function invoice(Request $request)
+    {
+        $userid = Auth::user()->id;
+        $response_exists = $this->navbardynamic($userid);
+
+        $invoice = Invoices::with(['plan', 'user'])->where('id', $request->id)->first();
+        return view('pages.invoice', compact('response_exists', 'invoice'));
     }
 
     public function navbardynamic($loginUserId){

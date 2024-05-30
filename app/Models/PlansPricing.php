@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Stripe\Stripe;
 use Stripe\Product;
 use Stripe\Price;
+use App\Models\Invoices;
 
 class PlansPricing extends Model
 {
@@ -110,5 +111,10 @@ class PlansPricing extends Model
         // Delete the product in Stripe
         $product = Product::retrieve($this->stripe_product_id);
         $product->delete();
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoices::class);
     }
 }

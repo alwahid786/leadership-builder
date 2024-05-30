@@ -136,6 +136,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/invoice-user', [ProfileController::class, 'userInvoice'])->name('invoice-user');
 
         Route::post('/single-charge', [ProfileController::class, 'singleCharge'])->name('singleCharge');
+        Route::get('/invoice/{id}', [ProfileController::class, 'invoice'])->name('invoice');
     });
 
     Route::get('/welcome', function () {
