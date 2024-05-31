@@ -28,8 +28,11 @@ class AdminController extends Controller
         $users = User::where('type', 'user')->count();
         $questions = Question::count();
         $plans = PlansPricing::count();
+        $invoices = Invoices::with(['plan', 'user'])->get();
 
-        return view('pages.dashboard', compact('users', 'questions', 'plans'));
+        $totalinvoices = count($invoices);
+
+        return view('pages.dashboard', compact('users', 'questions', 'plans', 'invoices', 'totalinvoices'));
     }
 
     public function users(Request $request)

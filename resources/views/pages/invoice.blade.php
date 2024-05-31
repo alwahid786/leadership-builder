@@ -51,7 +51,7 @@
         color: white;
     }
 </style>
-@if (Auth::user()->role == 'admin')
+@if (Auth::user()->type == 'admin')
 @include('includes.navbar-dash')
 @else
 @include('includes.navbar')

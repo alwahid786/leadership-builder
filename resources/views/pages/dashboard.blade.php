@@ -143,8 +143,8 @@
                             <path d="M49.3018 19.6261C49.1438 19.4677 48.9434 19.3582 48.7248 19.3107C48.5061 19.2632 48.2784 19.2797 48.0688 19.3583L21.1103 29.4681C20.6202 29.65 20.1941 29.9714 19.8845 30.3926C19.5748 30.8138 19.3953 31.3164 19.3679 31.8385C19.3406 32.3605 19.4666 32.8791 19.7305 33.3304C19.9944 33.7817 20.3846 34.1458 20.853 34.378L29.9835 38.9433L34.5488 48.0738C34.7674 48.5211 35.1077 48.8977 35.5308 49.1601C35.9539 49.4225 36.4425 49.5601 36.9403 49.5572H37.0882C37.6107 49.5341 38.1147 49.357 38.5368 49.0481C38.9588 48.7392 39.28 48.3123 39.4599 47.8212L49.5696 20.8579C49.648 20.6486 49.6644 20.4211 49.6169 20.2026C49.5694 19.9842 49.46 19.7841 49.3018 19.6261ZM37.2791 46.9957C37.2577 47.0623 37.2161 47.1206 37.1599 47.1624C37.1037 47.2041 37.0359 47.2273 36.9659 47.2285C36.8971 47.2325 36.8287 47.2161 36.7693 47.1813C36.7098 47.1465 36.662 47.0948 36.6318 47.0329L32.2679 38.3006L37.6587 32.9098C37.8708 32.6902 37.9881 32.3961 37.9855 32.0908C37.9828 31.7855 37.8604 31.4935 37.6445 31.2776C37.4286 31.0617 37.1366 30.9393 36.8313 30.9366C36.526 30.934 36.2319 31.0513 36.0123 31.2634L30.6216 36.6542L21.895 32.2962C21.8318 32.2669 21.7787 32.2193 21.7427 32.1596C21.7068 32.0998 21.6895 32.0307 21.6931 31.9611C21.6967 31.8915 21.7211 31.8245 21.7631 31.7689C21.8051 31.7132 21.8628 31.6714 21.9288 31.6488L46.4889 22.4391L37.2791 46.9957Z" fill="white" />
                         </svg>
                         <div>
-                            <p class="font-16 text-white poppins">Total Invoices</p>
-                            <h3 class="font-49 font-weight-600 text-white text-right poppins mt-2">576</h3>
+                            <p class="font-16 text-white poppins">Total Receipts</p>
+                            <h3 class="font-49 font-weight-600 text-white text-right poppins mt-2">{{ $totalinvoices }}</h3>
                         </div>
                     </a>
                     <a href="{{ route('plansAndPricing') }}" class="right-side-card card-pink d-flex align-items-center justify-content-between" style="gap:1rem;">
@@ -174,12 +174,12 @@
         {{-- Invoices row --}}
         <div class="row mt-4 pt-md-1">
             <div class="col-12">
-                <h1 class="blue crimson">All Invoices</h1>
+                <h1 class="blue crimson">All Receipts</h1>
                 <div class="mt-3 tableDiv">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col" style="padding-left:40px">Invoice ID</th>
+                                <th scope="col" style="padding-left:40px">Receipt ID</th>
                                 <th scope="col">Purchase Date</th>
                                 <th scope="col">Contact</th>
                                 <th scope="col">Amount</th>
@@ -188,29 +188,31 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($invoices as $invoice)     
                             <tr>
-                                <td style="padding-left:40px">#12341</td>
-                                <td>04/26/2020, 12:42 PM</td>
+                                <td style="padding-left:40px">#{{ $invoice->invoice_id }}</td>
+                                <td>{{ date('M d, Y H:i A', strtotime($invoice->created_at)); }}</td>
                                 <td class="d-flex align-items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41" fill="none">
                                         <rect x="0.535156" y="0.524994" width="40.1156" height="40.1156" rx="11" fill="#5EC8D6" fill-opacity="0.4" />
                                         <path d="M20.2886 20.8907L30.6666 15.2299C30.3365 14.1439 29.667 13.1924 28.7564 12.5149C27.8458 11.8374 26.7419 11.4697 25.6069 11.4657H14.9702C13.8352 11.4697 12.7313 11.8374 11.8207 12.5149C10.9101 13.1924 10.2406 14.1439 9.91052 15.2299L20.2886 20.8907Z" fill="#5EC8D6" />
                                         <path d="M20.7986 23.0361C20.6423 23.1213 20.4671 23.166 20.2891 23.166C20.111 23.166 19.9359 23.1213 19.7796 23.0361L9.65234 17.5121V25.2933C9.654 26.7033 10.2149 28.0551 11.2119 29.0521C12.2089 30.0492 13.5607 30.61 14.9707 30.6117H25.6074C27.0174 30.61 28.3692 30.0492 29.3662 29.0521C30.3633 28.0551 30.9241 26.7033 30.9258 25.2933V17.5121L20.7986 23.0361Z" fill="#5EC8D6" />
                                     </svg>
-                                    <p class="m-0 pl-3">abc@gmail.com</p>
+                                    <p class="m-0 pl-3">{{ $invoice->user->email }}</p>
                                 </td>
-                                <td style="color: #FAB117;"><strong>$512</strong></td>
-                                <td class="basicPlan">Basic</td>
+                                <td style="color: #FAB117;"><strong>${{ $invoice->plan->price }}</strong></td>
+                                <td class="{{$invoice->plan->duration == 'month' ? 'basicPlan' : 'proPlan'}}"">{{ $invoice->plan->name }}</td>
                                 <td>
-                                    <a href="{{url('/invoice')}}">
+                                    <a href="{{url('/invoices/'.$invoice->id)}}">
                                         <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
-                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
                                         </svg>
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
+                            @endforeach
+                            {{-- <tr>
                                 <td style="padding-left:40px">#12341</td>
                                 <td>04/26/2020, 12:42 PM</td>
                                 <td class="d-flex align-items-center">
@@ -407,7 +409,7 @@
                                         </svg>
                                     </a>
                                 </td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table>
                 </div>

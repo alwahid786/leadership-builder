@@ -87,12 +87,12 @@
     <div class="container-fluid contentRow position-relative">
         <div class="row">
             <div class="col-12">
-                <h1 class="blue">All Invoices</h1>
+                <h1 class="blue">All Receipts</h1>
                 <div class="mt-3 tableDiv">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col" style="padding-left:40px">Invoice ID</th>
+                                <th scope="col" style="padding-left:40px">Receipt ID</th>
                                 <th scope="col">Purchase Date</th>
                                 <th scope="col">Contact</th>
                                 <th scope="col">Amount</th>
