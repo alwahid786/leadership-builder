@@ -43,7 +43,9 @@ class AdminController extends Controller
 
     public function users(Request $request)
     {
-        $users = User::where('type', 'user')->get();
+        $users = User::with('plan')->where('type', 'user')->get();
+
+        // dd($users);
 
         return view('pages.users', compact('users'));
     }

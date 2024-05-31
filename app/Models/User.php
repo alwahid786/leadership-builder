@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Laravel\Cashier\Billable;
 use App\Models\Invoices;
+use App\Models\PlansPricing;
 
 class User extends Authenticatable
 {
@@ -27,6 +28,7 @@ class User extends Authenticatable
         'type',
         'password',
         'page_number',
+        'plan_id',
     ];
 
     /**
@@ -51,5 +53,10 @@ class User extends Authenticatable
     public function invoices()
     {
         return $this->hasMany(Invoices::class);
+    }
+
+    public function plan()
+    {
+        return $this->belongsTo(PlansPricing::class, 'plan_id');
     }
 }

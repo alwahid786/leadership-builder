@@ -118,4 +118,9 @@ class PlansPricing extends Model
     {
         return $this->hasMany(Invoices::class);
     }
+
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }

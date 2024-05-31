@@ -115,7 +115,7 @@
                             Days = {{ $user->total_days }}
                         </h6>
                         <h6 class="font-14 poppins font-weight-500 basic">
-                            Basic
+                            {{ isset($user->plan->name) ? $user->plan->name : 'N/A' }}
                         </h6>
                     </div>
                     <div class="tel d-flex align-items-center justify-content-center font-14 font-weight-500 poppins">
