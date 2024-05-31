@@ -96,7 +96,7 @@
                                 ${{ $totalPrice }}
                             </h1>
                             <p class="font-14 text-white poppins">
-                                Total Subscriptions = {{ $subscriptions }}
+                                Total Subscriptions : {{ $subscriptions }}
                             </p>
                             <button class="d-flex align-items-center justify-content-center main-wallet-btn font-18 poppins font-weight-500 text-white">
                                 <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
