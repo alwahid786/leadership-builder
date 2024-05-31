@@ -17,6 +17,7 @@ use App\Http\Traits\ResponseTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 
 class AdminController extends Controller
@@ -29,10 +30,15 @@ class AdminController extends Controller
         $questions = Question::count();
         $plans = PlansPricing::count();
         $invoices = Invoices::with(['plan', 'user'])->get();
+        $subscriptions = DB::table('subscriptions')->count();
 
+        $totalPrice = $invoices->sum(function ($invoice) {
+            return $invoice->plan->price;
+        });
+        
         $totalinvoices = count($invoices);
 
-        return view('pages.dashboard', compact('users', 'questions', 'plans', 'invoices', 'totalinvoices'));
+        return view('pages.dashboard', compact('users', 'questions', 'plans', 'invoices', 'totalinvoices', 'subscriptions', 'totalPrice'));
     }
 
     public function users(Request $request)

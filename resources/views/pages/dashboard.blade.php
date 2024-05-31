@@ -91,12 +91,12 @@
                 <div class="my-balance-card position-relative">
                     <div class="d-flex justify-content-between" style="gap:1rem;">
                         <div>
-                            <p class="font-18 font-weight-500 text-white poppins">My Balance</p>
+                            <p class="font-18 font-weight-500 text-white poppins">Total Subscriptions Payment</p>
                             <h1 class="font-63 poppins text-white">
-                                $23.525,00
+                                ${{ $totalPrice }}
                             </h1>
                             <p class="font-14 text-white poppins">
-                                Wednesday, March 16nd 2021, 12:14 AM
+                                Total Subscriptions = {{ $subscriptions }}
                             </p>
                             <button class="d-flex align-items-center justify-content-center main-wallet-btn font-18 poppins font-weight-500 text-white">
                                 <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
