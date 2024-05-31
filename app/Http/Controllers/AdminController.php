@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Book;
+use App\Models\Invoices;
 use App\Models\PlansPricing;
 use App\Models\Question;
 use App\Imports\QuestionsImport;
@@ -267,6 +268,18 @@ class AdminController extends Controller
     {
         $plans = PlansPricing::all();
         return view('pages.plans-and-pricing', compact('plans'));
+    }
+
+    public function adminInvoices()
+    {
+        $invoices = Invoices::with(['plan', 'user'])->get();
+        return view('pages.invoices', compact('invoices'));
+    }
+
+    public function adminInvoice($id)
+    {
+        $invoice = Invoices::with(['plan', 'user'])->find($id);
+        return view('pages.invoice', compact('invoice'));
     }
     // public function checkDay($day)
     // {

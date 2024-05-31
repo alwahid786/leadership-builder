@@ -74,6 +74,8 @@ class ProfileController extends Controller
 
         $invoices = Invoices::with(['plan', 'user'])->where('user_id', $userid)->get();
 
+        // dd($invoices);
+
         return view('pages.plans', compact('response_exists', 'plans', 'intent', 'invoices'));
     }
 
@@ -105,7 +107,7 @@ class ProfileController extends Controller
         $user->charge($amount, $paymentMethod->id);
 
         try {
-            $user->newSubscription(
+            $subscription = $user->newSubscription(
                 'default', $getplan->stripe_price_id
                 )->create($paymentMethod->id);
         } catch (Exception $th) {
@@ -113,6 +115,14 @@ class ProfileController extends Controller
                 'nextError' => 'Something went wrong!', $th->getMessage()
             ]);
         }
+
+        if ($getplan->duration == 'month') {
+            $subscription->ends_at = Carbon::now()->addMonth();
+        }
+        if ($getplan->duration == 'year') {
+            $subscription->ends_at = Carbon::now()->addYear();
+        }
+        $subscription->save();
 
         $invoice = new Invoices();
         $invoice->user_id = Auth::user()->id;

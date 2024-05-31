@@ -89,9 +89,8 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => ['auth', 'roles:admin']], function () {
         
         Route::get('/dashboard', [AdminController::class, 'adminDashboard'])->name('adminDashboard');
-        Route::get('/invoices', function () {
-            return view('pages.invoices');
-        });
+        Route::get('/invoices', [AdminController::class, 'adminInvoices'])->name('adminInvoices');
+        Route::get('/invoices/{id}', [AdminController::class, 'adminInvoice'])->name('adminInvoice');
         
         Route::get('/user-detail/{id}', [AdminController::class, 'userDetail'])->name('userDetail');
         Route::get('/users', [AdminController::class, 'users'])->name('users');

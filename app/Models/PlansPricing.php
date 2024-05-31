@@ -18,6 +18,7 @@ class PlansPricing extends Model
         'price',
         'details',
         'slug',
+        'duration',
         'stripe_plan',
         'stripe_price_id',
     ];
@@ -60,7 +61,7 @@ class PlansPricing extends Model
             'unit_amount' => $this->price * 100,
             'currency' => 'usd',
             'recurring' => [
-                'interval' => 'month', // or 'year', 'week', etc.
+                'interval' => $this->duration, // or 'year', 'week', etc.
             ],
         ]);
 
@@ -95,7 +96,7 @@ class PlansPricing extends Model
                 'unit_amount' => $this->price * 100,
                 'currency' => 'usd',
                 'recurring' => [
-                    'interval' => 'month', // or 'year', 'week', etc.
+                    'interval' => $this->duration, // or 'year', 'week', etc.
                 ],
             ]);
 

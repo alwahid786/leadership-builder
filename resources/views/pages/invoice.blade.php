@@ -51,14 +51,18 @@
         color: white;
     }
 </style>
+@if (Auth::user()->role == 'admin')
+@include('includes.navbar-dash')
+@else
 @include('includes.navbar')
+@endif
 <section class="contentSection position-relative">
     <div class="container-fluid contentRow">
         <div class="row">
             <div class="col-12">
                 <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-baseline">
-                        <h1 class="m-0">Invoice</h1>
+                        <h1 class="m-0">Receipt</h1>
                         <h3 class="blue ml-3 m-0">#{{ $invoice->invoice_id }}</h3>
                         <input type="hidden" id="invoiceId" value="{{ $invoice->invoice_id }}">
                     </div>
@@ -86,7 +90,7 @@
                                     <path d="M25 12.2324C27.99 14.3254 28.7375 16.7672 27.392 20.106C30.2823 17.8137 32.9234 17.8635 35.7639 20.0562C34.4683 16.6675 35.2655 14.1759 38.6542 12.2324C36.6609 11.8338 35.0164 11.8836 33.9699 11.1361C32.9234 10.3388 32.4251 8.74413 31.4285 6.99998C30.5813 10.6378 28.588 12.3321 25 12.2324Z" fill="white" />
                                 </svg>
                                 <div class="ml-5">
-                                    <h2>Leadership Invoice</h2>
+                                    <h2>Leadership Receipt</h2>
                                     <address>18 Guild Street London, EC2V 5PX <br> United Kingdom</address>
                                     <div class="d-flex" style="gap: 60px;">
                                         <p>mail@mail.com</p>
@@ -138,7 +142,7 @@
                             <h5>{{ $invoice->plan->name }}</h5>
                         </div>
                         <div class="" style="width: 15%;">
-                            <h5>One Month</h5>
+                            <h5>One {{ $invoice->plan->duration }}</h5>
                         </div>
                         <div class="" style="width: 15%;">
                             <h5>${{ $invoice->plan->price }}</h5>

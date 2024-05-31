@@ -115,7 +115,7 @@
                                     <div class="mt-3">
                                         <div id="preview"></div>
                                         <div id="editor">
-                                            {{$plan->details}}
+                                            {!!$plan->details!!}
                                         </div>
                                     </div>
                                     <input type="hidden" id="details" name="details" value="{{ $plan->details }}">
@@ -174,14 +174,7 @@
         }
         else {
             
-            const textarea = document.createElement('textarea');
-            
-            textarea.innerHTML = content;
-            let decodedString = textarea.value;
-        
-            decodedString = decodedString.replace(/<\/?[^>]+(>|$)/g, '');
-        
-            document.getElementById('details').value = decodedString;
+            document.getElementById('details').value = content;
         }
     }
 </script>

@@ -116,17 +116,17 @@
                             <span style="font-size:16px">/month</span>
                         </h2>
                     </div>
-                    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mt-3 mt-md-5"
+                    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mt-2"
                         style="gap:1rem;">
                         <div>
                             <div class="d-flex align-items-center" style="gap:8px;">
                                 <span
-                                    style="width:7px;height:7px;border-radius:50%;background:rgba(94, 94, 94, 1);"></span>
-                                <p class="para mb-0">{{ $plan->details }}</p>
+                                    style="width:7px;height:7px;border-radius:50%;"></span>
+                                <p class="mb-0">{!! $plan->details !!}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="mt-5 d-flex justify-content-end">
+                    <div class="d-flex justify-content-end">
                         <a href="{{ url('/edit-plan-page/' . $plan->id) }}" class="edit-btn d-flex align-items-center justify-content-center"
                             style="background-color: rgba(99, 99, 255, 1);">
                             Edit

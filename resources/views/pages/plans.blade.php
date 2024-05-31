@@ -78,13 +78,27 @@
     .StripeElement--webkit-autofill {
         background-color: #fefde5 !important;
     }
+
+    @media (min-width: 576px) {
+        #paymentmodal .modal-dialog {
+            margin: auto !important;
+            height: 100vh !important;
+            display: flex !important;
+            justify-content: center;
+            align-items: center !important;
+        }
+        #paymentmodal .modal-content {
+            border-radius: 10px;
+            font-family: inherit !important; 
+        }
+    }
 </style>
 @include('includes.navbar')
 <section class="contentSection position-relative">
     <div class="container-fluid contentRow">
         <div class="row mb-5">
-            <div class="form-group">
-                <div class="row">
+            <div class="form-group mx-auto">
+                <div class="row justify-content-center">
                     @foreach ($plans as $index => $plan)
                     @php
                     $colorClass = '';
@@ -96,16 +110,16 @@
                     $colorClass = 'enterprise-plan';
                     }
                     @endphp
-                    <div class="col-md-4 modal-open" onclick="openPaymentModal({{ $plan->id }})">
+                    <div class="col-md-4 modal-open" style="width: 600px;" onclick="openPaymentModal({{ $plan->id }})">
                         <div class="plans {{ $colorClass }} h-100">
                             <div class="d-flex justify-content-between checkbox">
                                 <h6 class="m-0">Plan Pricing</h6>
                             </div>
                             <h1>{{ $plan->name }}</h1>
-                            <ul class="ml-4">
-                                <p>{{ $plan->details }}</p>
+                            <ul class="ml-4 mt-4">
+                                <p>{!! $plan->details !!}</p>
                             </ul>
-                            <h1 class="align-self-end">${{ $plan->price }} <small>/month</small></h1>
+                            <h1 class="align-self-end mt-3">${{ $plan->price }} <small>/month</small></h1>
                         </div>
                     </div>
                     @endforeach
@@ -118,20 +132,23 @@
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header" style="@auth
+                                background-color: var(--blue);
+                                color: #fff !important;
+                            @endauth">
                                 <h5 class="modal-title" id="exampleModalLabel">Payment</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true" style="color:#fff !important">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <div class="form-row">
-                                    <label for="card-holder-name">Card Holder Name</label>
+                                    <label for="card-holder-name" class="form-label">Card Holder Name</label>
                                     <input class="form-control" id="card-holder-name" type="text">
                                     <input type="hidden" name="plan_id" id="plan_id_for_payment">
 
-                                    <label for="card-element">Credit or debit card</label>
-                                    <div id="card-element" class="form-control">
+                                    <label for="card-element"class="mt-4">Credit or debit card</label>
+                                    <div id="card-element" class="form-control mb-4">
                                     </div>
                                     <!-- Used to display form errors. -->
                                     <div id="card-errors" role="alert"></div>
@@ -146,10 +163,14 @@
                                 @endif
                             </div>
 
-                            <div class="modal-footer">
+                            <div class="modal-footer d-flex align-items-center justify-content-between">
+                                <img style="@auth
+                                    width: 170px;
+                                @endauth" 
+                                 src="{{asset('assets/images/powered-by-stripe.png')}}" alt="img">
                                 <div class="form-group text-center">
                                     <button id="card-button" data-secret="{{ $intent->client_secret }}"
-                                        class="btn btn-lg btn-success btn-block">SUBMIT</button>
+                                        class="btn btn-lg btn-success btn-block">PROCEED</button>
                                 </div>
                                 {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-primary">Save changes</button> --}}
@@ -192,7 +213,7 @@
                                     <p class="m-0 pl-3">{{ $invoice->user->email }}</p>
                                 </td>
                                 <td style="color: #FAB117;"><strong>${{ $invoice->plan->price }}</strong></td>
-                                <td class="basicPlan">{{ $invoice->plan->name }}</td>
+                                <td class="{{$invoice->plan->duration == 'month' ? 'basicPlan' : 'proPlan'}}"">{{ $invoice->plan->name }}</td>
                                 <td>
                                     <a href="{{url('/invoice/'.$invoice->id)}}">
                                         <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">

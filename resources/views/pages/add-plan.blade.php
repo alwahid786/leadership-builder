@@ -170,15 +170,7 @@
             })
         }
         else {
-            
-            const textarea = document.createElement('textarea');
-            
-            textarea.innerHTML = content;
-            let decodedString = textarea.value;
-        
-            decodedString = decodedString.replace(/<\/?[^>]+(>|$)/g, '');
-        
-            document.getElementById('details').value = decodedString;
+            document.getElementById('details').value = content;
         }
     }
 </script>

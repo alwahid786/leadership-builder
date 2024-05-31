@@ -87,12 +87,12 @@
     <div class="container-fluid contentRow position-relative">
         <div class="row">
             <div class="col-12">
-                <h1 class="blue">All Invoices</h1>
+                <h1 class="blue">All Receipts</h1>
                 <div class="mt-3 tableDiv">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col" style="padding-left:40px">Invoice ID</th>
+                                <th scope="col" style="padding-left:40px">Receipt ID</th>
                                 <th scope="col">Purchase Date</th>
                                 <th scope="col">Contact</th>
                                 <th scope="col">Amount</th>
@@ -114,7 +114,7 @@
                                     <p class="m-0 pl-3">{{ $invoice->user->email }}</p>
                                 </td>
                                 <td style="color: #FAB117;"><strong>${{ $invoice->plan->price }}</strong></td>
-                                <td class="basicPlan">{{ $invoice->plan->name }}</td>
+                                <td class="{{$invoice->plan->duration == 'month' ? 'basicPlan' : 'proPlan'}}">{{ $invoice->plan->name }}</td>
                                 <td>
                                     <a href="{{url('/invoice/'.$invoice->id)}}">
                                         <svg role='button' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
