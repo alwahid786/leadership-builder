@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Book;
+use App\Models\Question;
 use App\Models\PageCode;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
@@ -198,10 +199,12 @@ class ContentController extends Controller
         // }
         $response_exists = $this->navbardynamic($loginUserId);
 
+        $question = Question::where('day', $response_exists['day'])->first();
+
         // dd($response_exists);
         // $response_exists['today'] = ($response_exists['response_type']==null ? auth()->user()->total_days+1: auth()->user()->total_days);
 
-        return view('pages.cover', compact('response_exists'));
+        return view('pages.cover', compact('response_exists', 'question'));
     }
 
     // Show Past Day Data
@@ -214,11 +217,12 @@ class ContentController extends Controller
             ->first();
         
         $today = $this->navbardynamic($loginUserId);
+        $question = Question::where('day', $response_exists['day'])->first();
 
         $response_exists['today'] = $today['today'];
         // dd($response_exists);
 
-        return view('pages.cover', compact('response_exists'));
+        return view('pages.cover', compact('response_exists', 'question'));
     }
 
     public function navbardynamic($loginUserId){
@@ -342,6 +346,7 @@ class ContentController extends Controller
             $book->user_id = Auth::user()->id;
             $book->day = Auth::user()->total_days+1;
             $book->response_type = $request->responsetype;
+            $book->question_id = $request->question_id;
             if ($request->responsetype == 'audio') {
                 $book->q_answer = $request->desire;
             }

@@ -92,9 +92,9 @@
                 <div class="quotation-card day-card">
                     <h2>Quote of the Day {{$response_exists['day']}}</h2>
                     <div class="d-flex align-items-center">
-                        <q>Your time is limited, don't waste it living someone else's dream.</q>
+                        <q>{{$question['quotation']}},</q>
                         <b class="px-2">-</b>
-                        <em>Steve Jobs</em>
+                        <em>{{$question['author']}}</em>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                 <div class="question-card day-card">
                     <h2>Question of the Day {{$response_exists['day']}}</h2>
                     <div class="d-flex align-items-center">
-                        <q>What's your dream?</q>
+                        <q>{{$question['question']}}</q>
                     </div>
                 </div>
             </div>
@@ -164,6 +164,7 @@
                                 </div>
                                 <input type="hidden" name="desire" id="contentInput" data-class="desire">
                                 <input type="hidden" name="responsetype" value="audio" data-class="desire">
+                                <input type="hidden" name="question_id" value="{{$question['id']}}">
                                 <input type="hidden" name="getid" value="{{$response_exists['id']}}">
                                 <div class="text-right px-3 mt-3 w-100">
                                     <button type="submit" data-class="desire" id="save" class="btn btn-primary {{$response_exists['response_type']===null?'':'d-none'}}">
@@ -212,6 +213,7 @@
                                 <div id="timer2">00:00:00</div>
                             </div>
                             <input type="hidden" name="getid" id="getid" value="{{$response_exists['id']}}">
+                            <input type="hidden" name="question_id" id="question_id" value="{{$question['id']}}">
                         </div>
                         <div class="text-right px-3 mt-3 w-100">
                             <button id="retakevideo" class="btn btn-danger {{$response_exists['response_type']=='video' ? '':'d-none'}}">
@@ -660,6 +662,7 @@
             const formData = new FormData();
             formData.append('video', blob, 'recording.mp4');
             formData.append('responsetype', 'video');
+            formData.append('question_id', $('#question_id').val());
 
             console.log('Video saved successfully:', blob);
             fetch(`{{url('/DayResponse/submit')}}`, {
