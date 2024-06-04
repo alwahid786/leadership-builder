@@ -143,23 +143,8 @@
                             {{-- @csrf --}}
                             <div class="row">
                                 <div class="col-12 mt-3">
-                                    <div id="controls" class="d-flex align-items-center justify-content-between">
-                                        <div>
-                                            <button data-class="desire" type="button" id="startBtn1" data-sr_no="1" data-editor_name="editor" class="startBtn">Start Recording</button>
-                                            <button data-class="desire" type="button" id="stopBtn1" data-sr_no="1" class="btn-danger stopBtn" style="display: none;">Stop
-                                                Recording</button>
-                                            <button data-class="desire" type="button" id="resetBtn1" data-sr_no="1" class="btn-danger resetBtn" style="display: none;">Reset Text</button>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <i class="zmdi zmdi-circle mr-2"></i>
-                                            <div id="timer1">00:00:00</div>
-                                        </div>
-                                    </div>
                                     <div class="mt-3">
-                                        <div id="preview"></div>
-                                        <div id="editor">
-                                            {{$response_exists['response_type']===null?'':html_entity_decode(strip_tags($response_exists['q_answer']), ENT_QUOTES | ENT_HTML5, 'UTF-8');}}
-                                        </div>
+                                            <textarea cols="30" rows="22" class="form-control">{{$response_exists['response_type']===null?'':html_entity_decode(strip_tags($response_exists['q_answer']), ENT_QUOTES | ENT_HTML5, 'UTF-8');}}</textarea>
                                     </div>
                                 </div>
                             </div>

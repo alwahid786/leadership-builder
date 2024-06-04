@@ -173,13 +173,19 @@
                         <div class="{{$colorClass}}-line my-3"></div>
                         <div class="d-flex align-items-center justify-content-between pt-3">
                             <div class="profile-images d-flex flex-row-reverse align-items-center">
-                                <img src="{{asset('assets/images/user-profile-image-1.png')}}" alt="profile image">
-                                <img src="{{asset('assets/images/user-profile-image-2.png')}}" alt="profile image">
+                                @for ($i = 0 ; $i < $question->totalAnswers ; $i++)
+                                @if ($i >= 4)
+                                    @break    
+                                @endif
+                                    
+                                <img src="{{asset('storage/images/'.($question['profile'.$i]==null?'profile.png':$question['profile'.$i]))}}" alt="profile image">
+                                @endfor
+                                {{-- <img src="{{asset('assets/images/user-profile-image-2.png')}}" alt="profile image">
                                 <img src="{{asset('assets/images/user-profile-image-3.png')}}" alt="profile image">
-                                <img src="{{asset('assets/images/user-profile-image-4.png')}}" alt="profile image">
+                                <img src="{{asset('assets/images/user-profile-image-4.png')}}" alt="profile image"> --}}
                             </div>
                             <h6 class="total-answers font-14 open font-weight-600">
-                                Answers 0
+                                Answers {{$question->totalAnswers}}
                             </h6>
                         </div>
                     </div>

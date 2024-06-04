@@ -59,7 +59,19 @@ class AdminController extends Controller
 
     public function allQuestions()
     {
+        // $response_exists = Book::find($id);
+        // $answers = Book::with('user')->where('day', $question->day)->get();
+
         $questions = Question::orderBy('day', 'asc')->get();
+        foreach ($questions as $question) {
+            $totalAnswers = Book::with('user')->where('day', $question->day)->get();
+            $question['totalAnswers'] = count($totalAnswers);
+            $i=0;
+            foreach ($totalAnswers as $answer) {
+                $question['profile'.$i++] = $answer->user->profile_img;
+            }
+        }
+        // dd($questions);
 
         return view('pages.all-questions', compact('questions'));
     }
