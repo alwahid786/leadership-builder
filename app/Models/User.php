@@ -59,4 +59,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(PlansPricing::class, 'plan_id');
     }
+
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
 }

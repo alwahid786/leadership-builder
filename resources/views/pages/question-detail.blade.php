@@ -114,7 +114,7 @@
                     </svg>
                     <div>
                         <p class="font-16 text-white poppins">Total Answers</p>
-                        <h3 class="font-28 font-weight-600 text-white poppins mt-2 text-right">0</h3>
+                        <h3 class="font-28 font-weight-600 text-white poppins mt-2 text-right">{{ $answers->count() }}</h3>
                     </div>
                 </div>
             </div>
@@ -135,7 +135,32 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($answers as $answer)    
                             <tr>
+                                <td style="padding-left:40px">
+                                    <img src="{{asset('storage/images/'.($answer->user->profile_img==null?'profile.png':$answer->user->profile_img))}}" alt="profile" class="table-profile-pic">
+                                </td>
+                                <td>{{$answer->user->name.' '.$answer->user->last_name}}</td>
+                                <td>{{$answer->response_type}}</td>
+                                <td class="d-flex align-items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41" fill="none">
+                                        <rect x="0.535156" y="0.524994" width="40.1156" height="40.1156" rx="11" fill="#fab117" fill-opacity="0.4"></rect>
+                                        <path d="M28.1786 10.6913H26.405V9.12176C26.405 8.89526 26.3127 8.67998 26.1533 8.52061C25.9939 8.36123 25.7786 8.26895 25.5521 8.26895C25.3256 8.26895 25.1103 8.36123 24.9509 8.52061C24.7915 8.67998 24.6992 8.89526 24.6992 9.12176V10.6913H16.6775V9.12176C16.6775 8.89526 16.5852 8.67998 16.4258 8.52061C16.2664 8.36123 16.0511 8.26895 15.8246 8.26895C15.5981 8.26895 15.3828 8.36123 15.2234 8.52061C15.064 8.67998 14.9717 8.89526 14.9717 9.12176V10.6913H13.1981C12.9724 10.6913 12.7572 10.7837 12.5979 10.943C12.4386 11.1023 12.3463 11.3175 12.3463 11.5432V30.1871C12.3463 30.4128 12.4386 30.628 12.5979 30.7873C12.7572 30.9466 12.9724 31.039 13.1981 31.039H28.1786C28.4043 31.039 28.6195 30.9466 28.7788 30.7873C28.9381 30.628 29.0305 30.4128 29.0305 30.1871V11.5432C29.0305 11.3175 28.9381 11.1023 28.7788 10.943C28.6195 10.7837 28.4043 10.6913 28.1786 10.6913ZM27.4751 29.4832H13.9016V18.3651H27.4751V29.4832ZM27.4751 17.0668H13.9016V12.2477H27.4751V17.0668Z" fill="#fab117"></path>
+                                    </svg>
+                                    {{-- <p class="m-0 pl-3">04/26/2020, 12:42 PM</p> --}}
+                                    <p class="m-0 pl-3">{{date('m/d/Y H:i a', strtotime($answer->created_at)).' ('.$answer->created_at->diffForHumans().')'}}</p>
+                                </td>
+                                <td>
+                                    <a href="{{url('/answer/'.($answer->id))}}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+                                            <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+                                        </svg>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                            {{-- <tr>
                                 <td style="padding-left:40px">
                                     <img src="{{asset('assets/images/profile-image.png')}}" alt="profile" class="table-profile-pic">
                                 </td>
@@ -354,29 +379,7 @@
                                         </svg>
                                     </a>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td style="padding-left:40px">
-                                    <img src="{{asset('assets/images/profile-image.png')}}" alt="profile" class="table-profile-pic">
-                                </td>
-                                <td>John Smith</td>
-                                <td>Audio</td>
-                                <td class="d-flex align-items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41" fill="none">
-                                        <rect x="0.535156" y="0.524994" width="40.1156" height="40.1156" rx="11" fill="#fab117" fill-opacity="0.4"></rect>
-                                        <path d="M28.1786 10.6913H26.405V9.12176C26.405 8.89526 26.3127 8.67998 26.1533 8.52061C25.9939 8.36123 25.7786 8.26895 25.5521 8.26895C25.3256 8.26895 25.1103 8.36123 24.9509 8.52061C24.7915 8.67998 24.6992 8.89526 24.6992 9.12176V10.6913H16.6775V9.12176C16.6775 8.89526 16.5852 8.67998 16.4258 8.52061C16.2664 8.36123 16.0511 8.26895 15.8246 8.26895C15.5981 8.26895 15.3828 8.36123 15.2234 8.52061C15.064 8.67998 14.9717 8.89526 14.9717 9.12176V10.6913H13.1981C12.9724 10.6913 12.7572 10.7837 12.5979 10.943C12.4386 11.1023 12.3463 11.3175 12.3463 11.5432V30.1871C12.3463 30.4128 12.4386 30.628 12.5979 30.7873C12.7572 30.9466 12.9724 31.039 13.1981 31.039H28.1786C28.4043 31.039 28.6195 30.9466 28.7788 30.7873C28.9381 30.628 29.0305 30.4128 29.0305 30.1871V11.5432C29.0305 11.3175 28.9381 11.1023 28.7788 10.943C28.6195 10.7837 28.4043 10.6913 28.1786 10.6913ZM27.4751 29.4832H13.9016V18.3651H27.4751V29.4832ZM27.4751 17.0668H13.9016V12.2477H27.4751V17.0668Z" fill="#fab117"></path>
-                                    </svg>
-                                    <p class="m-0 pl-3">04/26/2020, 12:42 PM</p>
-                                </td>
-                                <td>
-                                    <a href="{{url('/')}}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
-                                            <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
-                                        </svg>
-                                    </a>
-                                </td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table>
                 </div>

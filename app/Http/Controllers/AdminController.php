@@ -132,8 +132,20 @@ class AdminController extends Controller
     public function questionDetail($id){
 
         $question = Question::find($id);
+        $answers = Book::with('user')->where('day', $question->day)->get();
+        
+        return view('pages.question-detail', compact('question', 'answers'));
+    }
 
-        return view('pages.question-detail', compact('question'));
+    public function answer_view($id)
+    {
+        $response_exists = Book::find($id);
+        $question = Question::where('day', $response_exists->day)->first();
+
+        // dd($response_exists);
+        // $response_exists['today'] = ($response_exists['response_type']==null ? auth()->user()->total_days+1: auth()->user()->total_days);
+
+        return view('pages.answer_view', compact('question', 'response_exists'));
     }
 
     public function importPage(){
@@ -291,6 +303,31 @@ class AdminController extends Controller
     {
         $invoice = Invoices::with(['plan', 'user'])->find($id);
         return view('pages.invoice', compact('invoice'));
+    }
+
+    public function navbardynamic($loginUserId){
+        
+        $current_date = Carbon::now()->toDateString();
+
+        $response_exists = Book::where('user_id', $loginUserId)
+            ->whereDate('created_at', $current_date)
+            ->first();
+
+            // dd($response_exists);
+
+        if ($response_exists==null) {
+            $response_exists['response_type'] = null;
+            $response_exists['q_answer'] = null;
+            $response_exists['video_url'] = null;
+            $response_exists['id'] = 0;
+            $response_exists['day'] = auth()->user()->total_days+1;
+            $response_exists['today'] = auth()->user()->total_days+1;
+        }
+        else {
+            $response_exists['today'] = auth()->user()->total_days;
+        }
+
+        return $response_exists;
     }
     // public function checkDay($day)
     // {
