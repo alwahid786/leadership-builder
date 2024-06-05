@@ -180,7 +180,7 @@
                         <div class="video-container">
                             <video id="videoElement" autoplay playsinline class="{{$response_exists['response_type']=='video' ? 'd-none':''}}"></video>
                             <video id="videoElement1" controls height="100%" style="width:100%; object-fit:cover; border-radius: 15px;">
-                                <source src="{{ asset('storage/videos/' . $response_exists['video_url']) }}" type="video/mp4">
+                                <source src="{{ asset('storage/videos/'.$response_exists['video_url']) }}" type="video/mp4">
                             </video>
                             <div class="controls-container py-2 text-center {{$response_exists['response_type']=='video' ? 'd-none':''}}">
                                 <h5>To Start Recording, Click the <span class="text-danger">Red</span> circle below</h5>

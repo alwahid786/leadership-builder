@@ -74,9 +74,15 @@ class ProfileController extends Controller
 
         $invoices = Invoices::with(['plan', 'user'])->where('user_id', $userid)->get();
 
-        // dd($invoices);
+        $cur_sub = auth()->user()->subscription();
+        
+        if ($cur_sub && $cur_sub->active() && $cur_sub->ends_at > Carbon::now()) {
+            $cur_sub = PlansPricing::where('stripe_price_id', $cur_sub->stripe_price)->first();
+        }
+        
+        // dd($cur_sub);
 
-        return view('pages.plans', compact('response_exists', 'plans', 'intent', 'invoices'));
+        return view('pages.plans', compact('response_exists', 'plans', 'intent', 'invoices', 'cur_sub'));
     }
 
     public function userInvoice(Request $request)

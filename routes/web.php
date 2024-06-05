@@ -127,11 +127,13 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => ['auth', 'roles:user']], function () {
         Route::get('/user-dashboard', [ContentController::class, 'coverPage']);
+        
         Route::get('/cover', [ContentController::class, 'coverPage'])->name('coverPage');
         // Submit Day Response
         Route::post('/DayResponse/submit', [ContentController::class, 'submitresponse'])->name('submitresponse');
         // Past Days
         Route::get('/pastday/{day}', [ContentController::class, 'pastday'])->name('pastday');
+
         Route::get('/plans', [ProfileController::class, 'plans'])->name('plans');
         Route::get('/invoice-user', [ProfileController::class, 'userInvoice'])->name('invoice-user');
 

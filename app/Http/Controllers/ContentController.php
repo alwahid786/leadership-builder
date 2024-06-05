@@ -18,6 +18,7 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ContentController extends Controller
 {
@@ -177,34 +178,21 @@ class ContentController extends Controller
     // Show Cover Page
     public function coverPage(Request $request)
     {
-        $loginUserId = Auth::user()->id;
-        // $current_date = Carbon::now()->toDateString();
+        $subscription = $this->checksubscription();
 
-        // $response_exists = Book::where('user_id', $loginUserId)
-        //     ->whereDate('created_at', $current_date)
-        //     ->first();
-
-        //     // dd($response_exists);
-
-        // if ($response_exists==null) {
-        //     $response_exists['response_type'] = null;
-        //     $response_exists['q_answer'] = null;
-        //     $response_exists['video_url'] = null;
-        //     $response_exists['id'] = 0;
-        //     $response_exists['day'] = auth()->user()->total_days+1;
-        //     $response_exists['today'] = auth()->user()->total_days+1;
-        // }
-        // else {
-        //     $response_exists['today'] = auth()->user()->total_days;
-        // }
-        $response_exists = $this->navbardynamic($loginUserId);
-
-        $question = Question::where('day', $response_exists['day'])->first();
-
-        // dd($response_exists);
-        // $response_exists['today'] = ($response_exists['response_type']==null ? auth()->user()->total_days+1: auth()->user()->total_days);
-
-        return view('pages.cover', compact('response_exists', 'question'));
+        if ($subscription) 
+        {
+            $loginUserId = Auth::user()->id;
+            $response_exists = $this->navbardynamic($loginUserId);
+    
+            $question = Question::where('day', $response_exists['day'])->first();
+       
+            return view('pages.cover', compact('response_exists', 'question'));
+        }
+        else
+        {
+            return redirect('/plans')->with('nextError', 'Please subscribe to continue');
+        }
     }
 
     // Show Past Day Data
@@ -535,5 +523,10 @@ class ContentController extends Controller
         $loginUserId = Auth::user()->id;
         $pageCodes = PageCode::all();
         return view('pages.page-codes', compact('pageCodes'));
+    }
+
+    public function checksubscription(){
+        $subscription = auth()->user()->total_days<2 && auth()->user()->subscription('default')->active() && auth()->user()->subscription('default')->end_date <= Carbon::now();
+        return $subscription;
     }
 }
