@@ -145,7 +145,7 @@
                     @endphp
                     <div class="col-md-4 modal-open mb-3 mt-3" style="width: 600px;"
                         onclick="openModal({{ $plan->id }}, {{ $cur_sub == null ? 'null' : json_encode($cur_sub) }})">
-                        <div class="plans {{ $colorClass }} h-90">
+                        <div class="plans {{ $colorClass }}" style="height: 300px;">
                             <div class="d-flex justify-content-between checkbox">
                                 <h6 class="m-0">Plan Pricing</h6>
                                 {{-- <img style="position: absolute; right: 10px; top: 0;"

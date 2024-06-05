@@ -526,7 +526,15 @@ class ContentController extends Controller
     }
 
     public function checksubscription(){
-        $subscription = auth()->user()->total_days<2 && auth()->user()->subscription('default')->active() && auth()->user()->subscription('default')->end_date <= Carbon::now();
-        return $subscription;
+        if (auth()->user()->total_days<1) {
+            return true;
+        }
+        else{
+            $subscription = auth()->user()->subscription('default');
+            if ($subscription) {
+                return $subscription->active() && $subscription->end_date <= Carbon::now();
+            }
+            return false;
+        }
     }
 }
