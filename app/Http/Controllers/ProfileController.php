@@ -98,6 +98,7 @@ class ProfileController extends Controller
 
     public function singleCharge(Request $request)
     {
+        return $request->all();
         $getplan = PlansPricing::where('id', $request->plan_id)->first();
 
         $amount = $getplan->price*100;

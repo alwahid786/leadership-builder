@@ -228,13 +228,13 @@
             </div>
         </div>
     </div>
-    <div class="buttonSection d-flex justify-content-end align-items-center mt-5">
+    {{-- <div class="buttonSection d-flex justify-content-end align-items-center mt-5">
         @if(auth()->user()->unlocked_pages >= 2)
         <a href="{{url('/wow/con')}}" class="navBtns">Next<i class="fas fa-arrow-right ml-2"></i> </a>
         @else
         <a href="javascript:void(0)" class="navBtns" id="nextButton" data-toggle="modal" data-target="#exampleModalCenter">Next<i class="fas fa-arrow-right ml-2"></i> </a>
         @endif
-    </div>
+    </div> --}}
 </section>
 
 @endsection
@@ -551,6 +551,12 @@
                     type: 'video/webm'
                 });
                 console.log('Blob:', blob);
+                console.log('Kuch to rolaaa hai.....');
+                console.log('Kuch to rolaaa hai.....');
+                console.log('Kuch to rolaaa hai.....');
+                console.log('Kuch to rolaaa hai.....');
+
+
                 const videoURL = window.URL.createObjectURL(blob);
                 document.getElementById('videoElement1').src = videoURL;
             }, 1000);

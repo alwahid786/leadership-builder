@@ -206,7 +206,7 @@
                                     width: 170px;
                                 @endauth" src="{{asset('assets/images/powered-by-stripe.png')}}" alt="img">
                                 <div class="form-group text-center">
-                                    <button id="card-button" data-secret="{{ $intent->client_secret }}"
+                                    <button type="submit" id="card-button" data-secret="{{ $intent->client_secret }}"
                                         class="btn btn-lg btn-success btn-block">PROCEED</button>
                                 </div>
                                 {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
