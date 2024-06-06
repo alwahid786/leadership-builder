@@ -542,7 +542,8 @@
             $('#videoElement1').removeClass('d-none');
             $('#retakevideo').removeClass('d-none');
             $('#timer2').addClass('d-none');
-            if (!$('#getid').val()) {
+            
+            if (($('#getid').val() == 0) || ($('#getid').val() == '')) {
                 $('#savevid').removeClass('d-none');
             }
             stopTimer();
