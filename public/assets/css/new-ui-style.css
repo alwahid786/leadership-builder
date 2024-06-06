@@ -1039,6 +1039,28 @@ a:hover {
     top: 6%;
     right: 5%;
 }
+.user-detail .monthly-user {
+    color: rgb(0, 131, 20);
+    background: rgb(188, 235, 150);
+    width: 130px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    position: absolute;
+    top: 6%;
+    right: 5%;
+}
+.user-detail .yearly-user {
+    color: rgba(250, 177, 23, 1);
+    background: rgba(255, 233, 187, 1);
+    width: 130px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    position: absolute;
+    top: 6%;
+    right: 5%;
+}
 .user-detail-view .label {
     color: rgba(118, 118, 118, 1) !important;
 }

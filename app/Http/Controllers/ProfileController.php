@@ -136,6 +136,10 @@ class ProfileController extends Controller
         $invoice->plan_id = $request->plan_id;
         $invoice->save();
 
+        $user = auth()->user();
+        $user->plan_id = $request->plan_id;
+        $user->save();
+
         $lastInsertedId = $invoice->id;
 
         // return redirect()->route('plans')->with('responseSuccess', 'Payment successful!');

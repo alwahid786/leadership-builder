@@ -52,9 +52,12 @@ class AdminController extends Controller
 
     public function userDetail($id)
     {
-        $user = User::find($id);
+        $user = User::with('plan')->find($id);
+        $subscription = DB::table('subscriptions')->where('user_id', $id)->first();
 
-        return view('pages.user-detail', compact('user'));
+        // dd($user);
+
+        return view('pages.user-detail', compact('user', 'subscription'));
     }
 
     public function allQuestions()

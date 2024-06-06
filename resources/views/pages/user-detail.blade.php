@@ -114,8 +114,8 @@
                             <h3 class="user-detail-heading">
                                 General Information
                             </h3>
-                            <span class="enterprise-user font-weight-700 font-18 crimson d-flex align-items-center justify-content-center">
-                                Enterprise User
+                            <span class="{{ $user->plan == null||$user->plan->duration == 'year' ? 'yearly-user' : 'monthly-user' }} font-weight-700 font-18 crimson d-flex align-items-center justify-content-center">
+                                {{ $user->plan == null ? 'Free' : $user->plan->name }}
                             </span>
                         </div>
                         <div class="d-flex align-items-center justify-content-between" style="margin-top: 36px">
@@ -157,11 +157,11 @@
                         <div class="d-flex align-items-center justify-content-between mt-3">
                             <div class="left-side">
                                 <p class="label">Plan purchase Date</p>
-                                <p style="margin-top: 27px">23-04-2024</p>
+                                <p style="margin-top: 27px">{{ $subscription == null ? 'N/A' : date('d-m-Y', strtotime($subscription->created_at)) }}</p>
                             </div>
                             <div class="right-side">
                                 <p class="label">Expire Plan purchase Date</p>
-                                <p style="margin-top: 27px">23-04-2024</p>
+                                <p style="margin-top: 27px">{{ $subscription == null ? 'N/A' : date('d-m-Y', strtotime($subscription->ends_at)) }}</p>
                             </div>
                         </div>
                     </div>
