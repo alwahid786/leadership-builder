@@ -294,6 +294,7 @@
         $("#audiodiv").addClass('d-none');
         $('#videoheading').removeClass('d-none');
         $('#audioheading').addClass('d-none');
+        $('#savevid').addClass('d-none');
         console.log('Video recording selected');
     };
 </script>
@@ -428,7 +429,7 @@
 </script>
 <script>
     $(document).ready(function() {
-        let mediaRecorder;
+        let mediaRecorder = null;
         let recordedBlobs = [];
         let downloadLink = document.createElement('a');
 
@@ -541,7 +542,9 @@
             $('#videoElement1').removeClass('d-none');
             $('#retakevideo').removeClass('d-none');
             $('#timer2').addClass('d-none');
-            $('#updatevid').removeClass('d-none');
+            if (!$('#getid').val()) {
+                $('#savevid').removeClass('d-none');
+            }
             stopTimer();
 
 
@@ -550,13 +553,8 @@
                 const blob = new Blob(recordedBlobs, {
                     type: 'video/webm'
                 });
-                console.log('Blob:', blob);
-                console.log('Kuch to rolaaa hai.....');
-                console.log('Kuch to rolaaa hai.....');
-                console.log('Kuch to rolaaa hai.....');
-                console.log('Kuch to rolaaa hai.....');
-
-
+                console.log('Blob:', recordedBlobs);
+                
                 const videoURL = window.URL.createObjectURL(blob);
                 document.getElementById('videoElement1').src = videoURL;
             }, 1000);
@@ -605,7 +603,7 @@
             console.log('Starting recording...');
 
             let options = {
-                mimeType: 'video/webm;codecs=vp9',
+                mimeType: 'video/webm',
                 videoBitsPerSecond: 2500000, // Increase video bitrate (adjust as needed)
                 audioBitsPerSecond: 128000 // Increase audio bitrate (adjust as needed)
             };

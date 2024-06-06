@@ -464,12 +464,13 @@
 
 @if(session()->has('responseSuccess'))
 <script>
+    document.getElementById('loader').style.display = 'none';
     Swal.fire({
         title: 'Success',
         text: `{{ session('responseSuccess') }}`,
         icon: 'success',
         confirmButtonColor: "#6dabe4"
-    })
+    });
 </script>
 @endif
 @if(session()->has('nextError'))
@@ -543,6 +544,7 @@
     const clientSecret = cardButton.dataset.secret;
     cardButton.addEventListener('click', async (e) => {
         e.preventDefault();
+        document.getElementById('loader').style.display = 'block';
         console.log("attempting");
         const { setupIntent, error } = await stripe.confirmCardSetup(
             clientSecret, {
@@ -552,11 +554,11 @@
                 }
             }
             );
-        if (error) {
-            var errorElement = document.getElementById('card-errors');
-            errorElement.textContent = error.message;
-        } else {
-            paymentMethodHandler(setupIntent.payment_method);
+            if (error) {
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = error.message;
+            } else {
+                paymentMethodHandler(setupIntent.payment_method);
         }
     });
     function paymentMethodHandler(payment_method) {
