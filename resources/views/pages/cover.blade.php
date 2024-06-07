@@ -111,7 +111,8 @@
                     <div class="d-flex justify-content-between align-content-center">
                         <div>
                             <input type="hidden" id="responsetypesave" value="{{$response_exists['response_type']}}">
-                            <div id="audioheading" class="{{$response_exists['response_type']==null||$response_exists['response_type']=='audio' ? '':'d-none'}}">
+                            <div id="audioheading"
+                                class="{{$response_exists['response_type']==null||$response_exists['response_type']=='audio' ? '':'d-none'}}">
                                 <h2 id="recordingHeader">Record Audio</h2>
                                 <p class="recordingTagline">Record audio to convert to text in the editor below.</p>
                             </div>
@@ -122,17 +123,23 @@
                         </div>
                         <div>
                             <div class="d-flex align-items-center" style="gap:8px">
-                                <div class="recordingTabs audioRecording {{ $response_exists['response_type']==null||$response_exists['response_type']=='audio' ? 'active' : ''}}  d-flex justify-content-between align-items-center" id="audiobtn" onclick="selectAudio()">
+                                <div class="recordingTabs audioRecording {{ $response_exists['response_type']==null||$response_exists['response_type']=='audio' ? 'active' : ''}}  d-flex justify-content-between align-items-center"
+                                    id="audiobtn" onclick="selectAudio()">
                                     <div>
                                         <i class="fas fa-microphone mr-2"></i> Audio Recording
                                     </div>
-                                    <div><i class="fas fa-check-circle {{ $response_exists['response_type']==null||$response_exists['response_type']=='audio' ? '' : 'd-none'}}"></i></div>
+                                    <div><i
+                                            class="fas fa-check-circle {{ $response_exists['response_type']==null||$response_exists['response_type']=='audio' ? '' : 'd-none'}}"></i>
+                                    </div>
                                 </div>
-                                <div class="recordingTabs videoRecording {{ $response_exists['response_type']=='video' ? 'active' : ''}} d-flex justify-content-between align-items-center" id="videobtn" onclick="selectVideo()">
+                                <div class="recordingTabs videoRecording {{ $response_exists['response_type']=='video' ? 'active' : ''}} d-flex justify-content-between align-items-center"
+                                    id="videobtn" onclick="selectVideo()">
                                     <div>
                                         <i class="fas fa-video mr-2"></i> Video Recording
                                     </div>
-                                    <div><i class="fas fa-check-circle {{$response_exists['response_type']=='video' ? '' : 'd-none'}}"></i></div>
+                                    <div><i
+                                            class="fas fa-check-circle {{$response_exists['response_type']=='video' ? '' : 'd-none'}}"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -145,10 +152,13 @@
                                 <div class="col-12 mt-3">
                                     <div id="controls" class="d-flex align-items-center justify-content-between">
                                         <div>
-                                            <button data-class="desire" type="button" id="startBtn1" data-sr_no="1" data-editor_name="editor" class="startBtn">Start Recording</button>
-                                            <button data-class="desire" type="button" id="stopBtn1" data-sr_no="1" class="btn-danger stopBtn" style="display: none;">Stop
+                                            <button data-class="desire" type="button" id="startBtn1" data-sr_no="1"
+                                                data-editor_name="editor" class="startBtn">Start Recording</button>
+                                            <button data-class="desire" type="button" id="stopBtn1" data-sr_no="1"
+                                                class="btn-danger stopBtn" style="display: none;">Stop
                                                 Recording</button>
-                                            <button data-class="desire" type="button" id="resetBtn1" data-sr_no="1" class="btn-danger resetBtn" style="display: none;">Reset Text</button>
+                                            <button data-class="desire" type="button" id="resetBtn1" data-sr_no="1"
+                                                class="btn-danger resetBtn" style="display: none;">Reset Text</button>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <i class="zmdi zmdi-circle mr-2"></i>
@@ -158,7 +168,8 @@
                                     <div class="mt-3">
                                         <div id="preview"></div>
                                         <div id="editor">
-                                            {{$response_exists['response_type']===null?'':html_entity_decode(strip_tags($response_exists['q_answer']), ENT_QUOTES | ENT_HTML5, 'UTF-8');}}
+                                            {{$response_exists['response_type']===null?'':html_entity_decode(strip_tags($response_exists['q_answer']),
+                                            ENT_QUOTES | ENT_HTML5, 'UTF-8');}}
                                         </div>
                                     </div>
                                 </div>
@@ -167,9 +178,11 @@
                                 <input type="hidden" name="question_id" value="{{$question['id']}}">
                                 <input type="hidden" name="getid" value="{{$response_exists['id']}}">
                                 <div class="text-right px-3 mt-3 w-100">
-                                    <button type="submit" data-class="desire" id="save" class="btn btn-primary {{$response_exists['response_type']===null?'':'d-none'}}">
+                                    <button type="submit" data-class="desire" id="save"
+                                        class="btn btn-primary {{$response_exists['response_type']===null?'':'d-none'}}">
                                         <i class="fas fa-save mr-2"></i>Save</button>
-                                    <button type="submit" data-class="desire" id="update" class="btn btn-success {{$response_exists['response_type']!==null?'':'d-none'}}">
+                                    <button type="submit" data-class="desire" id="update"
+                                        class="btn btn-success {{$response_exists['response_type']!==null?'':'d-none'}}">
                                         <i class="fas fa-save mr-2"></i>Update and Save</button>
                                 </div>
                             </div>
@@ -178,11 +191,15 @@
 
                     <div id="videodiv" class="d-none">
                         <div class="video-container">
-                            <video id="videoElement" autoplay playsinline class="{{$response_exists['response_type']=='video' ? 'd-none':''}}"></video>
-                            <video id="videoElement1" controls height="100%" style="width:100%; object-fit:cover; border-radius: 15px;">
-                                <source src="{{ asset('storage/videos/'.$response_exists['video_url']) }}" type="video/mp4">
+                            <video id="videoElement" autoplay playsinline
+                                class="{{$response_exists['response_type']=='video' ? 'd-none':''}}"></video>
+                            <video id="videoElement1" controls height="100%"
+                                style="width:100%; object-fit:cover; border-radius: 15px;">
+                                <source src="{{ asset('storage/videos/'.$response_exists['video_url']) }}"
+                                    type="video/mp4">
                             </video>
-                            <div class="controls-container py-2 text-center {{$response_exists['response_type']=='video' ? 'd-none':''}}">
+                            <div
+                                class="controls-container py-2 text-center {{$response_exists['response_type']=='video' ? 'd-none':''}}">
                                 <h5>To Start Recording, Click the <span class="text-danger">Red</span> circle below</h5>
                                 <div class="d-flex align-items-center justify-content-center" style="gap: 15px;">
                                     <div class="startRecordingBtn recordingBtns">
@@ -208,7 +225,8 @@
                             <div class="full-hd {{$response_exists['response_type']=='video' ? 'd-none':''}}">
                                 <img src="{{asset('assets/images/hd.png')}}" alt="">
                             </div>
-                            <div class="videotimer text-light {{$response_exists['response_type']=='video' ? 'd-none':''}}">
+                            <div
+                                class="videotimer text-light {{$response_exists['response_type']=='video' ? 'd-none':''}}">
                                 <i class="zmdi zmdi-circle mr-2"></i>
                                 <div id="timer2">00:00:00</div>
                             </div>
@@ -216,11 +234,14 @@
                             <input type="hidden" name="question_id" id="question_id" value="{{$question['id']}}">
                         </div>
                         <div class="text-right px-3 mt-3 w-100">
-                            <button id="retakevideo" class="btn btn-danger {{$response_exists['response_type']=='video' ? '':'d-none'}}">
+                            <button id="retakevideo"
+                                class="btn btn-danger {{$response_exists['response_type']=='video' ? '':'d-none'}}">
                                 <i class="fas fa-redo mr-2" aria-hidden="true"></i>Retake</button>
-                            <button id="savevid" class="btn btn-primary {{$response_exists['response_type']===null ? '':'d-none'}}">
+                            <button id="savevid"
+                                class="btn btn-primary {{$response_exists['response_type']===null ? '':'d-none'}}">
                                 <i class="fas fa-save mr-2"></i>Save</button>
-                            <button id="updatevid" class="btn btn-success {{$response_exists['response_type']=='video' ? '':'d-none'}}">
+                            <button id="updatevid"
+                                class="btn btn-success {{$response_exists['response_type']=='video' ? '':'d-none'}}">
                                 <i class="fas fa-save mr-2"></i>Update and Save</button>
                         </div>
                     </div>
@@ -232,7 +253,8 @@
         @if(auth()->user()->unlocked_pages >= 2)
         <a href="{{url('/wow/con')}}" class="navBtns">Next<i class="fas fa-arrow-right ml-2"></i> </a>
         @else
-        <a href="javascript:void(0)" class="navBtns" id="nextButton" data-toggle="modal" data-target="#exampleModalCenter">Next<i class="fas fa-arrow-right ml-2"></i> </a>
+        <a href="javascript:void(0)" class="navBtns" id="nextButton" data-toggle="modal"
+            data-target="#exampleModalCenter">Next<i class="fas fa-arrow-right ml-2"></i> </a>
         @endif
     </div> --}}
 </section>
@@ -634,9 +656,11 @@
             if (mediaRecorder.state === 'recording') {
                 mediaRecorder.pause();
             }
+            camPause();
         }
 
         function resumeRecording() {
+            camResume();
             if (mediaRecorder.state === 'paused') {
                 mediaRecorder.resume();
             }
@@ -760,6 +784,22 @@
             stream.getAudioTracks().forEach(track => track.stop());
         }
     }
+
+    function camPause() {
+    if (stream) {
+        // Disable all video tracks
+        stream.getVideoTracks().forEach(track => track.enabled = false);
+        console.log('Video tracks disabled.');
+        }
+    }
+
+    function camResume() {
+        if (stream) {
+        // Enable all video tracks
+            stream.getVideoTracks().forEach(track => track.enabled = true);
+        console.log('Video tracks enabled.');
+    }
+}
 
     function checkType() {
         let type = $('#responsetypesave').val();
