@@ -257,12 +257,14 @@ class AdminController extends Controller
             'name' => 'required',
             'details' => 'required',
             'price' => 'required',
+            'duration' => 'required',
         ]);
 
         $plan = new PlansPricing();
         $plan->name = $request->name;
         $plan->price = $request->price;
         $plan->details = $request->details;
+        $plan->duration = $request->duration;
         $plan->slug = \Str::slug($request->name);
         $plan->save();
 
@@ -275,12 +277,14 @@ class AdminController extends Controller
             'name' => 'required',
             'details' => 'required',
             'price' => 'required',
+            'duration' => 'required',
         ]);
 
         $plan = PlansPricing::find($request->id);
         $plan->name = $request->name;
         $plan->price = $request->price;
         $plan->details = $request->details;
+        $plan->duration = $request->duration;
         $plan->slug = \Str::slug($request->name);
         $plan->save();
 

@@ -63,7 +63,6 @@ class PlansPricing extends Model
             'recurring' => [
                 'interval' => $this->duration, // or 'year', 'week', etc.
             ],
-            'type' => 'recurring', // Specify the type as recurring
         ]);
 
         // dd($product->id, $price->id);
@@ -99,7 +98,6 @@ class PlansPricing extends Model
                 'recurring' => [
                     'interval' => $this->duration, // or 'year', 'week', etc.
                 ],
-                'type' => 'recurring', // Specify the type as recurring
             ]);
 
             $this->stripe_price_id = $price->id;
