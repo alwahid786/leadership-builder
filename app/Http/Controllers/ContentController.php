@@ -180,13 +180,13 @@ class ContentController extends Controller
     {
         $subscription = $this->checksubscription();
 
-        if ($subscription) 
+        if ($subscription)
         {
             $loginUserId = Auth::user()->id;
             $response_exists = $this->navbardynamic($loginUserId);
-    
+
             $question = Question::where('day', $response_exists['day'])->first();
-       
+
             return view('pages.cover', compact('response_exists', 'question'));
         }
         else
@@ -203,7 +203,7 @@ class ContentController extends Controller
         $response_exists = Book::where('user_id', $loginUserId)
             ->where('day', $day)
             ->first();
-        
+
         $today = $this->navbardynamic($loginUserId);
         $question = Question::where('day', $response_exists['day'])->first();
 
@@ -214,7 +214,7 @@ class ContentController extends Controller
     }
 
     public function navbardynamic($loginUserId){
-        
+
         $current_date = Carbon::now()->toDateString();
 
         $response_exists = Book::where('user_id', $loginUserId)
@@ -526,7 +526,7 @@ class ContentController extends Controller
     }
 
     public function checksubscription(){
-        if (auth()->user()->total_days<1) {
+        if (auth()->user()->total_days<21) {
             return true;
         }
         else{
