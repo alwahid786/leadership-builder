@@ -110,9 +110,9 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <select class="form-control form-select" name="duration" aria-label="Default select example" required>
-                                        <option selected>Select Duration</option>
-                                        <option value="month">Month</option>
-                                        <option value="year">Year</option>
+                                        <option>Select Duration</option>
+                                        <option value="month" @if($plan->duration == 'month') selected @endif>Month</option>
+                                        <option value="year" @if($plan->duration == 'year') selected @endif>Year</option>
                                     </select>
                                 </div>
                             </div>

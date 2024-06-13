@@ -113,7 +113,7 @@
                         <h2 class="heading-one font-49">{{ $plan->name }}</h2>
                         <h2 class="price">
                             ${{ $plan->price }}
-                            <span style="font-size:16px">/month</span>
+                            <span style="font-size:16px">/{{ $plan->duration }}</span>
                         </h2>
                     </div>
                     <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mt-2"

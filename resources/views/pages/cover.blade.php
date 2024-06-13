@@ -770,7 +770,7 @@
             audio: true
         }).then(stream => {
             window.stream = stream;
-            document.getElementById('videoElement').srcObject = stream;
+            document.getElementById('videoElement').srcObject = new MediaStream([stream.getVideoTracks()[0]]);
         }).catch(error => {
             console.error('Error accessing media devices.', error);
         });
@@ -786,7 +786,7 @@
     }
 
     function camPause() {
-    if (stream) {
+        if (stream) {
         // Disable all video tracks
         stream.getVideoTracks().forEach(track => track.enabled = false);
         console.log('Video tracks disabled.');
@@ -798,8 +798,8 @@
         // Enable all video tracks
             stream.getVideoTracks().forEach(track => track.enabled = true);
         console.log('Video tracks enabled.');
+        }
     }
-}
 
     function checkType() {
         let type = $('#responsetypesave').val();

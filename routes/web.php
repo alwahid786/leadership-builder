@@ -44,7 +44,7 @@ Route::post('/signin', [AuthController::class, 'signinFunction'])->name('signinF
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
 Route::post('/otp-verification', [AuthController::class, 'verifyOtp'])->name('verifyOtp');
 Route::post('/password-reset', [AuthController::class, 'resetPassword'])->name('resetPassword');
-Route::post('/webhook/stripe', [StripeWebhookController::class, 'handleWebhook']);
+Route::get('/webhook/stripe', [StripeWebhookController::class, 'handleWebhook']);
 
 Route::middleware('auth')->group(function () {
     // Functional Routes
