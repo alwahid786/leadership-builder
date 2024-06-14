@@ -143,9 +143,8 @@
                     $colorClass = 'enterprise-plan';
                     }
                     @endphp
-                    <div class="modal-open mb-3 mt-3" style="width: 350px; flex-grow: 1;"
-                        onclick="openModal({{ $plan->id }}, {{ $cur_sub == null ? 'null' : json_encode($cur_sub) }})">
-                        <div class="plans {{ $colorClass }}" style="height: 300px;">
+                    <div class="modal-open mb-3 mt-3" style="width: 350px; flex-grow: 1;">
+                        <div class="plans {{ $colorClass }}" style="height: 300px;" onclick="openModal({{ $plan->id }}, {{ $cur_sub == null ? 'null' : json_encode($cur_sub) }})">
                             <div class="d-flex justify-content-between checkbox">
                                 <h6 class="m-0">Plan Pricing</h6>
                                 {{-- <img style="position: absolute; right: 10px; top: 0;"
@@ -157,7 +156,7 @@
                             <ul class="ml-4 mt-4">
                                 <p>{!! $plan->details !!}</p>
                             </ul>
-                            <h1 class="align-self-end mt-3">${{ $plan->price }} <small>/month</small></h1>
+                            <h1 class="align-self-end mt-3">${{ $plan->price }} <small>/{{ $plan->duration }}</small></h1>
                         </div>
                     </div>
                     @endforeach
