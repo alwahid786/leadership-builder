@@ -44,7 +44,7 @@ Route::post('/signin', [AuthController::class, 'signinFunction'])->name('signinF
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgotPassword');
 Route::post('/otp-verification', [AuthController::class, 'verifyOtp'])->name('verifyOtp');
 Route::post('/password-reset', [AuthController::class, 'resetPassword'])->name('resetPassword');
-Route::get('/webhook/stripe', [StripeWebhookController::class, 'handleWebhook']);
+Route::post('/webhook/stripe', [StripeWebhookController::class, 'handleWebhook']);
 
 Route::middleware('auth')->group(function () {
     // Functional Routes
@@ -89,11 +89,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/welcome/submit', [ContentController::class, 'submitWelcome'])->name('submitWelcome');
 
     Route::group(['middleware' => ['auth', 'roles:admin']], function () {
-        
+
         Route::get('/dashboard', [AdminController::class, 'adminDashboard'])->name('adminDashboard');
         Route::get('/invoices', [AdminController::class, 'adminInvoices'])->name('adminInvoices');
         Route::get('/invoices/{id}', [AdminController::class, 'adminInvoice'])->name('adminInvoice');
-        
+
         Route::get('/user-detail/{id}', [AdminController::class, 'userDetail'])->name('userDetail');
         Route::get('/users', [AdminController::class, 'users'])->name('users');
         Route::get('/adduserpage', function () {
@@ -104,7 +104,7 @@ Route::middleware('auth')->group(function () {
             return view('pages.import-users');
         });
         Route::post('/import-users', [AdminController::class, 'importUsers'])->name('import-users');
-        
+
         Route::get('/all-questions', [AdminController::class, 'allQuestions'])->name('allQuestions');
 
         Route::get('/importpage', [AdminController::class, 'importPage'])->name('importPage');
@@ -129,7 +129,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => ['auth', 'roles:user']], function () {
         Route::get('/user-dashboard', [ContentController::class, 'coverPage']);
-        
+
         Route::get('/cover', [ContentController::class, 'coverPage'])->name('coverPage');
         // Submit Day Response
         Route::post('/DayResponse/submit', [ContentController::class, 'submitresponse'])->name('submitresponse');
