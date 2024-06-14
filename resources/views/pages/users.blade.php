@@ -101,7 +101,7 @@
         </div>
         <div class="row mt-4 pt-1">
             @foreach ($users as $user)    
-            <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="col-md-6 col-xl-4 col-xl-3 mt-3">
                 <a href="{{url('/user-detail/'.$user->id)}}" class="profile-card">
                     <div class="profile-img">
                         {{-- <img src="{{asset('assets/images/profile-card-img.png')}}" alt="profile image"> --}}

@@ -108,7 +108,7 @@
                     $colorClass = 'enterprise';
                 }
                 @endphp
-                <div class="plan-card mb-5 {{ $colorClass }}">
+                <div class="plan-card {{ $colorClass }}">
                     <div class="d-flex align-items-center justify-content-between">
                         <h2 class="heading-one font-49">{{ $plan->name }}</h2>
                         <h2 class="price">
@@ -116,7 +116,7 @@
                             <span style="font-size:16px">/{{ $plan->duration }}</span>
                         </h2>
                     </div>
-                    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mt-2"
+                    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between my-2"
                         style="gap:1rem;">
                         <div>
                             <div class="d-flex align-items-center" style="gap:8px;">

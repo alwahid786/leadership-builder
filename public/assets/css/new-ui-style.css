@@ -383,7 +383,7 @@ input::placeholder {
 
 .video-container {
     width: 100% !important;
-    height: 80vh;
+    height: 70vh;
     border-radius: 15px;
     position: relative;
     background-color: gray;
@@ -517,7 +517,7 @@ input::placeholder {
     background-color: white;
     padding: 0;
     border-radius: 20px;
-    overflow: hidden;
+    overflow-x: scroll;
 }
 
 /* .table thead th,
@@ -700,6 +700,7 @@ input::placeholder {
 .plan-card.basic {
     background: rgba(215, 215, 245, 1);
     border: 1px solid rgba(156, 156, 255, 1);
+    margin-top: 30px;
 }
 .plan-card.professional {
     background: rgba(193, 236, 183, 1);
@@ -956,6 +957,7 @@ a:hover {
     display: block;
     position: relative;
     margin-top: 60px;
+    min-height: 290px;
 }
 .profile-card:hover {
     box-shadow: 0px 4px 30px 0px rgba(17, 119, 170, 0.6); 
@@ -1256,6 +1258,21 @@ a:hover {
     }
     .form-svg svg {
         width: 300px;
+    }
+    .profile-img {
+        width: 100%;
+    }
+    .edit-profile-view {
+        padding: 20px;
+    }
+    .change-img {
+        margin: 20px 0
+    }
+    .day-card {
+        padding: 16px;
+    }
+    .primary-btn {
+        width: 126px;
     }
 }
 

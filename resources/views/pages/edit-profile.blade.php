@@ -114,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-9 mt-3 mt-md-0">
                     <div class="bg-white edit-profile-view">
                         <div class="row">
                             <div class="col-md-6">

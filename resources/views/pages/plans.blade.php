@@ -130,8 +130,8 @@
 <section class="contentSection position-relative">
     <div class="container-fluid contentRow">
         <div class="row mb-5">
-            <div class="form-group mx-auto">
-                <div class="row justify-content-center">
+            <div class="form-group w-100">
+                <div class="d-flex flex-wrap" style="gap:1rem;">
                     @foreach ($plans as $index => $plan)
                     @php
                     $colorClass = '';
@@ -143,7 +143,7 @@
                     $colorClass = 'enterprise-plan';
                     }
                     @endphp
-                    <div class="col-md-4 modal-open mb-3 mt-3" style="width: 600px;"
+                    <div class="modal-open mb-3 mt-3" style="width: 350px; flex-grow: 1;"
                         onclick="openModal({{ $plan->id }}, {{ $cur_sub == null ? 'null' : json_encode($cur_sub) }})">
                         <div class="plans {{ $colorClass }}" style="height: 300px;">
                             <div class="d-flex justify-content-between checkbox">

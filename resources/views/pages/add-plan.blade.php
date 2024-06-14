@@ -109,7 +109,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <select class="form-control form-select" name="duration" aria-label="Default select example" required>
-                                        <option selected>Select Duration</option>
+                                        <option value="" selected>Select Duration</option>
                                         <option value="month">Month</option>
                                         <option value="year">Year</option>
                                     </select>
@@ -176,7 +176,7 @@
                 text: `Please enter details`,
                 icon: 'error',
                 confirmButtonColor: "#6dabe4"
-            })
+            });
         }
         else {
             document.getElementById('details').value = content;

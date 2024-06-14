@@ -91,7 +91,7 @@
             <div class="col-12">
                 <div class="quotation-card day-card">
                     <h2>Quote of the Day {{$response_exists['day']}}</h2>
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex flex-wrap align-items-center" style="gap:0.5rem;">
                         <q>{{$question['quotation']}},</q>
                         <b class="px-2">-</b>
                         <em>{{$question['author']}}</em>
@@ -108,20 +108,24 @@
             </div>
             <div class="col-12 mt-3">
                 <div class="day-card answer-card">
-                    <div class="d-flex justify-content-between align-content-center">
+                    <div class="d-flex flex-wrap justify-content-between align-content-center" style="gap:1rem;">
                         <div>
                             <input type="hidden" id="responsetypesave" value="{{$response_exists['response_type']}}">
-                            <div id="audioheading" class="{{$response_exists['response_type']==null||$response_exists['response_type']=='audio' ? '':'d-none'}}">
+                            {{-- <div id="audioheading" class="{{$response_exists['response_type']==null||$response_exists['response_type']=='audio' ? '':'d-none'}}">
                                 <h2 id="recordingHeader">Audio</h2>
                                 <p class="recordingTagline">Text Response.</p>
                             </div>
                             <div id="videoheading" class="{{$response_exists['response_type']=='video'?'':'d-none'}}">
                                 <h2 id="recordingHeader">Video</h2>
                                 <p class="recordingTagline">Response.</p>
+                            </div> --}}
+                            <div id="videoheading">
+                                <h2 id="recordingHeader">Record Video</h2>
+                                <p class="recordingTagline">Record video to save it as the response.</p>
                             </div>
                         </div>
                         <div>
-                            <div class="d-flex align-items-center" style="gap:8px">
+                            {{-- <div class="d-flex flex-wrap align-items-center" style="gap:8px">
                                 <div class="recordingTabs audioRecording {{ $response_exists['response_type']==null||$response_exists['response_type']=='audio' ? 'active' : ''}} d-flex justify-content-between align-items-center" id="audiobtn" onclick="selectAudio()">
                                     <div>
                                         <i class="fas fa-microphone mr-2"></i> Audio Response
@@ -134,13 +138,19 @@
                                     </div>
                                     <div><i id="videocheck" class="fas fa-check-circle {{$response_exists['response_type']=='video' ? '' : 'd-none'}}"></i></div>
                                 </div>
+                            </div> --}}
+                            <div class="recordingTabs videoRecording active d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-video mr-2"></i> Video Recording
+                                </div>
+                                <div><i
+                                        class="fas fa-check-circle "></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                     {{-- @if ($response_exists['response_type']===null) --}}
-                    <div id="audiodiv">
-                        {{-- <form action="{{route('submitresponse')}}" id="desireForm" method="POST"> --}}
-                            {{-- @csrf --}}
+                    {{-- <div id="audiodiv">
                             <div class="row">
                                 <div class="col-12 mt-3">
                                     <div class="mt-3">
@@ -148,10 +158,9 @@
                                     </div>
                                 </div>
                             </div>
-                        {{-- </form> --}}
-                    </div>
+                    </div> --}}
 
-                    <div id="videodiv" class="d-none">
+                    <div id="videodiv" class="mt-3">
                         <div class="video-container">
                             <video id="videoElement" autoplay playsinline class="{{$response_exists['response_type']=='video' ? 'd-none':''}}"></video>
                             <video id="videoElement1" controls height="100%" style="width:100%; object-fit:cover; border-radius: 15px;">
