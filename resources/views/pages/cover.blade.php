@@ -213,7 +213,7 @@
                             <div
                                 class="controls-container py-2 text-center {{$response_exists['response_type']=='video' ? 'd-none':''}}">
                                 <h5>To Start Recording, Click the <span class="text-danger">Red</span> circle below</h5>
-                                <div class="d-flex align-items-center justify-content-center" style="gap: 15px;">
+                                <div class="d-flex align-items-center justify-content-center mt-1" style="gap: 15px;">
                                     <div class="startRecordingBtn recordingBtns">
                                         <img src="{{asset('assets/images/start.png')}}" alt="">
                                     </div>
@@ -576,7 +576,7 @@
             $('#videoElement1').removeClass('d-none');
             $('#retakevideo').removeClass('d-none');
             $('#timer2').addClass('d-none');
-            
+
             if (($('#getid').val() == 0) || ($('#getid').val() == '')) {
                 $('#savevid').removeClass('d-none');
             }
@@ -589,7 +589,7 @@
                     type: 'video/webm'
                 });
                 console.log('Blob:', recordedBlobs);
-                
+
                 const videoURL = window.URL.createObjectURL(blob);
                 document.getElementById('videoElement1').src = videoURL;
             }, 1000);
